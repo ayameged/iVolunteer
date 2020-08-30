@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import com.ivolunteer.ivolunteer.resources.StorageManager
+import com.ivolunteer.ivolunteer.resources.StorageTypes
 import kotlinx.android.synthetic.main.fragment_second.*
 
 /**
@@ -27,9 +29,17 @@ class SecondFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+//        TODO: move to func
         i_need_help_btn.setOnClickListener {
             val navController = Navigation.findNavController((activity as RegActivity), R.id.fragment)
             navController.navigate(R.id.action_SecondFragment_to_ThirdFragment)
+            StorageManager.instance.set(StorageTypes.IS_VOLUNTEER.toString(), false)
+        }
+
+        i_volunteer_btn.setOnClickListener {
+            val navController = Navigation.findNavController((activity as RegActivity), R.id.fragment)
+            navController.navigate(R.id.action_SecondFragment_to_ThirdFragment)
+            StorageManager.instance.set(StorageTypes.IS_VOLUNTEER.toString(), true)
         }
 
     }

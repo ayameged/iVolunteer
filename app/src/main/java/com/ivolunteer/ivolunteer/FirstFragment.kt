@@ -7,10 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.ivolunteer.ivolunteer.resources.NetworkManager
+import com.ivolunteer.ivolunteer.resources.StorageManager
+import com.ivolunteer.ivolunteer.resources.StorageTypes
 import com.ivolunteer.ivolunteer.types.Auth
+import com.ivolunteer.ivolunteer.types.City
 import org.json.JSONObject
 
 /**
@@ -33,34 +37,53 @@ class FirstFragment : Fragment() {
         val userName = view.findViewById<EditText>(R.id.user_name_register_text)
         val email = view.findViewById<EditText>(R.id.email_register_text)
         val password = view.findViewById<EditText>(R.id.password_register_text)
-        var registered = false
+        val registerErrorMessage = view.findViewById<TextView>(R.id.register_error_lbl)
 
         signUpBtn.setOnClickListener {
             val json = JSONObject()
+            StorageManager.instance.set(StorageTypes.USER_NAME.toString(), userName.text.toString())
             json.put("username", userName.text)
             json.put("email", email.text)
             json.put("password", password.text)
 
-            val navController = Navigation.findNavController((activity as RegActivity), R.id.fragment)
-            navController.navigate(R.id.action_FirstFragment_to_SecondFragment)
 
             NetworkManager.instance.post<Auth>("authenticate/register", json) { response, statusCode, error ->
                 print(response)
                 if (statusCode != 200) {
                     print(error)
+                    registerErrorMessage.post {
+                        registerErrorMessage.visibility = View.VISIBLE
+                    }
                 }
                 else{
-                    registered = true
-                }
-            }
-            if (registered){
-                NetworkManager.instance.post<Auth>("authenticate/login", json) { response, statusCode, error ->
-                    print(response)
-                    if (statusCode != 200) {
-                        print(error)
+                    NetworkManager.instance.post<Auth>("authenticate/login", json) { response, statusCode, error ->
+                        print(response)
+                        if (statusCode != 200) {
+                            print(error)
+                            registerErrorMessage.post {
+                                registerErrorMessage.visibility = View.VISIBLE
+                            }
+                        }
+                        else{
+                            StorageManager.instance.set(StorageTypes.TOKEN.toString(), response!!.token)
+                            NetworkManager.instance.get<String>("applicationUsers/ByUserName?username="+userName.text.toString()){response, statusCode, error ->
+                                if(statusCode == 200){
+                                    StorageManager.instance.set(StorageTypes.USER_ID.toString(), response!!)
+                                }
+                                else{
+                                    print(error)
+                                }
+                            }
+                            val navController = Navigation.findNavController((activity as RegActivity), R.id.fragment)
+                            navController.navigate(R.id.action_FirstFragment_to_SecondFragment)
+                        }
                     }
                 }
             }
+
+//            var userName = StorageManager.instance.get<String>(StorageTypes.USER_NAME.toString())
+
+
         }
     }
 }

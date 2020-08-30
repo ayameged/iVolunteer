@@ -7,6 +7,7 @@ import com.github.kittinunf.fuel.core.Response
 import com.github.kittinunf.fuel.core.extensions.jsonBody
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import org.json.JSONException
 import org.json.JSONObject
 import java.lang.reflect.Type
 
@@ -37,7 +38,10 @@ class NetworkManager {
     }
 
     inline fun <reified T>post(path: String, body: JSONObject, crossinline callback: (response: T?, statusCode: Int, error: JSONObject) -> Unit) {
+        val token = StorageManager.instance.get<String>(StorageTypes.TOKEN.toString())
+
         Fuel.post(apiAddress + path)
+            .header("Authorization", "Bearer " + token)
             .jsonBody(body.toString()).response { request, response, result ->
                 var (bytes, error) = result
                 var respErr = JSONObject()
@@ -46,6 +50,66 @@ class NetworkManager {
 
                 if (error != null) {
                     respErr = JSONObject(String(error.response.data))
+                }
+
+                if (bytes == null) {
+                    bytes = "{}".toByteArray()
+                }
+
+                val resp = Gson().fromJson<T>(String(bytes), collectionType)
+                try{
+                    callback(resp, response.statusCode, respErr)
+                } catch(e: Exception) {
+                    print(e)
+                }
+            }
+    }
+
+    inline fun <reified T>put(path: String, body: JSONObject, crossinline callback: (response: T?, statusCode: Int, error: JSONObject) -> Unit) {
+        val token = StorageManager.instance.get<String>(StorageTypes.TOKEN.toString())
+
+        Fuel.put(apiAddress + path)
+            .header("Authorization", "Bearer " + token)
+            .jsonBody(body.toString()).response { request, response, result ->
+                var (bytes, error) = result
+                var respErr = JSONObject()
+
+                val collectionType: Type = object : TypeToken<T?>() {}.type
+
+                if (error != null) {
+                    respErr = JSONObject(String(error.response.data))
+                }
+
+                if (bytes == null) {
+                    bytes = "{}".toByteArray()
+                }
+
+                val resp = Gson().fromJson<T>(String(bytes), collectionType)
+                try{
+                    callback(resp, response.statusCode, respErr)
+                } catch(e: Exception) {
+                    print(e)
+                }
+            }
+    }
+
+    inline fun <reified T>get(path: String, crossinline callback: (response: T?, statusCode: Int, error: JSONObject) -> Unit) {
+        val token = StorageManager.instance.get<String>(StorageTypes.TOKEN.toString())
+
+        Fuel.get(apiAddress + path)
+            .header("Authorization", "Bearer " + token)
+            .response { request, response, result ->
+                var (bytes, error) = result
+                var respErr = JSONObject()
+
+                val collectionType: Type = object : TypeToken<T?>() {}.type
+
+                if (error != null) {
+                    try {
+                        respErr = JSONObject(String(error.response.data))
+                    } catch (e: JSONException) {
+                        print(e)
+                    }
                 }
 
                 if (bytes == null) {

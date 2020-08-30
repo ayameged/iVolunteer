@@ -8,6 +8,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import com.ivolunteer.ivolunteer.resources.NetworkManager
+import com.ivolunteer.ivolunteer.resources.StorageManager
+import com.ivolunteer.ivolunteer.resources.StorageTypes
 import com.ivolunteer.ivolunteer.types.Auth
 import org.json.JSONObject
 
@@ -22,7 +24,6 @@ class LoginActivity : AppCompatActivity() {
         val loginError = findViewById<TextView>(R.id.unaothirized_messge)
         val registerButton = findViewById<Button>(R.id.register_new_user)
 
-
         loginButton.setOnClickListener {
             val json = JSONObject()
             json.put("username", userNameInput.text)
@@ -36,6 +37,9 @@ class LoginActivity : AppCompatActivity() {
                     loginError.post {
                         loginError.visibility = View.VISIBLE
                     }
+                }
+                else {
+                    StorageManager.instance.set(StorageTypes.TOKEN.toString(), response!!.token)
                 }
             }
         }
