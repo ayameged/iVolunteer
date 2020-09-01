@@ -8,7 +8,8 @@ enum class StorageTypes{
     IS_VOLUNTEER,
     USER_ID,
     TOKEN,
-    CITIES_LIST
+    CITIES_LIST,
+    RATE_ID
 }
 
 class StorageManager {

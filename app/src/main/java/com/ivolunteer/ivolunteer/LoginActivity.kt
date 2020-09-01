@@ -12,6 +12,9 @@ import com.ivolunteer.ivolunteer.resources.StorageManager
 import com.ivolunteer.ivolunteer.resources.StorageTypes
 import com.ivolunteer.ivolunteer.types.Auth
 import org.json.JSONObject
+import android.util.Log
+
+
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +28,7 @@ class LoginActivity : AppCompatActivity() {
         val registerButton = findViewById<Button>(R.id.register_new_user)
 
         loginButton.setOnClickListener {
+
             val json = JSONObject()
             json.put("username", userNameInput.text)
             json.put("password", passwordInput.text)
@@ -32,6 +36,7 @@ class LoginActivity : AppCompatActivity() {
             NetworkManager.instance.post<Auth>("authenticate/login", json) { response, statusCode, error ->
                 print(response)
                 if (statusCode != 200) {
+                    Log.i("LOG - error", error.toString())
                     print(error)
 
                     loginError.post {
@@ -40,6 +45,7 @@ class LoginActivity : AppCompatActivity() {
                 }
                 else {
                     StorageManager.instance.set(StorageTypes.TOKEN.toString(), response!!.token)
+                    Log.i("LOG - token: ", StorageManager.instance.get<String>(StorageTypes.TOKEN.toString())!!)
                 }
             }
         }

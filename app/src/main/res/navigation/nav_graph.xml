@@ -29,5 +29,5 @@
         android:id="@+id/ThirdFragment"
         android:name="com.ivolunteer.ivolunteer.ThirdFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_third"/>
+        tools:layout="@layout/fragment_third" />
 </navigation>

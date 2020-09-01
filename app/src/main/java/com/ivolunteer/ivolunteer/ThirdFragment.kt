@@ -1,10 +1,12 @@
 package com.ivolunteer.ivolunteer
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.EditText
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import com.ivolunteer.ivolunteer.resources.NetworkManager
@@ -46,8 +48,6 @@ class ThirdFragment : Fragment() {
                 }
             }
         }
-
-
        return t
     }
 
@@ -55,56 +55,35 @@ class ThirdFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val citySpinner = view.findViewById<Spinner>(R.id.city_spinner)
+        val genderSpinner = view.findViewById<Spinner>(R.id.gender_spinner)
+        val firstName = view.findViewById<EditText>(R.id.first_name_text)
+        val lastName = view.findViewById<EditText>(R.id.last_name_text)
+        val phone = view.findViewById<EditText>(R.id.phone_text)
+        val age = view.findViewById<EditText>(R.id.age_text)
         var cityId = 1
 
         update_btn.setOnClickListener{
 
             val json_create_user = JSONObject()
-
-//            var userName = StorageManager.instance.get<String>(StorageTypes.USER_NAME.toString())
-//            NetworkManager.instance.get<String>("applicationUsers/ByUserName?username="+userName){response, statusCode, error ->
-//                if(statusCode == 200){
-//                    StorageManager.instance.set(StorageTypes.USER_ID.toString(), response!!)
-//                }
-//                else{
-//                    print(error)
-//                }
-//            }
-//            var cities :List<City>? = StorageManager.instance.get<List<City>>(StorageTypes.CITIES_LIST.toString())
-//            if (cities != null) {
-//                for(city:City in cities.iterator()){
-//                    if (citySpinner.selectedItem.toString() == city.city){
-//                        cityId = city.needHelpCityId!!
-//                    }
-//                }
-//            }
+            val json_update_user = JSONObject()
             cityId = getCityId(citySpinner.selectedItem.toString())
             json_create_user.put("id", StorageManager.instance.get<String>(StorageTypes.USER_ID.toString()))
+            json_update_user.put("id", StorageManager.instance.get<String>(StorageTypes.USER_ID.toString()))
+            json_update_user.put("ApplicationUser", createApplicationUserJson(firstName, lastName, phone, age, genderSpinner))
             var isVolunteer = StorageManager.instance.get<Boolean>(StorageTypes.IS_VOLUNTEER.toString())
-//            val json_city = JSONObject()
-//            json_city.put("city",citySpinner.selectedItem.toString())
             if (isVolunteer != null && isVolunteer){
-//                json_create_user.put("volunteerusercity", json_city)
                 json_create_user.put("volunteerusercityid", cityId)
                 val json_rate = JSONObject()
                 json_rate.put("AvgRate", 0)
                 json_rate.put("numberofraters", 0)
                 json_create_user.put("rate", json_rate)
-                NetworkManager.instance.post<VolunteerUser>("VolunteerUsers", json_create_user){ response, statusCode, error ->
-                    print(response)
-                    if (statusCode != 200) {
-                        print(error)
-                    }
-                }
+                json_update_user.put("volunteerusercityid", cityId)
+                createVolunteerUser(json_create_user, json_update_user)
+
             }
             else{
                 json_create_user.put("needhelpcityid", cityId)
-                NetworkManager.instance.post<NeedHelpUser>("NeedHelpUsers", json_create_user){ response, statusCode, error ->
-                    print(response)
-                    if (statusCode != 200) {
-                        print(error)
-                    }
-                }
+                createNeedHelpUser(json_create_user)
             }
 //            TODO: create need help / volunteer user according storage
 //            TODO: Add post request according to user type
@@ -125,5 +104,44 @@ class ThirdFragment : Fragment() {
             }
         }
         return cityId
+    }
+
+    private fun createVolunteerUser(json_create_user: JSONObject, json_update_user: JSONObject){
+        NetworkManager.instance.post<VolunteerUser>("VolunteerUsers", json_create_user){ response, statusCode, error ->
+            print(response)
+            if (statusCode != 201) {
+                print(error)
+            }
+            else{
+                StorageManager.instance.set(StorageTypes.RATE_ID.toString(), response!!.rate.rateId)
+                json_update_user.put("rateId", StorageManager.instance.get<Int>(StorageTypes.RATE_ID.toString()))
+                NetworkManager.instance.put<Int>("VolunteerUsers/"+StorageManager.instance.get<String>(StorageTypes.USER_ID.toString()), json_update_user){ response, statusCode, error ->
+                    print(response)
+                    if (statusCode != 204){
+                        Log.i("LOG - error ", error.toString())
+                    }
+                }
+            }
+        }
+    }
+
+    private fun createApplicationUserJson(firstName: EditText, lastName: EditText, phone: EditText, age: EditText, genderSpinner: Spinner): JSONObject{
+        val json_application_user = JSONObject()
+        json_application_user.put("firstname", firstName.text)
+        json_application_user.put("lastName", lastName.text)
+        json_application_user.put("phoneNumber", phone.text)
+        json_application_user.put("age", age.text)
+        json_application_user.put("Gender", genderSpinner.selectedItem.toString())
+        return json_application_user
+    }
+
+    private fun createNeedHelpUser(json_create_user: JSONObject){
+        NetworkManager.instance.post<NeedHelpUser>("NeedHelpUsers", json_create_user){ response, statusCode, error ->
+            print(response)
+            if (statusCode != 200) {
+                print(error)
+            }
+
+        }
     }
 }

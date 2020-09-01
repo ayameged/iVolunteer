@@ -15,7 +15,7 @@
         <activity
             android:name=".RegActivity"
             android:label="@string/title_activity_reg"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".LoginActivity" />
         <activity
             android:name=".InitMainActivity"
