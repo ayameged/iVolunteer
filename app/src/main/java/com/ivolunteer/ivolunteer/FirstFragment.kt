@@ -1,6 +1,7 @@
 package com.ivolunteer.ivolunteer
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -48,30 +49,30 @@ class FirstFragment : Fragment() {
 
 
             NetworkManager.instance.post<Auth>("authenticate/register", json) { response, statusCode, error ->
-                print(response)
                 if (statusCode != 200) {
-                    print(error)
+                    Log.i("LOG - failed to register", error.toString())
                     registerErrorMessage.post {
                         registerErrorMessage.visibility = View.VISIBLE
                     }
                 }
                 else{
+                    Log.i("LOG - registratuin", "SUCCESS")
                     NetworkManager.instance.post<Auth>("authenticate/login", json) { response, statusCode, error ->
-                        print(response)
                         if (statusCode != 200) {
-                            print(error)
+                            Log.i("LOG - failed to login", error.toString())
                             registerErrorMessage.post {
                                 registerErrorMessage.visibility = View.VISIBLE
                             }
                         }
                         else{
+                            Log.i("LOG - login", "SUCCESS")
                             StorageManager.instance.set(StorageTypes.TOKEN.toString(), response!!.token)
                             NetworkManager.instance.get<String>("applicationUsers/ByUserName?username="+userName.text.toString()){response, statusCode, error ->
                                 if(statusCode == 200){
                                     StorageManager.instance.set(StorageTypes.USER_ID.toString(), response!!)
                                 }
                                 else{
-                                    print(error)
+                                    Log.i("LOG - failed to get user id", error.toString())
                                 }
                             }
                             val navController = Navigation.findNavController((activity as RegActivity), R.id.fragment)

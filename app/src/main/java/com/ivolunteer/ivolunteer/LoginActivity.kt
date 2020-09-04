@@ -34,10 +34,8 @@ class LoginActivity : AppCompatActivity() {
             json.put("password", passwordInput.text)
 
             NetworkManager.instance.post<Auth>("authenticate/login", json) { response, statusCode, error ->
-                print(response)
                 if (statusCode != 200) {
                     Log.i("LOG - error", error.toString())
-                    print(error)
 
                     loginError.post {
                         loginError.visibility = View.VISIBLE
