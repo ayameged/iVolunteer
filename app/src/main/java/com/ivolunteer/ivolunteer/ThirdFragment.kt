@@ -117,8 +117,8 @@ class ThirdFragment : Fragment() {
                         Log.i("LOG - error in update user", error.toString())
                     }else{
                         Log.i("LOG - volunteer user created ", "")
-                        val activityIntentVolunteer = Intent(this.context, VolunteerActivity::class.java)
-                        startActivity(activityIntentVolunteer)
+//                        val activityIntentVolunteer = Intent(this.context, VolunteerActivity::class.java)
+//                        startActivity(activityIntentVolunteer)
                     }
                 }
             }
@@ -146,6 +146,8 @@ class ThirdFragment : Fragment() {
                         Log.i("LOG - error in update user", error.toString())
                     }else{
                         Log.i("LOG - need help user created ", "")
+                        val activityIntentNeedHelpUser = Intent(this.context, NeedHelpActivity::class.java)
+                        startActivity(activityIntentNeedHelpUser)
                     }
                 }
 

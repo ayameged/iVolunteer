@@ -56,7 +56,7 @@ class FirstFragment : Fragment() {
                     }
                 }
                 else{
-                    Log.i("LOG - registratuin", "SUCCESS")
+                    Log.i("LOG - registration", "SUCCESS")
                     NetworkManager.instance.post<Auth>("authenticate/login", json) { response, statusCode, error ->
                         if (statusCode != 200) {
                             Log.i("LOG - failed to login", error.toString())

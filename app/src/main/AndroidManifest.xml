@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ivolunteer.ivolunteer">
+    package="com.ivolunteer.ivolunteer" >
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,11 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true" >
         <activity
-            android:name=".VolunteerActivity"
-            android:label="@string/title_activity_volunteer"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:name=".NeedHelpActivity"
+            android:label="@string/title_activity_need_help"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+<!--        <activity-->
+<!--            android:label="@string/title_activity_volunteer"-->
+<!--            android:theme="@style/AppTheme.NoActionBar" />-->
         <activity
             android:name=".RegActivity"
             android:label="@string/title_activity_reg"
@@ -23,7 +27,7 @@
         <activity android:name=".LoginActivity" />
         <activity
             android:name=".InitMainActivity"
-            android:theme="@android:style/Theme.NoDisplay">
+            android:theme="@android:style/Theme.NoDisplay" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

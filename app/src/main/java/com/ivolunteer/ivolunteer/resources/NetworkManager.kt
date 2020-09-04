@@ -13,7 +13,7 @@ import java.lang.reflect.Type
 
 
 class NetworkManager {
-    val apiAddress = "http://192.168.1.22:2315/api/"
+    val apiAddress = "http://192.168.1.12:2315/api/"
 
     inline fun <reified T> fromJson(json: String): T {
         return Gson().fromJson(json, object: TypeToken<T>(){}.type)
@@ -48,7 +48,7 @@ class NetworkManager {
 
                 val collectionType: Type = object : TypeToken<T?>() {}.type
 
-                if (error != null) {
+                if (error != null && String(error.response.data) != "") {
                     respErr = JSONObject(String(error.response.data))
                 }
 
@@ -57,11 +57,11 @@ class NetworkManager {
                 }
 
                 val resp = Gson().fromJson<T>(String(bytes), collectionType)
-                try{
+//                try{
                     callback(resp, response.statusCode, respErr)
-                } catch(e: Exception) {
-                    print(e)
-                }
+//                } catch(e: Exception) {
+//                    print(e)
+//                }
             }
     }
 
