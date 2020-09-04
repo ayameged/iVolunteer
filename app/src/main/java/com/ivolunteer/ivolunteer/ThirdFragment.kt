@@ -1,5 +1,6 @@
 package com.ivolunteer.ivolunteer
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -83,13 +84,10 @@ class ThirdFragment : Fragment() {
             }
             else{
                 json_create_user.put("needhelpcityid", cityId)
-                createNeedHelpUser(json_create_user)
+                json_update_user.put("needhelpcityid", cityId)
+                createNeedHelpUser(json_create_user, json_update_user)
             }
-//            TODO: create need help / volunteer user according storage
-//            TODO: Add post request according to user type
-
         }
-
     }
 
     private fun getCityId(cityName: String): Int{
@@ -108,17 +106,19 @@ class ThirdFragment : Fragment() {
 
     private fun createVolunteerUser(json_create_user: JSONObject, json_update_user: JSONObject){
         NetworkManager.instance.post<VolunteerUser>("VolunteerUsers", json_create_user){ response, statusCode, error ->
-            print(response)
             if (statusCode != 201) {
-                print(error)
+                Log.i("LOG - error in creating user ", error.toString())
             }
             else{
                 StorageManager.instance.set(StorageTypes.RATE_ID.toString(), response!!.rate.rateId)
                 json_update_user.put("rateId", StorageManager.instance.get<Int>(StorageTypes.RATE_ID.toString()))
                 NetworkManager.instance.put<Int>("VolunteerUsers/"+StorageManager.instance.get<String>(StorageTypes.USER_ID.toString()), json_update_user){ response, statusCode, error ->
-                    print(response)
                     if (statusCode != 204){
-                        Log.i("LOG - error ", error.toString())
+                        Log.i("LOG - error in update user", error.toString())
+                    }else{
+                        Log.i("LOG - volunteer user created ", "")
+                        val activityIntentVolunteer = Intent(this.context, VolunteerActivity::class.java)
+                        startActivity(activityIntentVolunteer)
                     }
                 }
             }
@@ -135,13 +135,21 @@ class ThirdFragment : Fragment() {
         return json_application_user
     }
 
-    private fun createNeedHelpUser(json_create_user: JSONObject){
+    private fun createNeedHelpUser(json_create_user: JSONObject, json_update_user: JSONObject){
         NetworkManager.instance.post<NeedHelpUser>("NeedHelpUsers", json_create_user){ response, statusCode, error ->
-            print(response)
-            if (statusCode != 200) {
-                print(error)
+            if (statusCode != 201) {
+                Log.i("LOG - error in creating user ", error.toString())
             }
+            else{
+                NetworkManager.instance.put<Int>("NeedHelpUsers/"+StorageManager.instance.get<String>(StorageTypes.USER_ID.toString()), json_update_user){ response, statusCode, error ->
+                    if (statusCode != 204){
+                        Log.i("LOG - error in update user", error.toString())
+                    }else{
+                        Log.i("LOG - need help user created ", "")
+                    }
+                }
 
+            }
         }
     }
 }

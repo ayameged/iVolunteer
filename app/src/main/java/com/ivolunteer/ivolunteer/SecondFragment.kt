@@ -29,18 +29,19 @@ class SecondFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        TODO: move to func
         i_need_help_btn.setOnClickListener {
-            val navController = Navigation.findNavController((activity as RegActivity), R.id.fragment)
-            navController.navigate(R.id.action_SecondFragment_to_ThirdFragment)
+            moveToFillDetailsPage()
             StorageManager.instance.set(StorageTypes.IS_VOLUNTEER.toString(), false)
         }
 
         i_volunteer_btn.setOnClickListener {
-            val navController = Navigation.findNavController((activity as RegActivity), R.id.fragment)
-            navController.navigate(R.id.action_SecondFragment_to_ThirdFragment)
+            moveToFillDetailsPage()
             StorageManager.instance.set(StorageTypes.IS_VOLUNTEER.toString(), true)
         }
+    }
 
+    private fun moveToFillDetailsPage(){
+        val navController = Navigation.findNavController((activity as RegActivity), R.id.fragment)
+        navController.navigate(R.id.action_SecondFragment_to_ThirdFragment)
     }
 }
