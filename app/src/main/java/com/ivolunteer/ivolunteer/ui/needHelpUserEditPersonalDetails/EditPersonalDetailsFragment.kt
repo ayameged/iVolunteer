@@ -1,4 +1,4 @@
-package com.ivolunteer.ivolunteer.ui.editPersonalDetails
+package com.ivolunteer.ivolunteer.ui.needHelpUserEditPersonalDetails
 
 import android.os.Bundle
 import android.text.Editable

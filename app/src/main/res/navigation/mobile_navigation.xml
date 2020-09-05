@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/nav_edit_personal_details"
-        android:name="com.ivolunteer.ivolunteer.ui.editPersonalDetails.EditPersonalDetailsFragment"
+        android:name="com.ivolunteer.ivolunteer.ui.needHelpUserEditPersonalDetails.EditPersonalDetailsFragment"
         android:label="@string/menu_edit_personal_details"
         tools:layout="@layout/fragment_edit_personal_details" />
 
     <fragment
         android:id="@+id/nav_my_activities"
-        android:name="com.ivolunteer.ivolunteer.ui.gallery.Gallery"
+        android:name="com.ivolunteer.ivolunteer.ui.needHelpUserMyActivities.MyActivitiesFragment"
         android:label="@string/menu__my_activities"
         tools:layout="@layout/fragment_my_activities" />
 
