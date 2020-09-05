@@ -17,6 +17,7 @@ import com.ivolunteer.ivolunteer.resources.StorageManager
 import com.ivolunteer.ivolunteer.resources.StorageTypes
 import com.ivolunteer.ivolunteer.types.City
 import com.ivolunteer.ivolunteer.types.needhelpuser.NeedHelpUser
+import com.ivolunteer.ivolunteer.util.Helper
 import kotlinx.android.synthetic.main.fragment_edit_personal_details.*
 import org.json.JSONObject
 
@@ -92,7 +93,7 @@ class EditPersonalDetailsFragment : Fragment() {
 
     update_btn_need_help_user.setOnClickListener {
 
-      var cityId = getCityId(citySpinner.selectedItem.toString())
+      var cityId = Helper.getCityId(citySpinner.selectedItem.toString())
       val json_update_user = JSONObject()
       json_update_user.put("id", StorageManager.instance.get<String>(StorageTypes.USER_ID.toString()))
       json_update_user.put("needhelpcityid", cityId)
@@ -117,20 +118,7 @@ class EditPersonalDetailsFragment : Fragment() {
     }
   }
 
-  private fun getCityId(cityName: String): Int{
-    //TODO: Duplicate - move to generic (User?)
-    var cityId = 1
-    var cities: List<City>? =
-      StorageManager.instance.get<List<City>>(StorageTypes.CITIES_LIST.toString())
-    if (cities != null) {
-      for (city: City in cities.iterator()) {
-        if (cityName == city.city) {
-          cityId = city.needHelpCityId!!
-        }
-      }
-    }
-    return cityId
-  }
+
 
   private fun updateNeedHelpUser(json_update_user: JSONObject){
     //TODO: Duplicate - move to generic (User?)
@@ -138,6 +126,7 @@ class EditPersonalDetailsFragment : Fragment() {
       StorageTypes.USER_ID.toString()), json_update_user){ response, statusCode, error ->
       if (statusCode != 204){
         Log.i("LOG - error in update user", error.toString())
+        //                        TODO: Add text about failure
       }else{
         Log.i("LOG - need help user updated ", "")
 //        val activityIntentNeedHelpUser = Intent(this.context, NeedHelpActivity::class.java)

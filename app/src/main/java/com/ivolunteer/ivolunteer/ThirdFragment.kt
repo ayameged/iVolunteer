@@ -16,6 +16,7 @@ import com.ivolunteer.ivolunteer.resources.StorageTypes
 import com.ivolunteer.ivolunteer.types.City
 import com.ivolunteer.ivolunteer.types.needhelpuser.NeedHelpUser
 import com.ivolunteer.ivolunteer.types.volunteeruser.VolunteerUser
+import com.ivolunteer.ivolunteer.util.Helper
 import kotlinx.android.synthetic.main.fragment_third.*
 import org.json.JSONObject
 
@@ -67,7 +68,7 @@ class ThirdFragment : Fragment() {
 
             val json_create_user = JSONObject()
             val json_update_user = JSONObject()
-            cityId = getCityId(citySpinner.selectedItem.toString())
+            cityId = Helper.getCityId(citySpinner.selectedItem.toString())
             json_create_user.put("id", StorageManager.instance.get<String>(StorageTypes.USER_ID.toString()))
             json_update_user.put("id", StorageManager.instance.get<String>(StorageTypes.USER_ID.toString()))
             json_update_user.put("ApplicationUser", createApplicationUserJson(firstName, lastName, phone, age, genderSpinner))
@@ -115,6 +116,7 @@ class ThirdFragment : Fragment() {
                 NetworkManager.instance.put<Int>("VolunteerUsers/"+StorageManager.instance.get<String>(StorageTypes.USER_ID.toString()), json_update_user){ response, statusCode, error ->
                     if (statusCode != 204){
                         Log.i("LOG - error in update user", error.toString())
+//                        TODO: Add text about failure
                     }else{
                         Log.i("LOG - volunteer user created ", "")
 //                        val activityIntentVolunteer = Intent(this.context, VolunteerActivity::class.java)
