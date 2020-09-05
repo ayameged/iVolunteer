@@ -6,7 +6,7 @@ data class ApplicationUser(
     val concurrencyStamp: String,
     val email: String,
     val emailConfirmed: Boolean,
-    val firstName: Any,
+    val firstName: String,
     val gender: Any,
     val id: String,
     val lastName: Any,

@@ -1,4 +1,4 @@
-package com.ivolunteer.ivolunteer.ui.home
+package com.ivolunteer.ivolunteer.ui.editPersonalDetails
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

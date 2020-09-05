@@ -5,16 +5,16 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_edit_personal_details"
-            android:title="@string/menu_edit_personal_details"
-            android:fontFamily="@font/gabriela"/>
-        <item
             android:id="@+id/nav_my_activities"
             android:title="@string/menu__my_activities"
             android:fontFamily="@font/gabriela"/>
         <item
             android:id="@+id/nav_new_help_event"
             android:title="@string/menu_new_help_events"
+            android:fontFamily="@font/gabriela"/>
+        <item
+            android:id="@+id/nav_edit_personal_details"
+            android:title="@string/menu_edit_personal_details"
             android:fontFamily="@font/gabriela"/>
 
     </group>

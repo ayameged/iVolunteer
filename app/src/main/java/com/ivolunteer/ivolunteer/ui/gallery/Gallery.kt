@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.ivolunteer.ivolunteer.R
 
-class GalleryFragment : Fragment() {
+class Gallery : Fragment() {
 
   private lateinit var galleryViewModel: GalleryViewModel
 
@@ -20,7 +20,7 @@ class GalleryFragment : Fragment() {
     savedInstanceState: Bundle?
   ): View? {
     galleryViewModel =
-    ViewModelProviders.of(this).get(GalleryViewModel::class.java)
+      ViewModelProviders.of(this).get(GalleryViewModel::class.java)
     val root = inflater.inflate(R.layout.fragment_my_activities, container, false)
     val textView: TextView = root.findViewById(R.id.text_gallery)
     galleryViewModel.text.observe(viewLifecycleOwner, Observer {
