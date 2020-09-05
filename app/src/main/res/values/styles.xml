@@ -5,6 +5,11 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@drawable/background</item>
+    </style>
+
+    <style name="GabrielaTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/gabriela</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

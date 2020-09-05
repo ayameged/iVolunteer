@@ -34,8 +34,12 @@
                 android:id="@+id/i_volunteer_btn"
                 android:layout_width="213dp"
                 android:layout_height="match_parent"
+                android:background="@android:drawable/button_onoff_indicator_off"
+                android:fontFamily="@font/gabriela"
                 android:gravity="center_horizontal|center_vertical"
-                android:text="I Volunteer" />
+                android:text="I volunteer"
+                android:textAllCaps="false"
+                android:textSize="18sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -53,7 +57,11 @@
                 android:id="@+id/i_need_help_btn"
                 android:layout_width="213dp"
                 android:layout_height="65dp"
-                android:text="I NEED HELP" />
+                android:background="@android:drawable/button_onoff_indicator_off"
+                android:fontFamily="@font/gabriela"
+                android:text="I need you"
+                android:textAllCaps="false"
+                android:textSize="18sp" />
         </LinearLayout>
 
     </LinearLayout>

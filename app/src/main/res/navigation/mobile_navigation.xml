@@ -9,7 +9,7 @@
         android:id="@+id/nav_edit_personal_details"
         android:name="com.ivolunteer.ivolunteer.ui.home.EditPersonalDetailsFragment"
         android:label="@string/menu_edit_personal_details"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_edit_personal_details" />
 
     <fragment
         android:id="@+id/nav_my_activities"

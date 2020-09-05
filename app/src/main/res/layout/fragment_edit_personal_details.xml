@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/edit_personal_details_freg"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ThirdFragment">
+    tools:context=".ui.home.EditPersonalDetailsFragment" >
 
     <LinearLayout
         android:layout_width="336dp"
@@ -33,15 +33,16 @@
                 android:text="Name"
                 android:textColor="#070707"
                 android:textSize="18sp" />
+
             <EditText
-                android:id="@+id/first_name_text"
+                android:id="@+id/first_name_update_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:fontFamily="@font/gabriela"
                 android:inputType="textPersonName"
-                android:textSize="18sp"
-                android:fontFamily="@font/gabriela"/>
+                android:textSize="18sp" />
 
         </LinearLayout>
 
@@ -61,13 +62,13 @@
                 android:textSize="18sp" />
 
             <EditText
-                android:id="@+id/last_name_text"
+                android:id="@+id/last_name_text_update"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:fontFamily="@font/gabriela"
                 android:inputType="textPersonName"
-                android:textSize="18sp"
-                android:fontFamily="@font/gabriela"/>
+                android:textSize="18sp" />
 
         </LinearLayout>
 
@@ -87,14 +88,14 @@
                 android:textSize="18sp" />
 
             <EditText
-                android:id="@+id/phone_text"
+                android:id="@+id/phone_text_update"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:fontFamily="@font/gabriela"
                 android:inputType="phone"
-                android:textSize="18sp"
-                android:fontFamily="@font/gabriela"/>
+                android:textSize="18sp" />
 
         </LinearLayout>
 
@@ -114,14 +115,14 @@
                 android:textSize="18sp" />
 
             <EditText
-                android:id="@+id/age_text"
+                android:id="@+id/age_text_update"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:fontFamily="@font/gabriela"
                 android:inputType="number"
-                android:textSize="18sp"
-                android:fontFamily="@font/gabriela"/>
+                android:textSize="18sp" />
 
         </LinearLayout>
 
@@ -150,8 +151,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/gabriela"/>
+                    android:fontFamily="@font/gabriela"
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
@@ -177,8 +178,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="18sp"
-                android:fontFamily="@font/gabriela"/>
+                android:fontFamily="@font/gabriela"
+                android:textSize="18sp" />
         </LinearLayout>
 
         <Button
@@ -194,13 +195,16 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textview_second"
-        android:layout_width="wrap_content"
+        android:id="@+id/text_home"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:textAlignment="center"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:textSize="18sp"
-        android:fontFamily="@font/gabriela"/>
-
+        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
