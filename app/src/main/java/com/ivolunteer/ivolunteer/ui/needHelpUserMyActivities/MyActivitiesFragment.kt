@@ -43,16 +43,18 @@ class MyActivitiesFragment : Fragment() {
        // response[0].details
         val cities= arrayOfNulls<String>(response!!.size)
         val type= arrayOfNulls<String>(response!!.size)
+        val occupied = arrayOfNulls<Boolean>(response!!.size)
         for(i in 0 until response!!.size) {
           cities[i] = (response[i].volunteerCity.city)
           type[i] = (response[i].volunteerType.type)
+          occupied[i] = (response[i].isOccupied)
         }
 
 
 //custom list - not working -
 
         try {
-          val myListAdapter = MyListAdapter(requireActivity(), type, cities)
+          val myListAdapter = MyListAdapter(requireActivity(), type, cities, occupied)
 
           listView?.post {
             listView.adapter = myListAdapter
