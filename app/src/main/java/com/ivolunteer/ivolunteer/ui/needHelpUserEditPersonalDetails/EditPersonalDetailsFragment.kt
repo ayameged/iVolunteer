@@ -58,8 +58,10 @@ class EditPersonalDetailsFragment : Fragment() {
 
         var citySpinner = view?.findViewById<Spinner>(R.id.city_spinner_update)
         val genderSpinner = view?.findViewById<Spinner>(R.id.gender_spinner_update)
-        genderSpinner?.adapter = activity?.applicationContext?.let { ArrayAdapter(it, R.layout.support_simple_spinner_dropdown_item, genderSelection) }
-        genderSpinner?.setSelection(genderSelection.indexOf(gender.toString()))
+        genderSpinner?.post{
+          genderSpinner?.adapter = activity?.applicationContext?.let { ArrayAdapter(it, R.layout.support_simple_spinner_dropdown_item, genderSelection) }
+          genderSpinner?.setSelection(genderSelection.indexOf(gender.toString()))
+        }
         NetworkManager.instance.get<List<City>>("NeedHelpCities") { response, statusCode, error ->
           if(response != null) {
             for (city in response) {
@@ -67,11 +69,9 @@ class EditPersonalDetailsFragment : Fragment() {
             }
             StorageManager.instance.set(StorageTypes.CITIES_LIST.toString(), response)
 
-            if (citySpinner != null) {
-              citySpinner.post {
-                citySpinner.adapter = activity?.applicationContext?.let { ArrayAdapter(it, R.layout.support_simple_spinner_dropdown_item, cities_names) }
-                citySpinner.setSelection(cities_names.indexOf(city.toString()))
-              }
+            citySpinner?.post {
+              citySpinner.adapter = activity?.applicationContext?.let { ArrayAdapter(it, R.layout.support_simple_spinner_dropdown_item, cities_names) }
+              citySpinner.setSelection(cities_names.indexOf(city.toString()))
             }
           }
         }
@@ -112,8 +112,10 @@ class EditPersonalDetailsFragment : Fragment() {
     var EditText  = view?.findViewById<EditText>(id)
     if (EditText != null) {
       if (text != "null") {
-        EditText.text =
-          Editable.Factory.getInstance().newEditable(text)
+        EditText.post {
+          EditText.text =
+            Editable.Factory.getInstance().newEditable(text)
+        }
       }
     }
   }
