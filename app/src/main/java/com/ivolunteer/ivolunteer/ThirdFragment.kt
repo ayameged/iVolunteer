@@ -91,19 +91,19 @@ class ThirdFragment : Fragment() {
         }
     }
 
-    private fun getCityId(cityName: String): Int{
-        var cityId = 1
-        var cities: List<City>? =
-            StorageManager.instance.get<List<City>>(StorageTypes.CITIES_LIST.toString())
-        if (cities != null) {
-            for (city: City in cities.iterator()) {
-                if (cityName == city.city) {
-                    cityId = city.needHelpCityId!!
-                }
-            }
-        }
-        return cityId
-    }
+//    private fun getCityId(cityName: String): Int{
+//        var cityId = 1
+//        var cities: List<City>? =
+//            StorageManager.instance.get<List<City>>(StorageTypes.CITIES_LIST.toString())
+//        if (cities != null) {
+//            for (city: City in cities.iterator()) {
+//                if (cityName == city.city) {
+//                    cityId = city.needHelpCityId!!
+//                }
+//            }
+//        }
+//        return cityId
+//    }
 
     private fun createVolunteerUser(json_create_user: JSONObject, json_update_user: JSONObject){
         NetworkManager.instance.post<VolunteerUser>("VolunteerUsers", json_create_user){ response, statusCode, error ->

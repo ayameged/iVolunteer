@@ -1,4 +1,4 @@
-package com.ivolunteer.ivolunteer.ui.needHelpUserMyActivities
+package com.ivolunteer.ivolunteer.ui.needHelpUserFragments.needHelpUserMyActivities
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

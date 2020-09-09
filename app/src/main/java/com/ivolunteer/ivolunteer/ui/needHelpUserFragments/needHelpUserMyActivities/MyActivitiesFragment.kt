@@ -1,4 +1,4 @@
-package com.ivolunteer.ivolunteer.ui.needHelpUserMyActivities
+package com.ivolunteer.ivolunteer.ui.needHelpUserFragments.needHelpUserMyActivities
 
 import android.os.Bundle
 import android.util.Log
@@ -16,7 +16,7 @@ import com.ivolunteer.ivolunteer.types.needhelpuseractivities.NeedHelpUserActivi
 
 class MyActivitiesFragment : Fragment() {
 
-  private lateinit var galleryViewModel: GalleryViewModel
+  private lateinit var galleryViewModel: SearchForVolunteersViewModel
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -24,7 +24,7 @@ class MyActivitiesFragment : Fragment() {
     savedInstanceState: Bundle?
   ): View? {
     galleryViewModel =
-      ViewModelProviders.of(this).get(GalleryViewModel::class.java)
+      ViewModelProviders.of(this).get(SearchForVolunteersViewModel::class.java)
     val root = inflater.inflate(R.layout.fragment_my_activities, container, false)
 
     var listView = root.findViewById<ListView>(R.id.recipe_list_view)

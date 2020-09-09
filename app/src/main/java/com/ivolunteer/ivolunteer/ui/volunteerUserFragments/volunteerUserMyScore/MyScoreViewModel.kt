@@ -1,13 +1,13 @@
-package com.ivolunteer.ivolunteer.ui.newHelpEvent
+package com.ivolunteer.ivolunteer.ui.volunteerUserFragments.volunteerUserMyScore
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class NewHelpViewModel : ViewModel() {
+class MyScoreViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is slideshow Fragment"
+        value = "This is gallery Fragment"
     }
     val text: LiveData<String> = _text
 }

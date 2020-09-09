@@ -13,7 +13,6 @@ import com.ivolunteer.ivolunteer.resources.StorageTypes
 import com.ivolunteer.ivolunteer.types.Auth
 import org.json.JSONObject
 import android.util.Log
-import android.widget.ImageButton
 
 enum class UserTypes{
     ApplicationUser,
@@ -61,8 +60,21 @@ class LoginActivity : AppCompatActivity() {
                                         StorageManager.instance.get<String>(StorageTypes.USER_TYPE.toString())!!
                                     )
                                     if (response == UserTypes.NeedHelpUser.name){
-                                        val activityIntentNeedHelpUser = Intent(this, NeedHelpActivity::class.java)
-                                        startActivity(activityIntentNeedHelpUser)
+
+                                        try {
+                                            val activityIntentNeedHelpUser = Intent(this, NeedHelpActivity::class.java)
+                                            startActivity(activityIntentNeedHelpUser)
+                                        } catch (E: Exception) {
+                                            Log.i("error", E.toString())
+                                        }
+                                    }else if(response == UserTypes.VolunteerUser.name){
+                                        try{
+                                            val activityIntentVolunteerUser = Intent(this, VolunteerActivity::class.java)
+                                            startActivity(activityIntentVolunteerUser)
+                                        }
+                                        catch (E: Exception) {
+                                            Log.i("error", E.toString())
+                                        }
                                     }
                                 }
                                 else{

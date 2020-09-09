@@ -1,7 +1,6 @@
-package com.ivolunteer.ivolunteer.ui.needHelpUserMyActivities
+package com.ivolunteer.ivolunteer.ui.needHelpUserFragments.needHelpUserMyActivities
 
 import android.app.Activity
-import android.graphics.drawable.Drawable
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter

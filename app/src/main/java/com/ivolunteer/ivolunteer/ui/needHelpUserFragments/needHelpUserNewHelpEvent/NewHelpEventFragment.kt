@@ -1,22 +1,15 @@
-package com.ivolunteer.ivolunteer.ui.newHelpEvent
+package com.ivolunteer.ivolunteer.ui.needHelpUserFragments.needHelpUserNewHelpEvent
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.EditText
 import android.widget.Spinner
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.ivolunteer.ivolunteer.R
 import com.ivolunteer.ivolunteer.resources.NetworkManager
-import com.ivolunteer.ivolunteer.resources.StorageManager
-import com.ivolunteer.ivolunteer.resources.StorageTypes
-import com.ivolunteer.ivolunteer.types.needhelpuser.NeedHelpUser
-import com.ivolunteer.ivolunteer.types.needhelpuseractivities.VolunteerType
 import com.ivolunteer.ivolunteer.types.volunteers.VolunteersTypeItem
 
 class NewHelpEventFragment : Fragment() {

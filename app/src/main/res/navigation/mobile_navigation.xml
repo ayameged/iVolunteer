@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/nav_edit_personal_details"
-        android:name="com.ivolunteer.ivolunteer.ui.needHelpUserEditPersonalDetails.EditPersonalDetailsFragment"
+        android:name="com.ivolunteer.ivolunteer.ui.editPersonalDetails.EditPersonalDetailsFragment"
         android:label="@string/menu_edit_personal_details"
         tools:layout="@layout/fragment_edit_personal_details" />
 
     <fragment
         android:id="@+id/nav_my_activities"
-        android:name="com.ivolunteer.ivolunteer.ui.needHelpUserMyActivities.MyActivitiesFragment"
+        android:name="com.ivolunteer.ivolunteer.ui.needHelpUserFragments.needHelpUserMyActivities.MyActivitiesFragment"
         android:label="@string/menu__my_activities"
         tools:layout="@layout/fragment_my_activities" />
 
     <fragment
         android:id="@+id/nav_new_help_event"
-        android:name="com.ivolunteer.ivolunteer.ui.newHelpEvent.NewHelpEventFragment"
+        android:name="com.ivolunteer.ivolunteer.ui.needHelpUserFragments.needHelpUserNewHelpEvent.NewHelpEventFragment"
         android:label="@string/menu_new_help_events"
         tools:layout="@layout/fragment_new_help_event" />
 </navigation>

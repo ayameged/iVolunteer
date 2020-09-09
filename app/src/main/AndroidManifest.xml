@@ -17,6 +17,11 @@
             android:label="@string/title_activity_need_help"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+        <activity
+            android:name=".VolunteerActivity"
+            android:label="@string/title_activity_need_help"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
 <!--        <activity-->
 <!--            android:name= ".InitMainActivity"-->
 <!--            android:label="@string/title_activity_volunteer"-->

@@ -26,4 +26,7 @@
     <string name="menu_edit_personal_details">Edit personal details</string>
     <string name="menu__my_activities">My activities</string>
     <string name="menu_new_help_events">New help event</string>
+    <string name="menu__my_volunteers">My volunteers</string>
+    <string name="menu_search_for_volunteers">Search for volunteers</string>
+    <string name="menu_my_score">My score</string>
 </resources>

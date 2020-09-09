@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/volunteer_navigation"
+    app:startDestination="@+id/nav_my_volunteers">
+
+    <fragment
+        android:id="@+id/nav_edit_personal_details"
+        android:name="com.ivolunteer.ivolunteer.ui.editPersonalDetails.EditPersonalDetailsFragment"
+        android:label="@string/menu_edit_personal_details"
+        tools:layout="@layout/fragment_edit_personal_details" />
+
+    <fragment
+        android:id="@+id/nav_my_volunteers"
+        android:name="com.ivolunteer.ivolunteer.ui.volunteerUserFragments.volunteerUserMyVolunteers.MyVolunteersFragment"
+        android:label="@string/menu__my_volunteers"
+        tools:layout="@layout/fragment_my_volunteers" />
+
+    <fragment
+        android:id="@+id/nav_search_for_volunteers"
+        android:name="com.ivolunteer.ivolunteer.ui.volunteerUserFragments.volunteerUserSearchForVolunteers.SearchForVolunteerFragment"
+        android:label="@string/menu_search_for_volunteers"
+        tools:layout="@layout/fragment_search_for_volunteers" />
+
+    <fragment
+        android:id="@+id/nav_my_score"
+        android:name="com.ivolunteer.ivolunteer.ui.volunteerUserFragments.volunteerUserMyScore.MyScoreFragment"
+        android:label="@string/menu_my_score"
+        tools:layout="@layout/fragment_my_score" />
+</navigation>
