@@ -177,13 +177,13 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/update_btn_need_help_user"
+            android:id="@+id/create_event_btn"
             android:layout_width="349dp"
             android:layout_height="wrap_content"
             android:background="@android:drawable/button_onoff_indicator_off"
             android:fontFamily="@font/gabriela"
             android:gravity="center"
-            android:text="Update"
+            android:text="Create"
             android:textAllCaps="false"
             android:textSize="18sp" />
 

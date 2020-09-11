@@ -84,7 +84,7 @@
                 <TextView
                     android:id="@+id/register_error_lbl"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="38dp"
                     android:text="Ooops... something wend wrong, please try again"
                     android:textColor="#E10D0D"
                     android:textStyle="bold"

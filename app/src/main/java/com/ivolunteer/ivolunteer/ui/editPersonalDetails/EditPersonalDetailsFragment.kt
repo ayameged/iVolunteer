@@ -1,5 +1,6 @@
 package com.ivolunteer.ivolunteer.ui.editPersonalDetails
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
@@ -9,9 +10,13 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Spinner
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
+import com.ivolunteer.ivolunteer.NeedHelpActivity
 import com.ivolunteer.ivolunteer.R
+import com.ivolunteer.ivolunteer.RegActivity
 import com.ivolunteer.ivolunteer.UserTypes
 import com.ivolunteer.ivolunteer.resources.NetworkManager
 import com.ivolunteer.ivolunteer.resources.StorageManager
@@ -35,43 +40,35 @@ class EditPersonalDetailsFragment : Fragment() {
     editPersonalDetailsViewModel =
       ViewModelProviders.of(this).get(EditPersonalDetailsModel::class.java)
     val root = inflater.inflate(R.layout.fragment_edit_personal_details, container, false)
-//    val textView: TextView = root.findViewById(R.id.text_home)
-//    editPersonalDetailsViewModel.text.observe(viewLifecycleOwner, Observer {
-//      textView.text = it
-//    })
-
-//    val genderSelection = arrayOf("Male", "Female")
-//    var cities_names: ArrayList<String> = ArrayList()
-//    var citySpinner = view?.findViewById<Spinner>(R.id.city_spinner_update)
-//    val genderSpinner = view?.findViewById<Spinner>(R.id.gender_spinner_update)
 
     if (StorageManager.instance.get<String>(StorageTypes.USER_TYPE.toString()) == UserTypes.NeedHelpUser.name) {
       //Get need help user details
       NetworkManager.instance.get<NeedHelpUser>("NeedHelpUsers/byid?id=" + StorageManager.instance.get<String>(StorageTypes.USER_ID.toString())) { response, statusCode, error ->
         if (statusCode == 200) {
-          var firstName = response?.applicationUser?.firstName
-          var lastName = response?.applicationUser?.lastName
-          var phone = response?.applicationUser?.phoneNumber
-          var gender = response?.applicationUser?.gender
-          var age = response?.applicationUser?.age
-          var city = response?.needHelpCity?.city
+          val firstName = response?.applicationUser?.firstName
+          val lastName = response?.applicationUser?.lastName
+          val phone = response?.applicationUser?.phoneNumber
+          val gender = response?.applicationUser?.gender
+          val age = response?.applicationUser?.age
+          val city = response?.needHelpCity?.city
 
 
-          editText(R.id.first_name_update_text, firstName.toString())
-          editText(R.id.last_name_text_update, lastName.toString())
-          editText(R.id.phone_text_update, phone.toString())
-          editText(R.id.age_text_update, age.toString())
+//          editText(R.id.first_name_update_text, firstName.toString())
+//          editText(R.id.last_name_text_update, lastName.toString())
+//          editText(R.id.phone_text_update, phone.toString())
+//          editText(R.id.age_text_update, age.toString())
+          editFields(firstName.toString(), lastName.toString(), phone.toString(), age.toString())
 
           val genderSelection = arrayOf("Male", "Female")
-          var cities_names: ArrayList<String> = ArrayList()
+          val cities_names: ArrayList<String> = ArrayList()
 
-          var citySpinner = view?.findViewById<Spinner>(R.id.city_spinner_update)
+          val citySpinner = view?.findViewById<Spinner>(R.id.city_spinner_update)
           val genderSpinner = view?.findViewById<Spinner>(R.id.gender_spinner_update)
 
 
           genderSpinner?.post {
-            genderSpinner?.adapter = activity?.applicationContext?.let {ArrayAdapter(it, R.layout.support_simple_spinner_dropdown_item,genderSelection)}
-            genderSpinner?.setSelection(genderSelection.indexOf(gender.toString()))
+            genderSpinner.adapter = activity?.applicationContext?.let {ArrayAdapter(it, R.layout.support_simple_spinner_dropdown_item,genderSelection)}
+            genderSpinner.setSelection(genderSelection.indexOf(gender.toString()))
           }
           NetworkManager.instance.get<List<City>>("NeedHelpCities") { response, statusCode, error ->
             if (response != null) {
@@ -99,10 +96,11 @@ class EditPersonalDetailsFragment : Fragment() {
           var age = response?.applicationUser?.age
           var city = response?.volunteerUserCity?.city
 
-          editText(R.id.first_name_update_text, firstName.toString())
-          editText(R.id.last_name_text_update, lastName.toString())
-          editText(R.id.phone_text_update, phone.toString())
-          editText(R.id.age_text_update, age.toString())
+//          editText(R.id.first_name_update_text, firstName.toString())
+//          editText(R.id.last_name_text_update, lastName.toString())
+//          editText(R.id.phone_text_update, phone.toString())
+//          editText(R.id.age_text_update, age.toString())
+          editFields(firstName.toString(), lastName.toString(), phone.toString(), age.toString())
 
           val genderSelection = arrayOf("Male", "Female")
           var cities_names: ArrayList<String> = ArrayList()
@@ -123,7 +121,6 @@ class EditPersonalDetailsFragment : Fragment() {
                 cities_names.add(city.city)
               }
               StorageManager.instance.set(StorageTypes.CITIES_LIST.toString(), response)
-
               citySpinner?.post {
                 citySpinner.adapter = activity?.applicationContext?.let {ArrayAdapter(it, R.layout.support_simple_spinner_dropdown_item, cities_names)}
                 citySpinner.setSelection(cities_names.indexOf(city.toString()))
@@ -131,7 +128,6 @@ class EditPersonalDetailsFragment : Fragment() {
             }
           }
         }
-
       }
     }
     return root
@@ -161,6 +157,7 @@ class EditPersonalDetailsFragment : Fragment() {
       json_application_user.put("Gender", genderSpinner.selectedItem)
       json_application_user.put("phoneNumber", phone.text)
       json_update_user.put("ApplicationUser", json_application_user)
+
       if (StorageManager.instance.get<String>(StorageTypes.USER_TYPE.toString()) == UserTypes.NeedHelpUser.name) {
         json_update_user.put("needhelpcityid", cityId)
         updateNeedHelpUser(json_update_user)
@@ -171,6 +168,13 @@ class EditPersonalDetailsFragment : Fragment() {
         updateVolunteerUser(json_update_user)
       }
     }
+  }
+
+  private fun editFields(firstName: String, lastName: String, phone: String, age: String){
+    editText(R.id.first_name_update_text, firstName)
+    editText(R.id.last_name_text_update, lastName)
+    editText(R.id.phone_text_update, phone)
+    editText(R.id.age_text_update, age)
   }
 
   private fun editText(id: Int, text: String){
@@ -185,23 +189,41 @@ class EditPersonalDetailsFragment : Fragment() {
     }
   }
 
+  @SuppressLint("SetTextI18n")
   private fun updateNeedHelpUser(json_update_user: JSONObject){
+    val loginError = view?.findViewById<TextView>(R.id.error_text_view)
     NetworkManager.instance.put<Int>("NeedHelpUsers/"+ StorageManager.instance.get<String>(
       StorageTypes.USER_ID.toString()), json_update_user){ response, statusCode, error ->
       if (statusCode != 204){
         Log.i("LOG - error in update user", error.toString())
+        loginError?.post {
+          loginError.visibility = View.VISIBLE
+        }
       }else{
         Log.i("LOG - need help user updated ", "")
+        loginError?.post{
+          loginError.text = "Your details updated"
+          loginError.visibility = View.VISIBLE
+        }
       }
     }
   }
 
+  @SuppressLint("SetTextI18n")
   private fun updateVolunteerUser(json_update_user: JSONObject){
+    val loginError = view?.findViewById<TextView>(R.id.error_text_view)
     NetworkManager.instance.put<Int>("VolunteerUsers/"+StorageManager.instance.get<String>(StorageTypes.USER_ID.toString()), json_update_user){ response, statusCode, error ->
       if (statusCode != 204){
         Log.i("LOG - error in update user", error.toString())
+        loginError?.post {
+          loginError.visibility = View.VISIBLE
+        }
       }else{
         Log.i("LOG - volunteer user created ", "")
+        loginError?.post{
+          loginError.text = "Your details updated"
+          loginError.visibility = View.VISIBLE
+        }
       }
     }
   }
