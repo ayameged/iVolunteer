@@ -28,19 +28,10 @@ class MyActivitiesFragment : Fragment() {
     val root = inflater.inflate(R.layout.fragment_my_activities, container, false)
 
     var listView = root.findViewById<ListView>(R.id.recipe_list_view)
-   // val listView = view?.findViewById(android.R.id.recipe_list_view)
 
-    NetworkManager.instance.get<NeedHelpUserActivities>(
-      "volunteers/byuserid?id=" + StorageManager.instance.get<String>(
-        StorageTypes.USER_ID.toString()
-      )
-    ) { response, statusCode, error ->
+    NetworkManager.instance.get<NeedHelpUserActivities>("volunteers/byuserid?id=" + StorageManager.instance.get<String>(StorageTypes.USER_ID.toString())) { response, statusCode, error ->
       if (statusCode == 200){
-        //        TODO: Meital - list
-//
 
-
-       // response[0].details
         val cities= arrayOfNulls<String>(response!!.size)
         val type= arrayOfNulls<String>(response!!.size)
         val occupied = arrayOfNulls<Boolean>(response!!.size)
@@ -50,34 +41,18 @@ class MyActivitiesFragment : Fragment() {
           occupied[i] = (response[i].isOccupied)
         }
 
-
-//custom list - not working -
-
         try {
           val myListAdapter = MyListAdapter(requireActivity(), type, cities, occupied)
 
           listView?.post {
             listView.adapter = myListAdapter
           }
-
         } catch(e: Exception) {
           print(e)
         }
-
-        //working
-
-//          val adapter = activity?.applicationContext?.let {ArrayAdapter<String>(it, android.R.layout.simple_list_item_1, type)}
-//
-//          if (listView != null) {
-//           listView.post {
-//              listView!!.adapter = adapter
-//            }
-//          }
-
-        }else{
+      }else{
           Log.i("LOG - failed to get activities ", error.toString())
       }
-
     }
     return root
   }

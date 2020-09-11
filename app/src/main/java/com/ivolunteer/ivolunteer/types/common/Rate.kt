@@ -1,4 +1,4 @@
-package com.ivolunteer.ivolunteer.types.volunteeruser
+package com.ivolunteer.ivolunteer.types.common
 
 data class Rate(
     val avgRate: Double,
