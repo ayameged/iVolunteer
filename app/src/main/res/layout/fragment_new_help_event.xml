@@ -152,7 +152,7 @@
                 android:text="F" />
 
             <CheckBox
-                android:id="@+id/suturday_check_box"
+                android:id="@+id/saturday_check_box"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -167,7 +167,7 @@
             <EditText
                 android:id="@+id/additinal_details_text"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="65dp"
                 android:ems="10"
                 android:gravity="start|top"
                 android:inputType="textMultiLine"

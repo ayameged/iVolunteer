@@ -9,6 +9,8 @@ enum class StorageTypes{
     USER_ID,
     TOKEN,
     CITIES_LIST,
+  //meital
+  TYPES_LIST,
     RATE_ID,
     USER_TYPE
 }
