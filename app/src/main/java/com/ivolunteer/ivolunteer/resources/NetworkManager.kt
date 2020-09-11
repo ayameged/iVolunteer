@@ -13,7 +13,7 @@ import java.lang.reflect.Type
 
 
 class NetworkManager {
-    val apiAddress = "http://192.168.1.22:2315/api/"
+    val apiAddress = "http://192.168.1.17:2315/api/"
 
     inline fun <reified T> fromJson(json: String): T {
         return Gson().fromJson(json, object: TypeToken<T>(){}.type)
