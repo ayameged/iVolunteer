@@ -1,18 +1,19 @@
 package com.ivolunteer.ivolunteer
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.view.View.OnFocusChangeListener
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.ivolunteer.ivolunteer.resources.NetworkManager
 import com.ivolunteer.ivolunteer.resources.StorageManager
 import com.ivolunteer.ivolunteer.resources.StorageTypes
 import com.ivolunteer.ivolunteer.types.Auth
 import org.json.JSONObject
-import android.util.Log
 
 enum class UserTypes{
     ApplicationUser,
@@ -32,6 +33,21 @@ class LoginActivity : AppCompatActivity() {
         val loginError = findViewById<TextView>(R.id.unaothirized_messge)
         val registerButton = findViewById<Button>(R.id.register_new_user)
 
+        userNameInput?.post {
+            userNameInput.setOnFocusChangeListener(OnFocusChangeListener { v, hasFocus ->
+                if (hasFocus) userNameInput.setHint(
+                    ""
+                ) else userNameInput.setHint("UserName")
+            })
+        }
+
+        passwordInput?.post {
+            passwordInput.setOnFocusChangeListener(OnFocusChangeListener { v, hasFocus ->
+                if (hasFocus) passwordInput.setHint(
+                    ""
+                ) else passwordInput.setHint("Password")
+            })
+        }
         loginButton.setOnClickListener {
 
             val json = JSONObject()
@@ -49,27 +65,44 @@ class LoginActivity : AppCompatActivity() {
                 else {
                     Log.i("LOG - login", "SUCCESS")
                     StorageManager.instance.set(StorageTypes.TOKEN.toString(), response!!.token)
-                    Log.i("LOG - token: ", StorageManager.instance.get<String>(StorageTypes.TOKEN.toString())!!)
-                    NetworkManager.instance.get<String>("applicationUsers/ByUserName?username="+userNameInput.text){response, statusCode, error ->
+                    Log.i(
+                        "LOG - token: ",
+                        StorageManager.instance.get<String>(StorageTypes.TOKEN.toString())!!
+                    )
+                    NetworkManager.instance.get<String>("applicationUsers/ByUserName?username=" + userNameInput.text){ response, statusCode, error ->
                         if(statusCode == 200){
                             StorageManager.instance.set(StorageTypes.USER_ID.toString(), response!!)
-                            NetworkManager.instance.get<String>("applicationusers/byuserid?id="+StorageManager.instance.get(StorageTypes.USER_ID.toString())){response, statusCode, error ->
+                            NetworkManager.instance.get<String>(
+                                "applicationusers/byuserid?id=" + StorageManager.instance.get(
+                                    StorageTypes.USER_ID.toString()
+                                )
+                            ){ response, statusCode, error ->
                                 if(statusCode == 200){
-                                    StorageManager.instance.set(StorageTypes.USER_TYPE.toString(), response!!)
-                                    Log.i("LOG - user type: ",
+                                    StorageManager.instance.set(
+                                        StorageTypes.USER_TYPE.toString(),
+                                        response!!
+                                    )
+                                    Log.i(
+                                        "LOG - user type: ",
                                         StorageManager.instance.get<String>(StorageTypes.USER_TYPE.toString())!!
                                     )
                                     if (response == UserTypes.NeedHelpUser.name){
 
                                         try {
-                                            val activityIntentNeedHelpUser = Intent(this, NeedHelpActivity::class.java)
+                                            val activityIntentNeedHelpUser = Intent(
+                                                this,
+                                                NeedHelpActivity::class.java
+                                            )
                                             startActivity(activityIntentNeedHelpUser)
                                         } catch (E: Exception) {
                                             Log.i("error", E.toString())
                                         }
                                     }else if(response == UserTypes.VolunteerUser.name){
                                         try{
-                                            val activityIntentVolunteerUser = Intent(this, VolunteerActivity::class.java)
+                                            val activityIntentVolunteerUser = Intent(
+                                                this,
+                                                VolunteerActivity::class.java
+                                            )
                                             startActivity(activityIntentVolunteerUser)
                                         }
                                         catch (E: Exception) {

@@ -171,8 +171,8 @@
                 android:ems="10"
                 android:gravity="start|top"
                 android:inputType="textMultiLine"
-                android:text="Additional details"
                 android:textColorHighlight="#090909"
+                android:hint="Additional Details"
                 android:textColorLink="#0B0A0A" />
         </LinearLayout>
 

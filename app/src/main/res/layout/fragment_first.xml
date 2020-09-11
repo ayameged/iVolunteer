@@ -23,21 +23,12 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/user_name_register_lbl"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/gabriela"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="User Name"
-                android:textColor="#070707"
-                android:textSize="18sp" />
-
             <EditText
                 android:id="@+id/user_name_register_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:ems="10"
+                android:hint="UserName"
                 android:inputType="textPersonName" />
         </LinearLayout>
 
@@ -46,21 +37,12 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/gabriela"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="Email"
-                android:textColor="#090909"
-                android:textSize="18sp" />
-
             <EditText
                 android:id="@+id/email_register_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:ems="10"
+                android:hint="Email"
                 android:inputType="textEmailAddress" />
         </LinearLayout>
 
@@ -69,21 +51,12 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/test"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/gabriela"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="Password"
-                android:textColor="#070707"
-                android:textSize="18sp" />
-
             <EditText
                 android:id="@+id/password_register_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:ems="10"
+                android:hint="Password"
                 android:inputType="textPassword" />
         </LinearLayout>
 

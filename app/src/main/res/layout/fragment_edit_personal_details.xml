@@ -24,18 +24,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/first_name_lbl"
-                android:layout_width="100dp"
-                android:layout_height="39dp"
-                android:fontFamily="@font/gabriela"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="Name"
-                android:textAlignment="viewStart"
-                android:textColor="#070707"
-                android:textSize="18sp"
-                tools:ignore="RtlCompat" />
-
             <EditText
                 android:id="@+id/first_name_update_text"
                 android:layout_width="wrap_content"
@@ -44,6 +32,8 @@
                 android:ems="10"
                 android:fontFamily="@font/gabriela"
                 android:inputType="textPersonName"
+                android:hint="First Name"
+
                 android:textSize="18sp" />
 
         </LinearLayout>
@@ -52,18 +42,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/last_name_lbl"
-                android:layout_width="100dp"
-                android:layout_height="39dp"
-                android:fontFamily="@font/gabriela"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="Last name"
-                android:textAlignment="viewStart"
-                android:textColor="#070707"
-                android:textSize="18sp"
-                tools:ignore="RtlCompat" />
 
             <EditText
                 android:id="@+id/last_name_text_update"
@@ -72,6 +50,8 @@
                 android:ems="10"
                 android:fontFamily="@font/gabriela"
                 android:inputType="textPersonName"
+                android:hint="Last Name"
+
                 android:textSize="18sp" />
 
         </LinearLayout>
@@ -80,18 +60,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/phone_lbl"
-                android:layout_width="100dp"
-                android:layout_height="39dp"
-                android:fontFamily="@font/gabriela"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="Phone"
-                android:textAlignment="viewStart"
-                android:textColor="#070707"
-                android:textSize="18sp"
-                tools:ignore="RtlCompat" />
 
             <EditText
                 android:id="@+id/phone_text_update"
@@ -101,6 +69,7 @@
                 android:ems="10"
                 android:fontFamily="@font/gabriela"
                 android:inputType="phone"
+                android:hint="Phone Number"
                 android:textSize="18sp" />
 
         </LinearLayout>
@@ -110,18 +79,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/age_lbl"
-                android:layout_width="100dp"
-                android:layout_height="39dp"
-                android:fontFamily="@font/gabriela"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="age"
-                android:textAlignment="viewStart"
-                android:textColor="#090909"
-                android:textSize="18sp"
-                tools:ignore="RtlCompat" />
-
             <EditText
                 android:id="@+id/age_text_update"
                 android:layout_width="wrap_content"
@@ -130,6 +87,7 @@
                 android:ems="10"
                 android:fontFamily="@font/gabriela"
                 android:inputType="number"
+                android:hint="Age"
                 android:textSize="18sp" />
 
         </LinearLayout>
