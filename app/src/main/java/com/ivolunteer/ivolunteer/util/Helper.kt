@@ -40,7 +40,7 @@ class Helper {
             if (voltypes != null) {
                 for (type: Type in voltypes.iterator()) {
                     if (typeName == type.type) {
-                        typeId = type.needHelpTypeId!!
+                        typeId = type.volunteerTypeId!!
                     }
                 }
             }

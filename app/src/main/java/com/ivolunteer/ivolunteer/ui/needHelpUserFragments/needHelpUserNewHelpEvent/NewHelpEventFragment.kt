@@ -13,6 +13,8 @@ import com.ivolunteer.ivolunteer.resources.NetworkManager
 import com.ivolunteer.ivolunteer.resources.StorageManager
 import com.ivolunteer.ivolunteer.resources.StorageTypes
 import com.ivolunteer.ivolunteer.types.Auth
+import com.ivolunteer.ivolunteer.types.City
+import com.ivolunteer.ivolunteer.types.Type
 import com.ivolunteer.ivolunteer.types.volunteercities.VolunteerCityItem
 import com.ivolunteer.ivolunteer.types.volunteers.VolunteersTypeItem
 import com.ivolunteer.ivolunteer.util.Helper
@@ -41,12 +43,17 @@ class NewHelpEventFragment : Fragment() {
     var volunteers_cities: ArrayList<String> = ArrayList()
     var volunteersTypesSpinner = root.findViewById<Spinner>(R.id.events_spinner)
     var volunteersCitiesSpinner = root.findViewById<Spinner>(R.id.city_spinner_new_event)
-    NetworkManager.instance.get<List<VolunteersTypeItem>>("VolunteerTypes") { response, statusCode, error ->
+
+
+
+    NetworkManager.instance.get<List<Type>>("volunteertypes") { response, statusCode, error ->
       if (statusCode == 200) {
         if (response != null) {
           for(item in response){
             volunteers_types.add(item.type)
             }
+          StorageManager.instance.set(StorageTypes.TYPES_LIST.toString(), response)
+
         }
         volunteersTypesSpinner?.post {
           volunteersTypesSpinner.adapter = activity?.applicationContext?.let { ArrayAdapter(it, R.layout.support_simple_spinner_dropdown_item, volunteers_types) }
@@ -57,12 +64,16 @@ class NewHelpEventFragment : Fragment() {
 
     }
 
-    NetworkManager.instance.get<List<VolunteerCityItem>>("VolunteerCities") { response, statusCode, error ->
+
+
+    NetworkManager.instance.get<List<City>>("NeedHelpCities") { response, statusCode, error ->
       if (statusCode == 200) {
         if (response != null) {
           for(item in response){
             volunteers_cities.add(item.city)
           }
+          //new
+          StorageManager.instance.set(StorageTypes.CITIES_LIST.toString(), response)
         }
         volunteersCitiesSpinner?.post {
           volunteersCitiesSpinner.adapter = activity?.applicationContext?.let { ArrayAdapter(it, R.layout.support_simple_spinner_dropdown_item, volunteers_cities) }
@@ -119,11 +130,6 @@ class NewHelpEventFragment : Fragment() {
         }
         i++;
       }
-
-
-
-
-
 
 
       val scheduleJson = JSONObject()
