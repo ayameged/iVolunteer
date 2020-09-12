@@ -68,9 +68,9 @@
 
             <Button
                 android:id="@+id/sign_up_btn"
-                android:layout_width="146dp"
+                android:layout_width="188dp"
                 android:layout_height="wrap_content"
-                android:background="@android:drawable/button_onoff_indicator_off"
+                android:background="@drawable/btn_rounded"
                 android:fontFamily="@font/gabriela"
                 android:text="Sign up"
                 android:textAllCaps="false"

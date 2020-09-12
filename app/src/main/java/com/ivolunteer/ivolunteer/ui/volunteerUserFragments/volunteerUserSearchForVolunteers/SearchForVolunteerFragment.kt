@@ -14,6 +14,7 @@ import com.ivolunteer.ivolunteer.resources.StorageManager
 import com.ivolunteer.ivolunteer.resources.StorageTypes
 import com.ivolunteer.ivolunteer.types.City
 import com.ivolunteer.ivolunteer.types.Type
+import com.ivolunteer.ivolunteer.types.VolunteerWithSched.searchedVolunteer
 import com.ivolunteer.ivolunteer.types.VolunteerWithSched.searchedVolunteerItem
 import com.ivolunteer.ivolunteer.ui.needHelpUserFragments.needHelpUserMyActivities.MyListAdapter
 import com.ivolunteer.ivolunteer.ui.needHelpUserFragments.needHelpUserMyActivities.SearchForVolunteersViewModel
@@ -31,7 +32,7 @@ class SearchForVolunteerFragment : Fragment() {
   ): View? {
     galleryViewModel =
       ViewModelProviders.of(this).get(SearchForVolunteersViewModel::class.java)
-    val root = inflater.inflate(R.layout.fragment_my_volunteers, container, false)
+    val root = inflater.inflate(R.layout.fragment_search_for_volunteers, container, false)
     var listView = root.findViewById<ListView>(R.id.search_volunteers_list_view)
 
 
@@ -114,7 +115,7 @@ class SearchForVolunteerFragment : Fragment() {
 
 
       // StorageManager.instance.get<String>(StorageTypes.USER_ID.toString()))
-      NetworkManager.instance.get<List<searchedVolunteerItem>>("volunteers/byAll?schedTime=1;0;0&schedDays=1;3;5&cityId=2&typeId=1") { response, statusCode, error ->
+      NetworkManager.instance.get<searchedVolunteer>("volunteers/byAll?schedTime=1;1;0&schedDays=1;2;3;4;5;6;7&cityId=5&typeId=1") { response, statusCode, error ->
         val cities= arrayOfNulls<String>(response!!.size)
         val type= arrayOfNulls<String>(response!!.size)
         val occupied = arrayOfNulls<Boolean>(response!!.size)
