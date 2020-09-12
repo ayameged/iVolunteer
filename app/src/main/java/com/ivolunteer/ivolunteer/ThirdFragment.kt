@@ -119,8 +119,8 @@ class ThirdFragment : Fragment() {
 //                        TODO: Add text about failure
                     }else{
                         Log.i("LOG - volunteer user created ", "")
-//                        val activityIntentVolunteer = Intent(this.context, VolunteerActivity::class.java)
-//                        startActivity(activityIntentVolunteer)
+                        val activityIntentVolunteer = Intent(this.context, VolunteerActivity::class.java)
+                        startActivity(activityIntentVolunteer)
                     }
                 }
             }

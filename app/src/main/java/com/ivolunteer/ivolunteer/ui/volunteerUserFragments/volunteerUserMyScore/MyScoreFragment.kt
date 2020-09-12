@@ -11,7 +11,7 @@ import com.ivolunteer.ivolunteer.ui.needHelpUserFragments.needHelpUserMyActiviti
 
 class MyScoreFragment : Fragment() {
 
-  private lateinit var galleryViewModel: SearchForVolunteersViewModel
+  private lateinit var galleryViewModel: MyScoreViewModel
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -19,7 +19,7 @@ class MyScoreFragment : Fragment() {
     savedInstanceState: Bundle?
   ): View? {
     galleryViewModel =
-      ViewModelProviders.of(this).get(SearchForVolunteersViewModel::class.java)
+      ViewModelProviders.of(this).get(MyScoreViewModel::class.java)
     val root = inflater.inflate(R.layout.fragment_my_volunteers, container, false)
 
 
