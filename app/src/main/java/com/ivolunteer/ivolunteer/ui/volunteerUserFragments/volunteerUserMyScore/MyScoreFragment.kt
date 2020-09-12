@@ -18,9 +18,8 @@ class MyScoreFragment : Fragment() {
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
-    galleryViewModel =
-      ViewModelProviders.of(this).get(MyScoreViewModel::class.java)
-    val root = inflater.inflate(R.layout.fragment_my_volunteers, container, false)
+    galleryViewModel = ViewModelProviders.of(this).get(MyScoreViewModel::class.java)
+    val root = inflater.inflate(R.layout.fragment_my_score, container, false)
 
 
 
