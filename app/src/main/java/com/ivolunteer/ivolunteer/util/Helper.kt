@@ -11,7 +11,7 @@ class Helper {
 
     companion object {
         fun getCityId(cityName: String): Int{
-            var cityId = 1
+            var cityId = 0
             var cities =
                 StorageManager.instance.get<List<City>>(StorageTypes.CITIES_LIST.toString())
             if (cities != null) {
@@ -25,7 +25,7 @@ class Helper {
         }
 
         fun getTypeId(typeName: String): Int{
-            var typeId = 1
+            var typeId = 0
             var voltypes: List<Type>? =
                 StorageManager.instance.get<List<Type>>(StorageTypes.TYPES_LIST.toString())
             if (voltypes != null) {

@@ -114,27 +114,132 @@ class SearchForVolunteerFragment : Fragment() {
       }
 
 
-      // StorageManager.instance.get<String>(StorageTypes.USER_ID.toString()))
-      NetworkManager.instance.get<searchedVolunteer>("volunteers/byAll?schedTime=1;1;0&schedDays=1;2;3;4;5;6;7&cityId=5&typeId=1") { response, statusCode, error ->
+        val time = arrayOf<CheckBox>(
+            view.findViewById<CheckBox>(R.id.search_morning_check_box),
+            view.findViewById<CheckBox>(R.id.search_noon_checkbox),
+            view.findViewById<CheckBox>(R.id.search_evening_check_box)
+        )
+        val timeSize = 3;
+        var timeArray: ArrayList<Int> = ArrayList()
+        for (checkBox in time) {
+            if (checkBox.isChecked)
+            {
+                timeArray.add(1)
+            }
+            else
+            {
+                timeArray.add(0)
+            }
+        }
+
+
+
+if (typeId!=0 && cityId!=0)
+{
+
+    // StorageManager.instance.get<String>(StorageTypes.USER_ID.toString()))
+    NetworkManager.instance.get<searchedVolunteer>("volunteers/byAll?schedDays=" +(internalData.joinToString ( separator =";" ))+"&schedTime="+(timeArray.joinToString ( separator =";" ))+"&cityId="+cityId+"&typeId="+typeId) { response, statusCode, error ->
         val cities= arrayOfNulls<String>(response!!.size)
         val type= arrayOfNulls<String>(response!!.size)
         val occupied = arrayOfNulls<Boolean>(response!!.size)
         for(i in 0 until response!!.size) {
-          cities[i] = (response[i].volunteerCity.city)
-          type[i] = (response[i].volunteerType.type)
-          occupied[i] = (response[i].isOccupied)
+            cities[i] = (response[i].volunteerCity.city)
+            type[i] = (response[i].volunteerType.type)
+            occupied[i] = (response[i].isOccupied)
         }
 
         try {
-          val myListAdapter = MyListAdapter(requireActivity(), type, cities, occupied)
+            val myListAdapter = MyListAdapter(requireActivity(), type, cities, occupied)
 
-          listView?.post {
-            listView.adapter = myListAdapter
-          }
+            listView?.post {
+                listView.adapter = myListAdapter
+            }
         } catch(e: Exception) {
-          print(e)
+            print(e)
         }
-      }//else{
+    }
+}
+
+
+        else if (typeId!=0)
+        {
+
+            // StorageManager.instance.get<String>(StorageTypes.USER_ID.toString()))
+            NetworkManager.instance.get<searchedVolunteer>("volunteers/byAll?schedDays=" +(internalData.joinToString ( separator =";" ))+"&schedTime="+(timeArray.joinToString ( separator =";" ))+"&typeId="+typeId) { response, statusCode, error ->
+                val cities= arrayOfNulls<String>(response!!.size)
+                val type= arrayOfNulls<String>(response!!.size)
+                val occupied = arrayOfNulls<Boolean>(response!!.size)
+                for(i in 0 until response!!.size) {
+                    cities[i] = (response[i].volunteerCity.city)
+                    type[i] = (response[i].volunteerType.type)
+                    occupied[i] = (response[i].isOccupied)
+                }
+
+                try {
+                    val myListAdapter = MyListAdapter(requireActivity(), type, cities, occupied)
+
+                    listView?.post {
+                        listView.adapter = myListAdapter
+                    }
+                } catch(e: Exception) {
+                    print(e)
+                }
+            }
+        }
+
+
+        else if (cityId!=0)
+        {
+
+            // StorageManager.instance.get<String>(StorageTypes.USER_ID.toString()))
+            NetworkManager.instance.get<searchedVolunteer>("volunteers/byAll?schedDays=" +(internalData.joinToString ( separator =";" ))+"&schedTime="+(timeArray.joinToString ( separator =";" ))+"&cityId="+cityId) { response, statusCode, error ->
+                val cities= arrayOfNulls<String>(response!!.size)
+                val type= arrayOfNulls<String>(response!!.size)
+                val occupied = arrayOfNulls<Boolean>(response!!.size)
+                for(i in 0 until response!!.size) {
+                    cities[i] = (response[i].volunteerCity.city)
+                    type[i] = (response[i].volunteerType.type)
+                    occupied[i] = (response[i].isOccupied)
+                }
+
+                try {
+                    val myListAdapter = MyListAdapter(requireActivity(), type, cities, occupied)
+
+                    listView?.post {
+                        listView.adapter = myListAdapter
+                    }
+                } catch(e: Exception) {
+                    print(e)
+                }
+            }
+        }
+
+else if (cityId==0 && typeId==0)
+{
+
+    // StorageManager.instance.get<String>(StorageTypes.USER_ID.toString()))
+    NetworkManager.instance.get<searchedVolunteer>("volunteers/byAll?schedDays=" +(internalData.joinToString ( separator =";" ))+"&schedTime="+(timeArray.joinToString ( separator =";" ))) { response, statusCode, error ->
+        val cities= arrayOfNulls<String>(response!!.size)
+        val type= arrayOfNulls<String>(response!!.size)
+        val occupied = arrayOfNulls<Boolean>(response!!.size)
+        for(i in 0 until response!!.size) {
+            cities[i] = (response[i].volunteerCity.city)
+            type[i] = (response[i].volunteerType.type)
+            occupied[i] = (response[i].isOccupied)
+        }
+
+        try {
+            val myListAdapter = MyListAdapter(requireActivity(), type, cities, occupied)
+
+            listView?.post {
+                listView.adapter = myListAdapter
+            }
+        } catch(e: Exception) {
+            print(e)
+        }
+    }
+}
+        //else{
       //Log.i("LOG - failed to get activities ", error.toString())
    // }
     }
