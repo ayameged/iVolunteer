@@ -127,6 +127,8 @@ class EditPersonalDetailsFragment : Fragment() {
               }
             }
           }
+        }else{
+          Log.i("LOG - failed to return user", error.toString())
         }
       }
     }

@@ -24,6 +24,7 @@
             android:id="@+id/volunteer_rating_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:isIndicator="true"
             android:numStars="5"
             android:stepSize="0.5" />
 
@@ -34,10 +35,9 @@
 
             <TextView
                 android:id="@+id/rates_number_text"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Rates number: 20" />
+                android:layout_weight="1" />
         </LinearLayout>
 
     </LinearLayout>
