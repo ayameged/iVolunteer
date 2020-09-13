@@ -37,7 +37,7 @@ class MyListAdapter(
             imageCheckBox.post {
                 imageCheckBox.setImageResource(android.R.drawable.checkbox_on_background);
             }
-        } else{
+        } else {
             imageCheckBox.post {
                 imageCheckBox.setImageResource(android.R.drawable.checkbox_off_background);
             }
