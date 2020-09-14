@@ -1,6 +1,5 @@
 package com.ivolunteer.ivolunteer.ui.needHelpUserFragments.needHelpUserMyActivities
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.provider.AlarmClock.EXTRA_MESSAGE
@@ -8,7 +7,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.ListView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -16,10 +14,7 @@ import com.ivolunteer.ivolunteer.R
 import com.ivolunteer.ivolunteer.resources.NetworkManager
 import com.ivolunteer.ivolunteer.resources.StorageManager
 import com.ivolunteer.ivolunteer.resources.StorageTypes
-import com.ivolunteer.ivolunteer.types.Type
 import com.ivolunteer.ivolunteer.types.needhelpuseractivities.NeedHelpUserActivities
-import com.ivolunteer.ivolunteer.types.needhelpuseractivities.NeedHelpUserActivitiesItem
-import com.ivolunteer.ivolunteer.types.needhelpuseractivities.VolunteerCity
 
 class MyActivitiesFragment : Fragment() {
 
@@ -42,14 +37,18 @@ class MyActivitiesFragment : Fragment() {
         val cities= arrayOfNulls<String>(response!!.size)
         val type= arrayOfNulls<String>(response!!.size)
         val occupied = arrayOfNulls<Boolean>(response!!.size)
+        val volunteerId = arrayOfNulls<Int>(response!!.size)
+
         for(i in 0 until response!!.size) {
           cities[i] = (response[i].volunteerCity.city)
           type[i] = (response[i].volunteerType.type)
           occupied[i] = (response[i].isOccupied)
+          volunteerId[i] = (response[i].volunteerId)
+
         }
 
         try {
-          val myListAdapter = MyListAdapter(requireActivity(), type, cities, occupied)
+          val myListAdapter = MyListAdapter(requireActivity(), type, cities, occupied, volunteerId)
 
           listView?.post {
             listView.adapter = myListAdapter

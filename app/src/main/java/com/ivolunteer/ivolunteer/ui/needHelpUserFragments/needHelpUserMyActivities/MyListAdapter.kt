@@ -13,9 +13,11 @@ class MyListAdapter(
     private val context: Activity,
     private val type: Array<String?>,
     private val city: Array<String?>,
-    private val occupied: Array<Boolean?>
+    private val occupied: Array<Boolean?>,
+    private val volunteerId: Array<Int?>
+
 )
-    : ArrayAdapter<String>(context, R.layout.custom_list, type) {
+    : ArrayAdapter<Int>(context, R.layout.custom_list, volunteerId ) {
 
     override fun getView(position: Int, view: View?, parent: ViewGroup): View {
         val inflater = context.layoutInflater
@@ -24,6 +26,7 @@ class MyListAdapter(
         val titleText = rowView.findViewById(R.id.type) as TextView
         val subtitleText = rowView.findViewById(R.id.city) as TextView
         val imageCheckBox = rowView.findViewById(R.id.is_occupied_check_box) as ImageView
+        val test = rowView.findViewById(R.id.volunteerId) as TextView
 
 
         titleText.post {

@@ -1,7 +1,6 @@
 package com.ivolunteer.ivolunteer.ui.volunteerUserFragments.volunteerUserSearchForVolunteers
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,10 +14,10 @@ import com.ivolunteer.ivolunteer.resources.StorageTypes
 import com.ivolunteer.ivolunteer.types.City
 import com.ivolunteer.ivolunteer.types.Type
 import com.ivolunteer.ivolunteer.types.VolunteerWithSched.searchedVolunteer
-import com.ivolunteer.ivolunteer.types.VolunteerWithSched.searchedVolunteerItem
 import com.ivolunteer.ivolunteer.ui.needHelpUserFragments.needHelpUserMyActivities.MyListAdapter
 import com.ivolunteer.ivolunteer.ui.needHelpUserFragments.needHelpUserMyActivities.SearchForVolunteersViewModel
 import com.ivolunteer.ivolunteer.util.Helper
+import kotlinx.android.synthetic.main.custom_list.*
 
 class SearchForVolunteerFragment : Fragment() {
 
@@ -142,14 +141,18 @@ if (typeId!=0 && cityId!=0)
         val cities= arrayOfNulls<String>(response!!.size)
         val type= arrayOfNulls<String>(response!!.size)
         val occupied = arrayOfNulls<Boolean>(response!!.size)
+        val volunteerId = arrayOfNulls<Int>(response!!.size)
+
         for(i in 0 until response!!.size) {
             cities[i] = (response[i].volunteerCity.city)
             type[i] = (response[i].volunteerType.type)
             occupied[i] = (response[i].isOccupied)
+            volunteerId[i] = (response[i].volunteerId)
+
         }
 
         try {
-            val myListAdapter = MyListAdapter(requireActivity(), type, cities, occupied)
+            val myListAdapter = MyListAdapter(requireActivity(), type, cities, occupied, volunteerId)
 
             listView?.post {
                 listView.adapter = myListAdapter
@@ -169,14 +172,17 @@ if (typeId!=0 && cityId!=0)
                 val cities= arrayOfNulls<String>(response!!.size)
                 val type= arrayOfNulls<String>(response!!.size)
                 val occupied = arrayOfNulls<Boolean>(response!!.size)
+                val volunteerId = arrayOfNulls<Int>(response!!.size)
+
                 for(i in 0 until response!!.size) {
                     cities[i] = (response[i].volunteerCity.city)
                     type[i] = (response[i].volunteerType.type)
                     occupied[i] = (response[i].isOccupied)
+                    volunteerId[i] = (response[i].volunteerId)
                 }
 
                 try {
-                    val myListAdapter = MyListAdapter(requireActivity(), type, cities, occupied)
+                    val myListAdapter = MyListAdapter(requireActivity(), type, cities, occupied, volunteerId)
 
                     listView?.post {
                         listView.adapter = myListAdapter
@@ -196,14 +202,17 @@ if (typeId!=0 && cityId!=0)
                 val cities= arrayOfNulls<String>(response!!.size)
                 val type= arrayOfNulls<String>(response!!.size)
                 val occupied = arrayOfNulls<Boolean>(response!!.size)
+                val volunteerId = arrayOfNulls<Int>(response!!.size)
+
                 for(i in 0 until response!!.size) {
                     cities[i] = (response[i].volunteerCity.city)
                     type[i] = (response[i].volunteerType.type)
                     occupied[i] = (response[i].isOccupied)
+                    volunteerId[i] = (response[i].volunteerId)
                 }
 
                 try {
-                    val myListAdapter = MyListAdapter(requireActivity(), type, cities, occupied)
+                    val myListAdapter = MyListAdapter(requireActivity(), type, cities, occupied, volunteerId)
 
                     listView?.post {
                         listView.adapter = myListAdapter
@@ -222,14 +231,17 @@ else if (cityId==0 && typeId==0)
         val cities= arrayOfNulls<String>(response!!.size)
         val type= arrayOfNulls<String>(response!!.size)
         val occupied = arrayOfNulls<Boolean>(response!!.size)
+        val volunteerId = arrayOfNulls<Int>(response!!.size)
+
         for(i in 0 until response!!.size) {
             cities[i] = (response[i].volunteerCity.city)
             type[i] = (response[i].volunteerType.type)
             occupied[i] = (response[i].isOccupied)
+            volunteerId[i] = (response[i].volunteerId)
         }
 
         try {
-            val myListAdapter = MyListAdapter(requireActivity(), type, cities, occupied)
+            val myListAdapter = MyListAdapter(requireActivity(), type, cities, occupied, volunteerId)
 
             listView?.post {
                 listView.adapter = myListAdapter

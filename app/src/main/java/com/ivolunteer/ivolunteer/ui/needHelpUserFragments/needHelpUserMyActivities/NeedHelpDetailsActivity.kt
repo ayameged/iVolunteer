@@ -8,6 +8,10 @@ import android.provider.AlarmClock.EXTRA_MESSAGE
 import android.webkit.WebView
 import android.widget.TextView
 import com.ivolunteer.ivolunteer.R
+import com.ivolunteer.ivolunteer.resources.NetworkManager
+import com.ivolunteer.ivolunteer.resources.StorageManager
+import com.ivolunteer.ivolunteer.resources.StorageTypes
+import com.ivolunteer.ivolunteer.types.VolunteerWithSched.searchedVolunteerItem
 import com.ivolunteer.ivolunteer.types.needhelpuseractivities.NeedHelpUserActivities
 import com.ivolunteer.ivolunteer.types.needhelpuseractivities.NeedHelpUserActivitiesItem
 import com.ivolunteer.ivolunteer.types.volunteeruseractivities.Volunteer
@@ -44,11 +48,32 @@ class NeedHelpDetailsActivity : AppCompatActivity() {
 // 3
 
 
-        val message = intent.getStringExtra(EXTRA_MESSAGE)
+        val volunteerId = intent.getStringExtra(EXTRA_MESSAGE)
 
-        // Capture the layout's TextView and set the string as its text
+
+        //storageManager + message
+
+
+
+/*
+
+        NetworkManager.instance.get<searchedVolunteerItem>("volunteers/byid?id=" + volunteerId) { response, statusCode, error ->
+            if (statusCode == 200) {
+
+                val test11 = response?.volunteerCity?.city
+                val type = response?.volunteerType?.type
+                val detailes = response?.details
+
+
+                // Capture the layout's TextView and set the string as its text
+               // val textView = findViewById<TextView>(R.id.detail_web_view).apply {
+                  //  text = test11
+            }
+        }
+*/
+
         val textView = findViewById<TextView>(R.id.detail_web_view).apply {
-            text = message
+            text = volunteerId
         }
 
         // 3
