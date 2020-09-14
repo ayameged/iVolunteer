@@ -1,89 +1,115 @@
 package com.ivolunteer.ivolunteer.ui.needHelpUserFragments.needHelpUserMyActivities
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.AlarmClock.EXTRA_MESSAGE
+import android.view.View
 import android.webkit.WebView
+import android.widget.CheckBox
+import android.widget.ImageView
 import android.widget.TextView
 import com.ivolunteer.ivolunteer.R
 import com.ivolunteer.ivolunteer.resources.NetworkManager
-import com.ivolunteer.ivolunteer.resources.StorageManager
-import com.ivolunteer.ivolunteer.resources.StorageTypes
 import com.ivolunteer.ivolunteer.types.VolunteerWithSched.searchedVolunteerItem
-import com.ivolunteer.ivolunteer.types.needhelpuseractivities.NeedHelpUserActivities
 import com.ivolunteer.ivolunteer.types.needhelpuseractivities.NeedHelpUserActivitiesItem
-import com.ivolunteer.ivolunteer.types.volunteeruseractivities.Volunteer
-import kotlinx.android.synthetic.main.nav_header_main.*
 
 class NeedHelpDetailsActivity : AppCompatActivity() {
-    private lateinit var webView: WebView
-
-    companion object {
-        const val EXTRA_TITLE = "title"
-        const val EXTRA_URL = "url"
-
-        fun newIntent(context: Context, recipe: NeedHelpUserActivitiesItem): Intent {
-            val detailIntent = Intent(context, NeedHelpDetailsActivity::class.java)
-
-            detailIntent.putExtra(EXTRA_TITLE, recipe.volunteerType.type)
-            detailIntent.putExtra(EXTRA_URL, recipe.volunteerCity.city)
-
-            return detailIntent
-        }
-    }
-
+    @SuppressLint("WrongViewCast")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_need_help__details)
-
-        // 1
-        val title = intent.extras?.getString(EXTRA_TITLE)
-        val url = intent.extras?.getString(EXTRA_URL)
-
-// 2
-        setTitle(title)
-
-// 3
-
-
         val volunteerId = intent.getStringExtra(EXTRA_MESSAGE)
-
-
-        //storageManager + message
-
-
-
-/*
 
         NetworkManager.instance.get<searchedVolunteerItem>("volunteers/byid?id=" + volunteerId) { response, statusCode, error ->
             if (statusCode == 200) {
 
-                val test11 = response?.volunteerCity?.city
+                val city = response?.volunteerCity?.city
                 val type = response?.volunteerType?.type
-                val detailes = response?.details
+                val details = response?.details
+                val volunteerSchedulerMorning = response?.volunteerScheduler?.isMorning
+                val volunteerSchedulerNoon = response?.volunteerScheduler?.isNoon
+                val volunteerSchedulerEvening = response?.volunteerScheduler?.isEvening
+                val volunteerSchedulerDays = response?.volunteerScheduler?.weekDays
+                val checkBoxMorning = findViewById<CheckBox>(R.id.detail_morning_check_box)
+                val checkBoxNoon = findViewById<CheckBox>(R.id.detail_noon_check_box)
+                val checkBoxEvening = findViewById<CheckBox>(R.id.detail_evening_check_box)
 
+                val days= arrayOf<CheckBox>(findViewById<CheckBox>(R.id.detail_sunday_check_box), findViewById<CheckBox>(R.id.detail_monday_check_box),
+                    findViewById<CheckBox>(R.id.detail_tuesday_check_box), findViewById<CheckBox>(R.id.detail_wednesday_check_box),
+                    findViewById<CheckBox>(R.id.detail_thursday_check_box), findViewById<CheckBox>(R.id.detail_friday_check_box),
+                    findViewById<CheckBox>(R.id.detail_saturday_check_box))
 
-                // Capture the layout's TextView and set the string as its text
-               // val textView = findViewById<TextView>(R.id.detail_web_view).apply {
-                  //  text = test11
+                val textType = findViewById<TextView>(R.id.detail_type)
+                textType.post {
+                    textType.text = type
+                }
+
+                val textCity = findViewById<TextView>(R.id.detail_city).apply {
+                    text = city
+                }
+
+                val detail = findViewById<TextView>(R.id.detail_details).apply {
+                    text = details
+                }
+
+                if (volunteerSchedulerMorning!!) {
+                    checkBoxMorning.post {
+                        checkBoxMorning.isChecked = true
+                    }
+                }
+                checkBoxMorning.post {
+                    checkBoxMorning.isEnabled = false
+                }
+
+                if (volunteerSchedulerNoon!!) {
+                    checkBoxNoon.post {
+                        checkBoxNoon.isChecked = true
+                    }
+                }
+                checkBoxNoon.post {
+                    checkBoxNoon.isEnabled = false
+                }
+
+                if (volunteerSchedulerEvening!!) {
+                    checkBoxEvening.post {
+                        checkBoxEvening.isChecked = true
+                    }
+                }
+                checkBoxEvening.post {
+                    checkBoxEvening.isEnabled = false
+                }
+
+                var i=1;
+                if (volunteerSchedulerDays != null) {
+                    for (day in volunteerSchedulerDays) {
+                        for (i in 1 until 8) {
+                            days[i - 1].isEnabled = false
+                            if (day==i) {
+                                days[i - 1].post {
+                                    days[i - 1].isChecked = true
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
-*/
-
-        val textView = findViewById<TextView>(R.id.detail_web_view).apply {
-            text = volunteerId
-        }
-
-        // 3
-        //  webView = findViewById(R.id.detail_web_view)
-
-// 4
-        //if (url != null) {
-        //  webView.loadUrl(url)
-        //}
-
-// 4
     }
+
+    /*fun setCheckBox(checkBox: CheckBox, boolean: Boolean)
+    {
+        if (boolean!!) {
+            checkBox.post {
+                checkBox.isChecked = true
+            }
+        }
+        else {
+            checkBox.post {
+                checkBox.isChecked = false
+            }
+        }
+    }*/
 }

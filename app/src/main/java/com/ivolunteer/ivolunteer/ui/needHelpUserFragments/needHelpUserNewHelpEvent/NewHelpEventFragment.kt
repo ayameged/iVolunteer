@@ -77,7 +77,7 @@ class NewHelpEventFragment : Fragment() {
 
 
       val morningCheckBox = view.findViewById<CheckBox>(R.id.morning_check_box)
-      val noonCheckBox = view.findViewById<CheckBox>(R.id.noon_checkbox)
+      val noonCheckBox = view.findViewById<CheckBox>(R.id.noon_check_box)
       val eveningCheckBox = view.findViewById<CheckBox>(R.id.evening_check_box)
       val volunteersCitiesSpinner = view.findViewById<Spinner>(R.id.city_spinner_new_event)
       val volunteersTypesSpinner = view.findViewById<Spinner>(R.id.events_spinner)

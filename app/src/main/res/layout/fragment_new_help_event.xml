@@ -86,7 +86,7 @@
                 android:text="Morning" />
 
             <CheckBox
-                android:id="@+id/noon_checkbox"
+                android:id="@+id/noon_check_box"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
