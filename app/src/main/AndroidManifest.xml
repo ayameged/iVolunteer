@@ -12,15 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.needHelpUserFragments.needHelpUserMyActivities.NeedHelpDetailsActivity"></activity>
+        <activity android:name=".ui.volunteerUserFragments.volunteerUserMyVolunteers.VolunteerUserDetailsActivity"></activity>
+        <activity android:name=".ui.needHelpUserFragments.needHelpUserMyActivities.NeedHelpDetailsActivity" />
         <activity
             android:name=".NeedHelpActivity"
             android:label="@string/title_activity_need_help"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".VolunteerActivity"
             android:label="@string/title_activity_need_help"
-            android:theme="@style/AppTheme.NoActionBar"></activity> <!-- <activity -->
+            android:theme="@style/AppTheme.NoActionBar" /> <!-- <activity -->
         <!-- android:name= ".InitMainActivity" -->
         <!-- android:label="@string/title_activity_volunteer" -->
         <!-- android:theme="@style/AppTheme.FullBackground"> -->

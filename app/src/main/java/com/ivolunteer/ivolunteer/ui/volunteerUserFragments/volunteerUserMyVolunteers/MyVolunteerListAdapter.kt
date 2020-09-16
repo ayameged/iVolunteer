@@ -13,8 +13,10 @@ class MyVolunteerListAdapter(
     private val context: Activity,
     private val type: Array<String?>,
     private val city: Array<String?>,
+    private val volunteerId: Array<Int?>
+
 )
-    : ArrayAdapter<String>(context, R.layout.custom_my_volunteers_list, type) {
+    : ArrayAdapter<Int>(context, R.layout.custom_my_volunteers_list, volunteerId) {
 
     override fun getView(position: Int, view: View?, parent: ViewGroup): View {
         val inflater = context.layoutInflater

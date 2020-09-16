@@ -54,7 +54,6 @@ class MyActivitiesFragment : Fragment() {
             listView.adapter = myListAdapter
 
           }
-            //Yael
 
             listView.setOnItemClickListener { parent, view, position, id ->
                 val selectedActivities = myListAdapter.getItem(position)
@@ -67,7 +66,7 @@ class MyActivitiesFragment : Fragment() {
                 }
                 startActivity(intent)
 
-              //Yael
+
             }
 
 

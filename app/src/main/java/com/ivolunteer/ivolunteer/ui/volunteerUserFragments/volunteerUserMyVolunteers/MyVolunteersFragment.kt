@@ -1,6 +1,9 @@
 package com.ivolunteer.ivolunteer.ui.volunteerUserFragments.volunteerUserMyVolunteers
 
+import android.content.Intent
 import android.os.Bundle
+import android.provider.AlarmClock
+import android.provider.AlarmClock.EXTRA_MESSAGE
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +18,7 @@ import com.ivolunteer.ivolunteer.resources.StorageTypes
 import com.ivolunteer.ivolunteer.types.needhelpuseractivities.NeedHelpUserActivities
 import com.ivolunteer.ivolunteer.types.volunteeruseractivities.VolunteerUserActivities
 import com.ivolunteer.ivolunteer.ui.needHelpUserFragments.needHelpUserMyActivities.MyListAdapter
+import com.ivolunteer.ivolunteer.ui.needHelpUserFragments.needHelpUserMyActivities.NeedHelpDetailsActivity
 import com.ivolunteer.ivolunteer.ui.needHelpUserFragments.needHelpUserMyActivities.SearchForVolunteersViewModel
 
 class MyVolunteersFragment : Fragment() {
@@ -37,18 +41,33 @@ class MyVolunteersFragment : Fragment() {
 
         val cities= arrayOfNulls<String>(response!!.size)
         val type= arrayOfNulls<String>(response!!.size)
+        val volunteerId= arrayOfNulls<Int>(response!!.size)
+
         for(i in 0 until response!!.size) {
           cities[i] = (response[i].volunteerCity.city)
           type[i] = (response[i].volunteerType.type)
+          volunteerId[i] = (response[i].volunteerId)
+
         }
 
         try {
-          val myListAdapter = MyVolunteerListAdapter(requireActivity(), type, cities)
+          val myListAdapter = MyVolunteerListAdapter(requireActivity(), type, cities, volunteerId)
 
           listView?.post {
             listView.adapter = myListAdapter
           }
-        } catch(e: Exception) {
+
+
+          listView.setOnItemClickListener { parent, view, position, id ->
+            val selectedActivities = myListAdapter.getItem(position)
+            val message = selectedActivities.toString()
+            val intent = Intent(requireActivity(), VolunteerUserDetailsActivity::class.java).apply {
+              putExtra(EXTRA_MESSAGE, message)
+            }
+            startActivity(intent)
+            }
+          }
+          catch(e: Exception) {
           print(e)
         }
       }else{
