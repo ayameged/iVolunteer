@@ -87,7 +87,13 @@ class VolunteerUserDetailsActivity : AppCompatActivity() {
 
                 val textDetail = findViewById<TextView>(R.id.my_volunteers_detail_details)
                 textDetail.post {
-                    textDetail.text = details
+                    if (details=="null")
+                    {
+                        textDetail.text =""
+                    }
+                    else {
+                        textDetail.text = details
+                    }
                 }
 
 
