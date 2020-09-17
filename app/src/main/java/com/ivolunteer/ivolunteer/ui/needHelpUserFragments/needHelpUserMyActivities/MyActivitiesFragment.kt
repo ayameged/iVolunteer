@@ -70,9 +70,6 @@ class MyActivitiesFragment : Fragment() {
             }
 
 
-
-
-
         } catch(e: Exception) {
           print(e)
         }

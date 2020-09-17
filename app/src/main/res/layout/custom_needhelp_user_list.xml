@@ -13,7 +13,7 @@
 
 
         <Button
-            android:id="@+id/volunteer_detail_contact_button"
+            android:id="@+id/needhelp_detail_contact_button"
             android:layout_width="107dp"
             android:layout_height="28dp"
             android:layout_marginStart="15dp"
@@ -36,7 +36,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/volunteerUser_name"
+                android:id="@+id/needhelpUser_name"
                 android:layout_width="76dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
@@ -48,7 +48,7 @@
 
 
             <TextView
-                android:id="@+id/volunteerUser_PhoneNumber"
+                android:id="@+id/needhelpUser_PhoneNumber"
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
@@ -59,7 +59,7 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/volunteerUser_Email"
+                android:id="@+id/needhelpUser_Email"
                 android:layout_width="110dp"
                 android:layout_height="31dp"
                 android:layout_marginStart="15dp"

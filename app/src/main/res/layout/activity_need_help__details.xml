@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="395dp"
-        android:layout_height="426dp"
+        android:layout_height="459dp"
         android:layout_marginStart="35dp"
         android:layout_marginTop="60dp"
         android:layout_marginEnd="35dp"
@@ -173,15 +173,18 @@
                 android:gravity="start|top"
                 android:inputType="textMultiLine"
                 android:textColorHighlight="#090909"
-                android:hint="Additional Details"
                 android:textColorLink="#0B0A0A" />
+
 
             <ListView
                 android:id="@+id/volunteer_volunteerUsers_list"
                 android:layout_width="409dp"
                 android:layout_height="243dp"
                 tools:layout_editor_absoluteX="1dp"
-                tools:layout_editor_absoluteY="487dp" />
+                tools:layout_editor_absoluteY="487dp">
+
+            </ListView>
+
 
         </LinearLayout>
 

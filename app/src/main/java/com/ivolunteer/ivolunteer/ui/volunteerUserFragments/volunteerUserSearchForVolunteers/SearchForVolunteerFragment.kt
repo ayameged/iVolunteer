@@ -1,6 +1,9 @@
 package com.ivolunteer.ivolunteer.ui.volunteerUserFragments.volunteerUserSearchForVolunteers
 
+import android.content.Intent
 import android.os.Bundle
+import android.provider.AlarmClock
+import android.provider.AlarmClock.EXTRA_MESSAGE
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +18,7 @@ import com.ivolunteer.ivolunteer.types.City
 import com.ivolunteer.ivolunteer.types.Type
 import com.ivolunteer.ivolunteer.types.VolunteerWithSched.searchedVolunteer
 import com.ivolunteer.ivolunteer.ui.needHelpUserFragments.needHelpUserMyActivities.MyListAdapter
+import com.ivolunteer.ivolunteer.ui.needHelpUserFragments.needHelpUserMyActivities.NeedHelpDetailsActivity
 import com.ivolunteer.ivolunteer.ui.needHelpUserFragments.needHelpUserMyActivities.SearchForVolunteersViewModel
 import com.ivolunteer.ivolunteer.util.Helper
 import kotlinx.android.synthetic.main.custom_list.*
@@ -152,11 +156,32 @@ if (typeId!=0 && cityId!=0)
         }
 
         try {
+
+
+
+
             val myListAdapter = MyListAdapter(requireActivity(), type, cities, occupied, volunteerId)
 
             listView?.post {
                 listView.adapter = myListAdapter
             }
+
+
+
+/*
+
+            listView.setOnItemClickListener { parent, view, position, id ->
+                val selectedActivities = myListAdapter.getItem(position)
+
+                val message = selectedActivities.toString()
+
+                val intent = Intent(requireActivity(), searchVolunteerDetailActivity::class.java).apply {
+                    putExtra(EXTRA_MESSAGE, message)
+                }
+                startActivity(intent)
+
+            }
+*/
         } catch(e: Exception) {
             print(e)
         }
@@ -187,6 +212,8 @@ if (typeId!=0 && cityId!=0)
                     listView?.post {
                         listView.adapter = myListAdapter
                     }
+
+
                 } catch(e: Exception) {
                     print(e)
                 }
@@ -217,6 +244,7 @@ if (typeId!=0 && cityId!=0)
                     listView?.post {
                         listView.adapter = myListAdapter
                     }
+
                 } catch(e: Exception) {
                     print(e)
                 }
@@ -246,6 +274,9 @@ else if (cityId==0 && typeId==0)
             listView?.post {
                 listView.adapter = myListAdapter
             }
+
+
+
         } catch(e: Exception) {
             print(e)
         }

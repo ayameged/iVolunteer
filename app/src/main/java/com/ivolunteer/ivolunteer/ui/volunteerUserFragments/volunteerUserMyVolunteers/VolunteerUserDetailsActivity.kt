@@ -4,10 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.AlarmClock
 import android.widget.CheckBox
+import android.widget.ListView
 import android.widget.TextView
 import com.ivolunteer.ivolunteer.R
 import com.ivolunteer.ivolunteer.resources.NetworkManager
 import com.ivolunteer.ivolunteer.types.VolunteerWithSched.searchedVolunteerItem
+import com.ivolunteer.ivolunteer.types.VolunteerWithSched.volunteerwithvolUser
+import com.ivolunteer.ivolunteer.ui.needHelpUserFragments.needHelpUserMyActivities.VolunteerUserListAdapter
 
 class VolunteerUserDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,12 +19,12 @@ class VolunteerUserDetailsActivity : AppCompatActivity() {
 
         val volunteerId = intent.getStringExtra(AlarmClock.EXTRA_MESSAGE)
 
-        NetworkManager.instance.get<searchedVolunteerItem>("volunteers/byid?id=" + volunteerId) { response, statusCode, error ->
+        NetworkManager.instance.get<volunteerwithvolUser>("volunteers/byid?id=" + volunteerId) { response, statusCode, error ->
             if (statusCode == 200) {
 
                 val city = response?.volunteerCity?.city
                 val type = response?.volunteerType?.type
-                val details = response?.details
+                val details = response?.details.toString()
                 val volunteerSchedulerMorning = response?.volunteerScheduler?.isMorning
                 val volunteerSchedulerNoon = response?.volunteerScheduler?.isNoon
                 val volunteerSchedulerEvening = response?.volunteerScheduler?.isEvening
@@ -30,23 +33,63 @@ class VolunteerUserDetailsActivity : AppCompatActivity() {
                 val checkBoxNoon = findViewById<CheckBox>(R.id.my_volunteers_detail_noon_check_box)
                 val checkBoxEvening = findViewById<CheckBox>(R.id.my_volunteers_detail_evening_check_box)
 
+
+                val firstName = arrayOfNulls<String>(1)
+                val lastName = arrayOfNulls<String>(1)
+                val email = arrayOfNulls<String>(1)
+                val phoneNumber = arrayOfNulls<String>(1)
+                val name = arrayOfNulls<String>(2)
+
+
+                    firstName[0] = (response!!.needHelpUser.applicationUser.firstName)
+                    lastName[0] = (response!!.needHelpUser.applicationUser.lastName)
+                    email[0] = (response!!.needHelpUser.applicationUser.email)
+                    phoneNumber[0] = (response!!.needHelpUser.applicationUser.phoneNumber)
+                    name[0] = firstName[0] + " " + lastName[0]
+
+
                 val days= arrayOf<CheckBox>(findViewById<CheckBox>(R.id.my_volunteers_detail_sunday_check_box), findViewById<CheckBox>(R.id.my_volunteers_detail_monday_check_box),
                     findViewById<CheckBox>(R.id.my_volunteers_detail_tuesday_check_box), findViewById<CheckBox>(R.id.my_volunteers_detail_wednesday_check_box),
                     findViewById<CheckBox>(R.id.my_volunteers_detail_thursday_check_box), findViewById<CheckBox>(R.id.my_volunteers_detail_friday_check_box),
                     findViewById<CheckBox>(R.id.my_volunteers_detail_saturday_check_box))
+
+
+
+                var listView = findViewById<ListView>(R.id.volunteer_needhelpusers_list)
+                try {
+                    val myListAdapter = NeedHelpUserListAdapter(this, name, email, phoneNumber)
+
+
+                    runOnUiThread {
+
+                        listView?.post {
+                            listView.adapter = myListAdapter
+                        }
+                    }
+
+                } catch (e: Exception) {
+                    print(e)
+                }
+
+
 
                 val textType = findViewById<TextView>(R.id.my_volunteers_detail_type)
                 textType.post {
                     textType.text = type
                 }
 
-                val textCity = findViewById<TextView>(R.id.my_volunteers_detail_city).apply {
-                    text = city
+
+                val textCity = findViewById<TextView>(R.id.my_volunteers_detail_city)
+                textCity.post {
+                    textCity.text = city
                 }
 
-                val detail = findViewById<TextView>(R.id.my_volunteers_detail_details).apply {
-                    text = details
+
+                val textDetail = findViewById<TextView>(R.id.my_volunteers_detail_details)
+                textDetail.post {
+                    textDetail.text = details
                 }
+
 
                 if (volunteerSchedulerMorning!!) {
                     checkBoxMorning.post {

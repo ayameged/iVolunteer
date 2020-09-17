@@ -1,8 +1,11 @@
 package com.ivolunteer.ivolunteer.ui.needHelpUserFragments.needHelpUserMyActivities
 
 import android.annotation.SuppressLint
+import android.content.ActivityNotFoundException
+import android.content.Intent
 import android.os.Bundle
 import android.provider.AlarmClock.EXTRA_MESSAGE
+import android.widget.Button
 import android.widget.CheckBox
 import android.widget.ListView
 import android.widget.TextView
@@ -30,14 +33,14 @@ class NeedHelpDetailsActivity : AppCompatActivity() {
                 val volunteerSchedulerEvening = response?.volunteerScheduler?.isEvening
                 val volunteerSchedulerDays = response?.volunteerScheduler?.weekDays
 
-                val firstName= arrayOfNulls<String>(response!!.volunteerUser.size)
-                val lastName= arrayOfNulls<String>(response!!.volunteerUser.size)
-                val email= arrayOfNulls<String>(response!!.volunteerUser.size)
-                val phoneNumber= arrayOfNulls<String>(response!!.volunteerUser.size)
-                val name= arrayOfNulls<String>(response!!.volunteerUser.size)
+                val firstName = arrayOfNulls<String>(response!!.volunteerUser.size)
+                val lastName = arrayOfNulls<String>(response!!.volunteerUser.size)
+                val email = arrayOfNulls<String>(response!!.volunteerUser.size)
+                val phoneNumber = arrayOfNulls<String>(response!!.volunteerUser.size)
+                val name = arrayOfNulls<String>(response!!.volunteerUser.size)
 
 
-                for(i in 0 until response.volunteerUser.size) {
+                for (i in 0 until response.volunteerUser.size) {
                     firstName[i] = (response.volunteerUser[i].applicationUser.firstName)
                     lastName[i] = (response.volunteerUser[i].applicationUser.lastName)
                     email[i] = (response.volunteerUser[i].applicationUser.email)
@@ -45,15 +48,23 @@ class NeedHelpDetailsActivity : AppCompatActivity() {
                     name[i] = firstName[i] + " " + lastName[i]
                 }
 
-
+              //  val needhelp_detail_contact =
+                  //  findViewById<Button>(R.id.volunteer_detail_contact_button)
                 val checkBoxMorning = findViewById<CheckBox>(R.id.detail_morning_check_box)
                 val checkBoxNoon = findViewById<CheckBox>(R.id.detail_noon_check_box)
                 val checkBoxEvening = findViewById<CheckBox>(R.id.detail_evening_check_box)
 
-                val days= arrayOf<CheckBox>(findViewById<CheckBox>(R.id.detail_sunday_check_box), findViewById<CheckBox>(R.id.detail_monday_check_box),
-                    findViewById<CheckBox>(R.id.detail_tuesday_check_box), findViewById<CheckBox>(R.id.detail_wednesday_check_box),
-                    findViewById<CheckBox>(R.id.detail_thursday_check_box), findViewById<CheckBox>(R.id.detail_friday_check_box),
-                    findViewById<CheckBox>(R.id.detail_saturday_check_box))
+                val days = arrayOf<CheckBox>(
+                    findViewById<CheckBox>(R.id.detail_sunday_check_box),
+                    findViewById<CheckBox>(
+                        R.id.detail_monday_check_box
+                    ),
+                    findViewById<CheckBox>(R.id.detail_tuesday_check_box),
+                    findViewById<CheckBox>(R.id.detail_wednesday_check_box),
+                    findViewById<CheckBox>(R.id.detail_thursday_check_box),
+                    findViewById<CheckBox>(R.id.detail_friday_check_box),
+                    findViewById<CheckBox>(R.id.detail_saturday_check_box)
+                )
                 var listView = findViewById<ListView>(R.id.volunteer_volunteerUsers_list)
                 try {
                     val myListAdapter = VolunteerUserListAdapter(this, name, email, phoneNumber)
@@ -66,7 +77,7 @@ class NeedHelpDetailsActivity : AppCompatActivity() {
                         }
                     }
 
-                } catch(e: Exception) {
+                } catch (e: Exception) {
                     print(e)
                 }
 
@@ -82,7 +93,13 @@ class NeedHelpDetailsActivity : AppCompatActivity() {
 
                 val textDetail = findViewById<TextView>(R.id.detail_details)
                 textDetail.post {
-                    textDetail.text = details
+                    if (details=="null") {
+                        textDetail.text = ""
+                    }
+                    else {
+                        textDetail.text = details
+                    }
+
                 }
 
 
@@ -91,6 +108,10 @@ class NeedHelpDetailsActivity : AppCompatActivity() {
                         checkBoxMorning.isChecked = true
                     }
                 }
+                textDetail.post {
+                    textDetail.isEnabled = false
+                }
+
                 checkBoxMorning.post {
                     checkBoxMorning.isEnabled = false
                 }
@@ -113,12 +134,12 @@ class NeedHelpDetailsActivity : AppCompatActivity() {
                     checkBoxEvening.isEnabled = false
                 }
 
-                var i=1;
+                var i = 1;
                 if (volunteerSchedulerDays != null) {
                     for (day in volunteerSchedulerDays) {
                         for (i in 1 until 8) {
                             days[i - 1].isEnabled = false
-                            if (day==i) {
+                            if (day == i) {
                                 days[i - 1].post {
                                     days[i - 1].isChecked = true
                                 }
@@ -126,6 +147,8 @@ class NeedHelpDetailsActivity : AppCompatActivity() {
                         }
                     }
                 }
+
+
             }
         }
     }

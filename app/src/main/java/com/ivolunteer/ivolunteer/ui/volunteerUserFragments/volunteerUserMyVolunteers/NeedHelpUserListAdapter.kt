@@ -1,4 +1,4 @@
-package com.ivolunteer.ivolunteer.ui.needHelpUserFragments.needHelpUserMyActivities
+package com.ivolunteer.ivolunteer.ui.volunteerUserFragments.volunteerUserMyVolunteers
 
 import android.app.Activity
 import android.content.ActivityNotFoundException
@@ -12,36 +12,36 @@ import androidx.core.content.ContextCompat.startActivity
 import com.ivolunteer.ivolunteer.R
 
 
-class VolunteerUserListAdapter(
+class NeedHelpUserListAdapter(
     private val context: Activity,
-    private val volUserName: Array<String?>,
-    private val volUserEmail: Array<String?>,
-    private val volUserPhoneNumber: Array<String?>,
+    private val needHelpUserName: Array<String?>,
+    private val needHelpUserEmail: Array<String?>,
+    private val needHelpPhoneNumber: Array<String?>,
 
 
     )
-    : ArrayAdapter<String>(context, R.layout.custom_volunteer_user_list, volUserEmail) {
+    : ArrayAdapter<String>(context, R.layout.custom_needhelp_user_list, needHelpUserEmail) {
 
     override fun getView(position: Int, view: View?, parent: ViewGroup): View {
         val inflater = context.layoutInflater
-        val rowView = inflater.inflate(R.layout.custom_volunteer_user_list, null, true)
+        val rowView = inflater.inflate(R.layout.custom_needhelp_user_list, null, true)
 
-        val name = rowView.findViewById(R.id.volunteerUser_name) as TextView
-        val email = rowView.findViewById(R.id.volunteerUser_Email) as TextView
-        val phoneNumber = rowView.findViewById(R.id.volunteerUser_PhoneNumber) as TextView
+        val name = rowView.findViewById(R.id.needhelpUser_name) as TextView
+        val email = rowView.findViewById(R.id.needhelpUser_Email) as TextView
+        val phoneNumber = rowView.findViewById(R.id.needhelpUser_PhoneNumber) as TextView
 
 
 
         name.post {
-            name.text = volUserName[position]
+            name.text = needHelpUserName[position]
         }
 
 
         email.post {
-            email.text = volUserEmail[position]
+            email.text = needHelpUserEmail[position]
         }
         phoneNumber.post {
-            phoneNumber.text = volUserPhoneNumber[position]
+            phoneNumber.text = needHelpPhoneNumber[position]
         }
 
 
@@ -50,7 +50,7 @@ class VolunteerUserListAdapter(
 
 
 
-        val updateButtonNeedHelpUser = rowView.findViewById<Button>(R.id.volunteer_detail_contact_button)
+        val updateButtonNeedHelpUser = rowView.findViewById<Button>(R.id.needhelp_detail_contact_button)
 
         updateButtonNeedHelpUser.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
