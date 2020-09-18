@@ -198,41 +198,26 @@
 
         <TextView
             android:id="@+id/NeedHelpUserName_text"
-            android:layout_width="202dp"
-            android:layout_height="39dp"
+            android:layout_width="392dp"
+            android:layout_height="47dp"
             android:fontFamily="@font/gabriela"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/NeedHelpUserPhone_text"
-            android:layout_width="203dp"
-            android:layout_height="39dp"
+            android:layout_width="392dp"
+            android:layout_height="37dp"
             android:fontFamily="@font/gabriela"
             android:textSize="18sp" />
 
         <TextView
             android:id="@+id/NeedHelpUser_Mail_text"
-            android:layout_width="202dp"
-            android:layout_height="37dp"
+            android:layout_width="392dp"
+            android:layout_height="39dp"
             android:fontFamily="@font/gabriela"
             android:textSize="18sp" />
 
-        <Button
-            android:id="@+id/myVolunteers_detail_ivolunteer"
-            android:layout_width="176dp"
-            android:layout_height="33dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="100dp"
-            android:background="@drawable/btn_rounded"
-            android:fontFamily="@font/gabriela"
-            android:foregroundGravity="left"
-            android:text="iVolunteer"
-            android:textAllCaps="false"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/myVolunteers_detail_contact"

@@ -191,69 +191,8 @@ class VolunteerUserDetailsActivity : AppCompatActivity() {
                     }
                 })
 
-                val iVolunteerButton = findViewById<Button>(R.id.myVolunteers_detail_ivolunteer)
-
-                iVolunteerButton.setOnClickListener(object : View.OnClickListener {
-                    override fun onClick(v: View?) {
-
-                        //POST Associate
-
-                        val Associatejson = JSONObject()
 
 
-                        Associatejson.put("volunteerId",volunteerId )
-                        Associatejson.put("Id", StorageManager.instance.get<String>(StorageTypes.USER_ID.toString()))
-                        NetworkManager.instance.post<Auth>("VolunteerUser_Volunteer", Associatejson) { response, statusCode, error ->
-                            if (statusCode != 200) {
-                                Log.i("LOG - error", error.toString())
-
-                            } else {
-                                Log.i("LOG - login", "SUCCESS")
-                            }
-                        }
-
-
-
-                        //update isOccupied
-                        /*
-                        val json_update_user = JSONObject()
-                        json_update_user.put("id", StorageManager.instance.get<String>(StorageTypes.USER_ID.toString()))
-
-                        NetworkManager.instance.put<Int>("VolunteerUsers/"+ StorageManager.instance.get<String>(
-                            StorageTypes.USER_ID.toString()), json_update_user){ response, statusCode, error ->
-                            if (statusCode != 204){
-                                Log.i("LOG - error in update user", error.toString())
-                                loginError?.post {
-                                    loginError.visibility = View.VISIBLE
-                                }
-                            }else{
-                                Log.i("LOG - volunteer user created ", "")
-                                loginError?.post{
-                                    loginError.text = "Your details updated"
-                                    loginError.visibility = View.VISIBLE
-                                }
-                            }
-                        }
-
-        */
-
-                        //val intent = Intent(context, VolunteerUserListAdapter::class.java)
-
-                        /*               val intent =Intent(Intent.ACTION_SENDTO);
-                                       intent.setType("text/plain");
-
-                                       //emailLauncher.type = "message/rfc822"
-                                       try {
-                                           context.startActivity(intent)
-                                           //startActivity(emailLauncher)
-                                       }
-                                       catch (e: ActivityNotFoundException) {
-                                           print(e)
-                                       }
-                       */
-                        // Your code that you want to execute on this button click
-                    }
-                })
 
 
 

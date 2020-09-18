@@ -1,7 +1,7 @@
 package com.ivolunteer.ivolunteer.types.VolunteerWithSched
 
 data class volunteerwithvolUser(
-    val details: Any,
+    val details: String,
     val isArchive: Boolean,
     val isCyclic: Boolean,
     val isOccupied: Boolean,

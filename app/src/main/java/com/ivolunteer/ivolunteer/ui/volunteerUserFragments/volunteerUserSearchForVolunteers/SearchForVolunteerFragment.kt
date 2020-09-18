@@ -299,7 +299,7 @@ class SearchForVolunteerFragment : Fragment() {
 
             val message = selectedActivities.toString()
 
-            val intent = Intent(requireActivity(), VolunteerUserDetailsActivity::class.java).apply {
+            val intent = Intent(requireActivity(), searchVolunteerDetailActivity::class.java).apply {
                 putExtra(EXTRA_MESSAGE, message)
             }
             try {

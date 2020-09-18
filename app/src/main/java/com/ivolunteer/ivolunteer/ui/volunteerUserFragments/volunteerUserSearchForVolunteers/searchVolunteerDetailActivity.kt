@@ -1,29 +1,32 @@
-/*
 package com.ivolunteer.ivolunteer.ui.volunteerUserFragments.volunteerUserSearchForVolunteers
 
-import android.annotation.SuppressLint
-import android.content.Context
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.AlarmClock.EXTRA_MESSAGE
+import android.provider.AlarmClock
+import android.util.Log
 import android.view.View
-import android.webkit.WebView
+import android.widget.Button
 import android.widget.CheckBox
-import android.widget.ImageView
+import android.widget.ListView
 import android.widget.TextView
 import com.ivolunteer.ivolunteer.R
 import com.ivolunteer.ivolunteer.resources.NetworkManager
+import com.ivolunteer.ivolunteer.resources.StorageManager
+import com.ivolunteer.ivolunteer.resources.StorageTypes
+import com.ivolunteer.ivolunteer.types.Auth
 import com.ivolunteer.ivolunteer.types.VolunteerWithSched.searchedVolunteerItem
 import com.ivolunteer.ivolunteer.types.VolunteerWithSched.volunteerwithvolUser
-import com.ivolunteer.ivolunteer.types.needhelpuseractivities.NeedHelpUserActivitiesItem
+import com.ivolunteer.ivolunteer.ui.needHelpUserFragments.needHelpUserMyActivities.VolunteerUserListAdapter
+import org.json.JSONObject
 
 class searchVolunteerDetailActivity : AppCompatActivity() {
-    @SuppressLint("WrongViewCast")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_volunteer__details)
-        val volunteerId = intent.getStringExtra(EXTRA_MESSAGE)
+
+        val volunteerId = intent.getStringExtra(AlarmClock.EXTRA_MESSAGE)
 
         NetworkManager.instance.get<volunteerwithvolUser>("volunteers/byid?id=" + volunteerId) { response, statusCode, error ->
             if (statusCode == 200) {
@@ -39,10 +42,49 @@ class searchVolunteerDetailActivity : AppCompatActivity() {
                 val checkBoxNoon = findViewById<CheckBox>(R.id.search_detail_noon_check_box)
                 val checkBoxEvening = findViewById<CheckBox>(R.id.search_detail_evening_check_box)
 
+
+                val firstName = arrayOfNulls<String>(1)
+                val lastName = arrayOfNulls<String>(1)
+                val email = arrayOfNulls<String>(1)
+                val phoneNumber = arrayOfNulls<String>(1)
+                val needHelpUserId = arrayOfNulls<String>(1)
+
+                val name = arrayOfNulls<String>(2)
+
+
+                firstName[0] = (response!!.needHelpUser.applicationUser.firstName)
+                lastName[0] = (response!!.needHelpUser.applicationUser.lastName)
+                email[0] = (response!!.needHelpUser.applicationUser.email)
+                phoneNumber[0] = (response!!.needHelpUser.applicationUser.phoneNumber)
+                needHelpUserId[0] = (response!!.needHelpUser.applicationUser.id)
+
+                name[0] = firstName[0] + " " + lastName[0]
+
+
                 val days= arrayOf<CheckBox>(findViewById<CheckBox>(R.id.search_detail_sunday_check_box), findViewById<CheckBox>(R.id.search_detail_monday_check_box),
                     findViewById<CheckBox>(R.id.search_detail_tuesday_check_box), findViewById<CheckBox>(R.id.search_detail_wednesday_check_box),
                     findViewById<CheckBox>(R.id.search_detail_thursday_check_box), findViewById<CheckBox>(R.id.search_detail_friday_check_box),
                     findViewById<CheckBox>(R.id.search_detail_saturday_check_box))
+
+/*
+
+                var listView = findViewById<ListView>(R.id.volunteer_needhelpusers_list)
+                try {
+                    val myListAdapter = NeedHelpUserListAdapter(this, name, email, phoneNumber, needHelpUserId)
+
+
+                    runOnUiThread {
+
+                        listView?.post {
+                            listView.adapter = myListAdapter
+                        }
+                    }
+
+                } catch (e: Exception) {
+                    print(e)
+                }
+
+*/
 
                 val textType = findViewById<TextView>(R.id.search_detail_type)
                 textType.post {
@@ -57,7 +99,9 @@ class searchVolunteerDetailActivity : AppCompatActivity() {
 
 
                 val textDetail = findViewById<TextView>(R.id.search_detail_details)
+
                 textDetail.post {
+                    textDetail.isEnabled = false
                     if (details=="null")
                     {
                         textDetail.text =""
@@ -67,7 +111,20 @@ class searchVolunteerDetailActivity : AppCompatActivity() {
                     }
                 }
 
+                val textName = findViewById<TextView>(R.id.search_NeedHelpUserName_text)
+                textName.post {
+                    textName.text = name[0]
+                }
 
+                val textPhone = findViewById<TextView>(R.id.search_NeedHelpUserPhone_text)
+                textPhone.post {
+                    textPhone.text = phoneNumber[0]
+                }
+
+                val textEMail = findViewById<TextView>(R.id.search_NeedHelpUserMail_text)
+                textEMail.post {
+                    textEMail.text = email[0]
+                }
                 if (volunteerSchedulerMorning!!) {
                     checkBoxMorning.post {
                         checkBoxMorning.isChecked = true
@@ -108,7 +165,67 @@ class searchVolunteerDetailActivity : AppCompatActivity() {
                         }
                     }
                 }
+
+
+
+
+                val updateButtonNeedHelpUser = findViewById<Button>(R.id.search_detail_contact)
+
+                updateButtonNeedHelpUser.setOnClickListener(object : View.OnClickListener {
+                    override fun onClick(v: View?) {
+                        //val intent = Intent(context, VolunteerUserListAdapter::class.java)
+
+                        val intent =Intent(Intent.ACTION_SENDTO);
+                        intent.setType("text/plain");
+
+                        //emailLauncher.type = "message/rfc822"
+                        try {
+                            startActivity(intent)
+                            //startActivity(emailLauncher)
+                        }
+                        catch (e: ActivityNotFoundException) {
+                            print(e)
+                        }
+
+                        // Your code that you want to execute on this button click
+                    }
+                })
+
+
+                val iVolunteerButton = findViewById<Button>(R.id.search_detail_ivolunteer)
+
+                iVolunteerButton.setOnClickListener(object : View.OnClickListener {
+                    override fun onClick(v: View?) {
+
+                        //POST Associate
+
+                        val Associatejson = JSONObject()
+
+
+                        Associatejson.put("volunteerId", volunteerId)
+                        Associatejson.put(
+                            "Id",
+                            StorageManager.instance.get<String>(StorageTypes.USER_ID.toString())
+                        )
+                        NetworkManager.instance.post<Auth>(
+                            "VolunteerUser_Volunteer",
+                            Associatejson
+                        ) { response, statusCode, error ->
+                            if (statusCode != 200) {
+                                Log.i("LOG - error", error.toString())
+
+                            } else {
+                                Log.i("LOG - login", "SUCCESS")
+                            }
+                        }
+
+                    }
+                    })
+
+
+
             }
+
         }
     }
-}*/
+}

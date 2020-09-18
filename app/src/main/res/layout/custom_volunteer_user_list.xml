@@ -37,8 +37,8 @@
 
             <Button
                 android:id="@+id/volunteer_detail_rate_button"
-                android:layout_width="113dp"
-                android:layout_height="26dp"
+                android:layout_width="106dp"
+                android:layout_height="29dp"
                 android:layout_marginStart="15dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"

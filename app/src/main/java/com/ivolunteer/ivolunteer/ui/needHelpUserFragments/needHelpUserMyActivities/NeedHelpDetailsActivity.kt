@@ -27,7 +27,7 @@ class NeedHelpDetailsActivity : AppCompatActivity() {
 
                 val city = response?.volunteerCity?.city
                 val type = response?.volunteerType?.type
-                val details = response?.details.toString()
+                val details = response?.details
                 val volunteerSchedulerMorning = response?.volunteerScheduler?.isMorning
                 val volunteerSchedulerNoon = response?.volunteerScheduler?.isNoon
                 val volunteerSchedulerEvening = response?.volunteerScheduler?.isEvening

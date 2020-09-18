@@ -83,6 +83,7 @@ class NewHelpEventFragment : Fragment() {
       val volunteersTypesSpinner = view.findViewById<Spinner>(R.id.events_spinner)
       val cityId = Helper.getCityId(volunteersCitiesSpinner.selectedItem.toString())
       val typeId = Helper.getTypeId(volunteersTypesSpinner.selectedItem.toString())
+      val details = view.findViewById<TextView>(R.id.additinal_details_text)
 
 
       val days= arrayOf<CheckBox>(view.findViewById<CheckBox>(R.id.sunday_check_box), view.findViewById<CheckBox>(R.id.monday_check_box),
@@ -113,6 +114,7 @@ class NewHelpEventFragment : Fragment() {
 
       json.put("volunteercityid", cityId)
       json.put("volunteertypeid", typeId)
+      json.put("details", details.text)
 
       NetworkManager.instance.post<Auth>("volunteers", json) { response, statusCode, error ->
         if (statusCode != 200) {

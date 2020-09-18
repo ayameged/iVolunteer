@@ -13,6 +13,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".ui.volunteerUserFragments.volunteerUserMyVolunteers.VolunteerUserDetailsActivity"></activity>
+        <activity android:name=".ui.volunteerUserFragments.volunteerUserSearchForVolunteers.searchVolunteerDetailActivity"></activity>
+
         <activity android:name=".ui.needHelpUserFragments.needHelpUserMyActivities.NeedHelpDetailsActivity" />
         <activity
             android:name=".NeedHelpActivity"
