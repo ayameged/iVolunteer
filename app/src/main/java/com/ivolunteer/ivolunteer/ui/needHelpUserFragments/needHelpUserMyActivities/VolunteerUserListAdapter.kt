@@ -3,6 +3,7 @@ package com.ivolunteer.ivolunteer.ui.needHelpUserFragments.needHelpUserMyActivit
 import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.net.Uri
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
@@ -58,12 +59,14 @@ class VolunteerUserListAdapter(
             override fun onClick(v: View?) {
                 //val intent = Intent(context, VolunteerUserListAdapter::class.java)
 
-                 val intent =Intent(Intent.ACTION_SENDTO);
+                 val intent =Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto",volUserEmail[position], null));
                 intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_EMAIL,volUserEmail[position])
+                intent.putExtra(Intent.EXTRA_SUBJECT,"How can you help me?")
 
                 //emailLauncher.type = "message/rfc822"
                 try {
-                    context.startActivity(intent)
+                    context.startActivity(Intent.createChooser(intent,"Send email"))
                     //startActivity(emailLauncher)
                 }
                 catch (e: ActivityNotFoundException) {
