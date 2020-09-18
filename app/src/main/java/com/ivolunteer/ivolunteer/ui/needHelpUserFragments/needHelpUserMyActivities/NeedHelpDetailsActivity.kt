@@ -38,6 +38,7 @@ class NeedHelpDetailsActivity : AppCompatActivity() {
                 val email = arrayOfNulls<String>(response!!.volunteerUser.size)
                 val phoneNumber = arrayOfNulls<String>(response!!.volunteerUser.size)
                 val name = arrayOfNulls<String>(response!!.volunteerUser.size)
+                val volunteerUserId = arrayOfNulls<String>(response!!.volunteerUser.size)
 
 
                 for (i in 0 until response.volunteerUser.size) {
@@ -45,7 +46,10 @@ class NeedHelpDetailsActivity : AppCompatActivity() {
                     lastName[i] = (response.volunteerUser[i].applicationUser.lastName)
                     email[i] = (response.volunteerUser[i].applicationUser.email)
                     phoneNumber[i] = (response.volunteerUser[i].applicationUser.phoneNumber)
+                    volunteerUserId[i] = (response.volunteerUser[i].applicationUser.id)
+
                     name[i] = firstName[i] + " " + lastName[i]
+
                 }
 
               //  val needhelp_detail_contact =
@@ -67,7 +71,7 @@ class NeedHelpDetailsActivity : AppCompatActivity() {
                 )
                 var listView = findViewById<ListView>(R.id.volunteer_volunteerUsers_list)
                 try {
-                    val myListAdapter = VolunteerUserListAdapter(this, name, email, phoneNumber)
+                    val myListAdapter = VolunteerUserListAdapter(this, name, email, phoneNumber, volunteerUserId)
 
 
                     runOnUiThread {

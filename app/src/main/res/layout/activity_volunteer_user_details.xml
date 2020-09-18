@@ -173,7 +173,6 @@
                 android:gravity="start|top"
                 android:inputType="textMultiLine"
                 android:textColorHighlight="#090909"
-                android:hint="Additional Details"
                 android:textColorLink="#0B0A0A" />
 
 

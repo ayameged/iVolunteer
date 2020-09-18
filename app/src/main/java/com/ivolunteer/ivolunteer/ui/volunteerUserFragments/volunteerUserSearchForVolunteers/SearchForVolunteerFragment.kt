@@ -20,6 +20,9 @@ import com.ivolunteer.ivolunteer.types.VolunteerWithSched.searchedVolunteer
 import com.ivolunteer.ivolunteer.ui.needHelpUserFragments.needHelpUserMyActivities.MyListAdapter
 import com.ivolunteer.ivolunteer.ui.needHelpUserFragments.needHelpUserMyActivities.NeedHelpDetailsActivity
 import com.ivolunteer.ivolunteer.ui.needHelpUserFragments.needHelpUserMyActivities.SearchForVolunteersViewModel
+import com.ivolunteer.ivolunteer.ui.volunteerUserFragments.volunteerUserMyVolunteers.MyVolunteerListAdapter
+import com.ivolunteer.ivolunteer.ui.volunteerUserFragments.volunteerUserMyVolunteers.NeedHelpUserListAdapter
+import com.ivolunteer.ivolunteer.ui.volunteerUserFragments.volunteerUserMyVolunteers.VolunteerUserDetailsActivity
 import com.ivolunteer.ivolunteer.util.Helper
 import kotlinx.android.synthetic.main.custom_list.*
 
@@ -135,58 +138,63 @@ class SearchForVolunteerFragment : Fragment() {
             }
         }
 
+        val cities= arrayOfNulls<String>(1)
+        val type= arrayOfNulls<String>(1)
+        val occupied = arrayOfNulls<Boolean>(1)
+        val volunteerId = arrayOfNulls<Int>(1)
 
+        var myListAdapter=MyListAdapter(requireActivity(), type, cities, occupied, volunteerId)
 
-if (typeId!=0 && cityId!=0)
-{
+        if (typeId!=0 && cityId!=0)
+        {
 
-    // StorageManager.instance.get<String>(StorageTypes.USER_ID.toString()))
-    NetworkManager.instance.get<searchedVolunteer>("volunteers/byAll?schedDays=" +(internalData.joinToString ( separator =";" ))+"&schedTime="+(timeArray.joinToString ( separator =";" ))+"&cityId="+cityId+"&typeId="+typeId) { response, statusCode, error ->
-        val cities= arrayOfNulls<String>(response!!.size)
-        val type= arrayOfNulls<String>(response!!.size)
-        val occupied = arrayOfNulls<Boolean>(response!!.size)
-        val volunteerId = arrayOfNulls<Int>(response!!.size)
+            // StorageManager.instance.get<String>(StorageTypes.USER_ID.toString()))
+            NetworkManager.instance.get<searchedVolunteer>("volunteers/byAll?schedDays=" +(internalData.joinToString ( separator =";" ))+"&schedTime="+(timeArray.joinToString ( separator =";" ))+"&cityId="+cityId+"&typeId="+typeId) { response, statusCode, error ->
+                val cities= arrayOfNulls<String>(response!!.size)
+                val type= arrayOfNulls<String>(response!!.size)
+                val occupied = arrayOfNulls<Boolean>(response!!.size)
+                val volunteerId = arrayOfNulls<Int>(response!!.size)
 
-        for(i in 0 until response!!.size) {
-            cities[i] = (response[i].volunteerCity.city)
-            type[i] = (response[i].volunteerType.type)
-            occupied[i] = (response[i].isOccupied)
-            volunteerId[i] = (response[i].volunteerId)
+                for(i in 0 until response!!.size) {
+                    cities[i] = (response[i].volunteerCity.city)
+                    type[i] = (response[i].volunteerType.type)
+                    occupied[i] = (response[i].isOccupied)
+                    volunteerId[i] = (response[i].volunteerId)
 
-        }
-
-        try {
-
-
-
-
-            val myListAdapter = MyListAdapter(requireActivity(), type, cities, occupied, volunteerId)
-
-            listView?.post {
-                listView.adapter = myListAdapter
-            }
-
-
-
-/*
-
-            listView.setOnItemClickListener { parent, view, position, id ->
-                val selectedActivities = myListAdapter.getItem(position)
-
-                val message = selectedActivities.toString()
-
-                val intent = Intent(requireActivity(), searchVolunteerDetailActivity::class.java).apply {
-                    putExtra(EXTRA_MESSAGE, message)
                 }
-                startActivity(intent)
 
+                try {
+
+
+
+
+                     myListAdapter = MyListAdapter(requireActivity(), type, cities, occupied, volunteerId)
+
+                    listView?.post {
+                        listView.adapter = myListAdapter
+                    }
+
+
+
+        /*
+
+                    listView.setOnItemClickListener { parent, view, position, id ->
+                        val selectedActivities = myListAdapter.getItem(position)
+
+                        val message = selectedActivities.toString()
+
+                        val intent = Intent(requireActivity(), searchVolunteerDetailActivity::class.java).apply {
+                            putExtra(EXTRA_MESSAGE, message)
+                        }
+                        startActivity(intent)
+
+                    }
+        */
+                } catch(e: Exception) {
+                    print(e)
+                }
             }
-*/
-        } catch(e: Exception) {
-            print(e)
         }
-    }
-}
 
 
         else if (typeId!=0)
@@ -207,7 +215,7 @@ if (typeId!=0 && cityId!=0)
                 }
 
                 try {
-                    val myListAdapter = MyListAdapter(requireActivity(), type, cities, occupied, volunteerId)
+                     myListAdapter = MyListAdapter(requireActivity(), type, cities, occupied, volunteerId)
 
                     listView?.post {
                         listView.adapter = myListAdapter
@@ -239,7 +247,7 @@ if (typeId!=0 && cityId!=0)
                 }
 
                 try {
-                    val myListAdapter = MyListAdapter(requireActivity(), type, cities, occupied, volunteerId)
+                     myListAdapter = MyListAdapter(requireActivity(), type, cities, occupied, volunteerId)
 
                     listView?.post {
                         listView.adapter = myListAdapter
@@ -251,37 +259,62 @@ if (typeId!=0 && cityId!=0)
             }
         }
 
-else if (cityId==0 && typeId==0)
-{
+        else if (cityId==0 && typeId==0)
+        {
 
-    // StorageManager.instance.get<String>(StorageTypes.USER_ID.toString()))
-    NetworkManager.instance.get<searchedVolunteer>("volunteers/byAll?schedDays=" +(internalData.joinToString ( separator =";" ))+"&schedTime="+(timeArray.joinToString ( separator =";" ))) { response, statusCode, error ->
-        val cities= arrayOfNulls<String>(response!!.size)
-        val type= arrayOfNulls<String>(response!!.size)
-        val occupied = arrayOfNulls<Boolean>(response!!.size)
-        val volunteerId = arrayOfNulls<Int>(response!!.size)
+            // StorageManager.instance.get<String>(StorageTypes.USER_ID.toString()))
+            NetworkManager.instance.get<searchedVolunteer>("volunteers/byAll?schedDays=" +(internalData.joinToString ( separator =";" ))+"&schedTime="+(timeArray.joinToString ( separator =";" ))) { response, statusCode, error ->
+                val cities= arrayOfNulls<String>(response!!.size)
+                val type= arrayOfNulls<String>(response!!.size)
+                val occupied = arrayOfNulls<Boolean>(response!!.size)
+                val volunteerId = arrayOfNulls<Int>(response!!.size)
 
-        for(i in 0 until response!!.size) {
-            cities[i] = (response[i].volunteerCity.city)
-            type[i] = (response[i].volunteerType.type)
-            occupied[i] = (response[i].isOccupied)
-            volunteerId[i] = (response[i].volunteerId)
+                for(i in 0 until response!!.size) {
+                    cities[i] = (response[i].volunteerCity.city)
+                    type[i] = (response[i].volunteerType.type)
+                    occupied[i] = (response[i].isOccupied)
+                    volunteerId[i] = (response[i].volunteerId)
+                }
+
+                try {
+                     myListAdapter = MyListAdapter(requireActivity(), type, cities, occupied, volunteerId)
+
+                    listView?.post {
+                        listView.adapter = myListAdapter
+                    }
+
+
+
+                } catch(e: Exception) {
+                    print(e)
+                }
+            }
         }
 
-        try {
-            val myListAdapter = MyListAdapter(requireActivity(), type, cities, occupied, volunteerId)
 
-            listView?.post {
-                listView.adapter = myListAdapter
+
+        listView.setOnItemClickListener { parent, view, position, id ->
+            val selectedActivities = myListAdapter.getItem(position)
+//NeedHelpUserActivitiesItem selectedCity=myListAdapter.getItem(position)
+
+            val message = selectedActivities.toString()
+
+            val intent = Intent(requireActivity(), VolunteerUserDetailsActivity::class.java).apply {
+                putExtra(EXTRA_MESSAGE, message)
+            }
+            try {
+                startActivity(intent)
             }
 
+            catch(e: Exception) {
+                print(e)
+            }
 
-
-        } catch(e: Exception) {
-            print(e)
         }
-    }
-}
+
+
+
+
         //else{
       //Log.i("LOG - failed to get activities ", error.toString())
    // }

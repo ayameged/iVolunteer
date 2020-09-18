@@ -17,10 +17,11 @@ class VolunteerUserListAdapter(
     private val volUserName: Array<String?>,
     private val volUserEmail: Array<String?>,
     private val volUserPhoneNumber: Array<String?>,
+    private val volUserId: Array<String?>,
 
 
     )
-    : ArrayAdapter<String>(context, R.layout.custom_volunteer_user_list, volUserEmail) {
+    : ArrayAdapter<String>(context, R.layout.custom_volunteer_user_list, volUserId) {
 
     override fun getView(position: Int, view: View?, parent: ViewGroup): View {
         val inflater = context.layoutInflater
@@ -51,6 +52,7 @@ class VolunteerUserListAdapter(
 
 
         val updateButtonNeedHelpUser = rowView.findViewById<Button>(R.id.volunteer_detail_contact_button)
+        val volunteerDetailsRateButton = rowView.findViewById<Button>(R.id.volunteer_detail_rate_button)
 
         updateButtonNeedHelpUser.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
@@ -72,7 +74,11 @@ class VolunteerUserListAdapter(
             }
         })
 
-
+        //Aya
+        volunteerDetailsRateButton.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                //Aya
+            }})
 
 
             return rowView

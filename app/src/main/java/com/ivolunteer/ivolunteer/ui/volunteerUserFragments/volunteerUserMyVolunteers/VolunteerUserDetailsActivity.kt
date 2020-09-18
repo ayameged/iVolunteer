@@ -38,6 +38,8 @@ class VolunteerUserDetailsActivity : AppCompatActivity() {
                 val lastName = arrayOfNulls<String>(1)
                 val email = arrayOfNulls<String>(1)
                 val phoneNumber = arrayOfNulls<String>(1)
+                val needHelpUserId = arrayOfNulls<String>(1)
+
                 val name = arrayOfNulls<String>(2)
 
 
@@ -45,7 +47,9 @@ class VolunteerUserDetailsActivity : AppCompatActivity() {
                     lastName[0] = (response!!.needHelpUser.applicationUser.lastName)
                     email[0] = (response!!.needHelpUser.applicationUser.email)
                     phoneNumber[0] = (response!!.needHelpUser.applicationUser.phoneNumber)
-                    name[0] = firstName[0] + " " + lastName[0]
+                needHelpUserId[0] = (response!!.needHelpUser.applicationUser.id)
+
+                name[0] = firstName[0] + " " + lastName[0]
 
 
                 val days= arrayOf<CheckBox>(findViewById<CheckBox>(R.id.my_volunteers_detail_sunday_check_box), findViewById<CheckBox>(R.id.my_volunteers_detail_monday_check_box),
@@ -57,7 +61,7 @@ class VolunteerUserDetailsActivity : AppCompatActivity() {
 
                 var listView = findViewById<ListView>(R.id.volunteer_needhelpusers_list)
                 try {
-                    val myListAdapter = NeedHelpUserListAdapter(this, name, email, phoneNumber)
+                    val myListAdapter = NeedHelpUserListAdapter(this, name, email, phoneNumber, needHelpUserId)
 
 
                     runOnUiThread {
@@ -86,7 +90,9 @@ class VolunteerUserDetailsActivity : AppCompatActivity() {
 
 
                 val textDetail = findViewById<TextView>(R.id.my_volunteers_detail_details)
+
                 textDetail.post {
+                    textDetail.isEnabled = false
                     if (details=="null")
                     {
                         textDetail.text =""

@@ -1,3 +1,4 @@
+/*
 package com.ivolunteer.ivolunteer.ui.volunteerUserFragments.volunteerUserSearchForVolunteers
 
 import android.annotation.SuppressLint
@@ -14,6 +15,7 @@ import android.widget.TextView
 import com.ivolunteer.ivolunteer.R
 import com.ivolunteer.ivolunteer.resources.NetworkManager
 import com.ivolunteer.ivolunteer.types.VolunteerWithSched.searchedVolunteerItem
+import com.ivolunteer.ivolunteer.types.VolunteerWithSched.volunteerwithvolUser
 import com.ivolunteer.ivolunteer.types.needhelpuseractivities.NeedHelpUserActivitiesItem
 
 class searchVolunteerDetailActivity : AppCompatActivity() {
@@ -23,12 +25,12 @@ class searchVolunteerDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_search_volunteer__details)
         val volunteerId = intent.getStringExtra(EXTRA_MESSAGE)
 
-        NetworkManager.instance.get<searchedVolunteerItem>("volunteers/byid?id=" + volunteerId) { response, statusCode, error ->
+        NetworkManager.instance.get<volunteerwithvolUser>("volunteers/byid?id=" + volunteerId) { response, statusCode, error ->
             if (statusCode == 200) {
 
                 val city = response?.volunteerCity?.city
                 val type = response?.volunteerType?.type
-                val details = response?.details
+                val details = response?.details.toString()
                 val volunteerSchedulerMorning = response?.volunteerScheduler?.isMorning
                 val volunteerSchedulerNoon = response?.volunteerScheduler?.isNoon
                 val volunteerSchedulerEvening = response?.volunteerScheduler?.isEvening
@@ -47,13 +49,24 @@ class searchVolunteerDetailActivity : AppCompatActivity() {
                     textType.text = type
                 }
 
-                val textCity = findViewById<TextView>(R.id.search_detail_city).apply {
-                    text = city
+
+                val textCity = findViewById<TextView>(R.id.search_detail_city)
+                textCity.post {
+                    textCity.text = city
                 }
 
-                val detail = findViewById<TextView>(R.id.search_detail_details).apply {
-                    text = details
+
+                val textDetail = findViewById<TextView>(R.id.search_detail_details)
+                textDetail.post {
+                    if (details=="null")
+                    {
+                        textDetail.text =""
+                    }
+                    else {
+                        textDetail.text = details
+                    }
                 }
+
 
                 if (volunteerSchedulerMorning!!) {
                     checkBoxMorning.post {
@@ -98,18 +111,4 @@ class searchVolunteerDetailActivity : AppCompatActivity() {
             }
         }
     }
-
-    /*fun setCheckBox(checkBox: CheckBox, boolean: Boolean)
-    {
-        if (boolean!!) {
-            checkBox.post {
-                checkBox.isChecked = true
-            }
-        }
-        else {
-            checkBox.post {
-                checkBox.isChecked = false
-            }
-        }
-    }*/
-}
+}*/
