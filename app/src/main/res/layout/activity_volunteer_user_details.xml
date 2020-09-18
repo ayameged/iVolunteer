@@ -7,13 +7,16 @@
     tools:context=".ui.volunteerUserFragments.volunteerUserMyVolunteers.VolunteerUserDetailsActivity">
 
     <LinearLayout
-        android:layout_width="395dp"
-        android:layout_height="426dp"
+        android:id="@+id/linearLayout2"
+        android:layout_width="397dp"
+        android:layout_height="0dp"
         android:layout_marginStart="35dp"
         android:layout_marginTop="60dp"
         android:layout_marginEnd="35dp"
+        android:layout_marginBottom="1dp"
         android:gravity="center"
         android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
@@ -176,19 +179,77 @@
                 android:textColorLink="#0B0A0A" />
 
 
-            <ListView
-                android:id="@+id/volunteer_needhelpusers_list"
-                android:layout_width="409dp"
-                android:layout_height="243dp"
-                tools:layout_editor_absoluteX="1dp"
-                tools:layout_editor_absoluteY="487dp">
-
-            </ListView>
         </LinearLayout>
 
 
+    </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
+        <TextView
+            android:id="@+id/NeedHelpUserName_text"
+            android:layout_width="202dp"
+            android:layout_height="39dp"
+            android:fontFamily="@font/gabriela"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/NeedHelpUserPhone_text"
+            android:layout_width="203dp"
+            android:layout_height="39dp"
+            android:fontFamily="@font/gabriela"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/NeedHelpUser_Mail_text"
+            android:layout_width="202dp"
+            android:layout_height="37dp"
+            android:fontFamily="@font/gabriela"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/myVolunteers_detail_ivolunteer"
+            android:layout_width="176dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="100dp"
+            android:background="@drawable/btn_rounded"
+            android:fontFamily="@font/gabriela"
+            android:foregroundGravity="left"
+            android:text="iVolunteer"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/myVolunteers_detail_contact"
+            android:layout_width="174dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="100dp"
+            android:background="@drawable/btn_rounded"
+            android:fontFamily="@font/gabriela"
+            android:foregroundGravity="left"
+            android:text="contact"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

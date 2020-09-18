@@ -60,9 +60,12 @@ class MyVolunteersFragment : Fragment() {
 
           listView.setOnItemClickListener { parent, view, position, id ->
             val selectedActivities = myListAdapter.getItem(position)
-            val message = selectedActivities.toString()
+            val volunteerId = selectedActivities.toString() //pass volunterrId
             val intent = Intent(requireActivity(), VolunteerUserDetailsActivity::class.java).apply {
-              putExtra(EXTRA_MESSAGE, message)
+              putExtra(EXTRA_MESSAGE, volunteerId)
+            }
+            val intent1 = Intent(requireActivity(), NeedHelpUserListAdapter::class.java).apply {
+              putExtra(EXTRA_MESSAGE, volunteerId)
             }
             startActivity(intent)
             }

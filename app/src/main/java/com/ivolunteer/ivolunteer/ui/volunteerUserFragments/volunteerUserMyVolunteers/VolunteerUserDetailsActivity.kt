@@ -1,16 +1,25 @@
 package com.ivolunteer.ivolunteer.ui.volunteerUserFragments.volunteerUserMyVolunteers
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.AlarmClock
+import android.util.Log
+import android.view.View
+import android.widget.Button
 import android.widget.CheckBox
 import android.widget.ListView
 import android.widget.TextView
 import com.ivolunteer.ivolunteer.R
 import com.ivolunteer.ivolunteer.resources.NetworkManager
+import com.ivolunteer.ivolunteer.resources.StorageManager
+import com.ivolunteer.ivolunteer.resources.StorageTypes
+import com.ivolunteer.ivolunteer.types.Auth
 import com.ivolunteer.ivolunteer.types.VolunteerWithSched.searchedVolunteerItem
 import com.ivolunteer.ivolunteer.types.VolunteerWithSched.volunteerwithvolUser
 import com.ivolunteer.ivolunteer.ui.needHelpUserFragments.needHelpUserMyActivities.VolunteerUserListAdapter
+import org.json.JSONObject
 
 class VolunteerUserDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,7 +66,7 @@ class VolunteerUserDetailsActivity : AppCompatActivity() {
                     findViewById<CheckBox>(R.id.my_volunteers_detail_thursday_check_box), findViewById<CheckBox>(R.id.my_volunteers_detail_friday_check_box),
                     findViewById<CheckBox>(R.id.my_volunteers_detail_saturday_check_box))
 
-
+/*
 
                 var listView = findViewById<ListView>(R.id.volunteer_needhelpusers_list)
                 try {
@@ -75,7 +84,7 @@ class VolunteerUserDetailsActivity : AppCompatActivity() {
                     print(e)
                 }
 
-
+*/
 
                 val textType = findViewById<TextView>(R.id.my_volunteers_detail_type)
                 textType.post {
@@ -102,7 +111,20 @@ class VolunteerUserDetailsActivity : AppCompatActivity() {
                     }
                 }
 
+                val textName = findViewById<TextView>(R.id.NeedHelpUserName_text)
+                textName.post {
+                    textName.text = name[0]
+                }
 
+                val textPhone = findViewById<TextView>(R.id.NeedHelpUserPhone_text)
+                textPhone.post {
+                    textPhone.text = phoneNumber[0]
+                }
+
+                val textEMail = findViewById<TextView>(R.id.NeedHelpUser_Mail_text)
+                textEMail.post {
+                    textEMail.text = email[0]
+                }
                 if (volunteerSchedulerMorning!!) {
                     checkBoxMorning.post {
                         checkBoxMorning.isChecked = true
@@ -143,6 +165,100 @@ class VolunteerUserDetailsActivity : AppCompatActivity() {
                         }
                     }
                 }
+
+
+
+
+                val updateButtonNeedHelpUser = findViewById<Button>(R.id.myVolunteers_detail_contact)
+
+                updateButtonNeedHelpUser.setOnClickListener(object : View.OnClickListener {
+                    override fun onClick(v: View?) {
+                        //val intent = Intent(context, VolunteerUserListAdapter::class.java)
+
+                        val intent =Intent(Intent.ACTION_SENDTO);
+                        intent.setType("text/plain");
+
+                        //emailLauncher.type = "message/rfc822"
+                        try {
+                            startActivity(intent)
+                            //startActivity(emailLauncher)
+                        }
+                        catch (e: ActivityNotFoundException) {
+                            print(e)
+                        }
+
+                        // Your code that you want to execute on this button click
+                    }
+                })
+
+                val iVolunteerButton = findViewById<Button>(R.id.myVolunteers_detail_ivolunteer)
+
+                iVolunteerButton.setOnClickListener(object : View.OnClickListener {
+                    override fun onClick(v: View?) {
+
+                        //POST Associate
+
+                        val Associatejson = JSONObject()
+
+
+                        Associatejson.put("volunteerId",volunteerId )
+                        Associatejson.put("Id", StorageManager.instance.get<String>(StorageTypes.USER_ID.toString()))
+                        NetworkManager.instance.post<Auth>("VolunteerUser_Volunteer", Associatejson) { response, statusCode, error ->
+                            if (statusCode != 200) {
+                                Log.i("LOG - error", error.toString())
+
+                            } else {
+                                Log.i("LOG - login", "SUCCESS")
+                            }
+                        }
+
+
+
+                        //update isOccupied
+                        /*
+                        val json_update_user = JSONObject()
+                        json_update_user.put("id", StorageManager.instance.get<String>(StorageTypes.USER_ID.toString()))
+
+                        NetworkManager.instance.put<Int>("VolunteerUsers/"+ StorageManager.instance.get<String>(
+                            StorageTypes.USER_ID.toString()), json_update_user){ response, statusCode, error ->
+                            if (statusCode != 204){
+                                Log.i("LOG - error in update user", error.toString())
+                                loginError?.post {
+                                    loginError.visibility = View.VISIBLE
+                                }
+                            }else{
+                                Log.i("LOG - volunteer user created ", "")
+                                loginError?.post{
+                                    loginError.text = "Your details updated"
+                                    loginError.visibility = View.VISIBLE
+                                }
+                            }
+                        }
+
+        */
+
+                        //val intent = Intent(context, VolunteerUserListAdapter::class.java)
+
+                        /*               val intent =Intent(Intent.ACTION_SENDTO);
+                                       intent.setType("text/plain");
+
+                                       //emailLauncher.type = "message/rfc822"
+                                       try {
+                                           context.startActivity(intent)
+                                           //startActivity(emailLauncher)
+                                       }
+                                       catch (e: ActivityNotFoundException) {
+                                           print(e)
+                                       }
+                       */
+                        // Your code that you want to execute on this button click
+                    }
+                })
+
+
+
+
+
             }
 
         }

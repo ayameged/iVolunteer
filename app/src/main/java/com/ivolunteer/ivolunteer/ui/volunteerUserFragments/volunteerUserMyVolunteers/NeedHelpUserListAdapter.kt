@@ -3,6 +3,8 @@ package com.ivolunteer.ivolunteer.ui.volunteerUserFragments.volunteerUserMyVolun
 import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.os.Bundle
+import android.provider.AlarmClock
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
@@ -57,91 +59,6 @@ class NeedHelpUserListAdapter(
 
 
 
-        val updateButtonNeedHelpUser = rowView.findViewById<Button>(R.id.needhelp_detail_contact_button)
-
-        updateButtonNeedHelpUser.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-                //val intent = Intent(context, VolunteerUserListAdapter::class.java)
-
-                 val intent =Intent(Intent.ACTION_SENDTO);
-                intent.setType("text/plain");
-
-                //emailLauncher.type = "message/rfc822"
-                try {
-                    context.startActivity(intent)
-                    //startActivity(emailLauncher)
-                }
-                catch (e: ActivityNotFoundException) {
-                    print(e)
-                }
-
-                // Your code that you want to execute on this button click
-            }
-        })
-
-        val iVolunteerButton = rowView.findViewById<Button>(R.id.needhelp_detail_iVolunteer_button)
-
-        iVolunteerButton.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-
-                //POST Associate
-
-                val Associatejson = JSONObject()
-
-
-                Associatejson.put("volunteerId",28 )
-                Associatejson.put("Id", "07bba5be-1e94-47fc-b4ca-28de88dd8cfd")
-                NetworkManager.instance.post<Auth>("VolunteerUser_Volunteer", Associatejson) { response, statusCode, error ->
-                    if (statusCode != 200) {
-                        Log.i("LOG - error", error.toString())
-
-                    } else {
-                        Log.i("LOG - login", "SUCCESS")
-                    }
-                }
-
-
-
-                //update isOccupied
-                /*
-                val json_update_user = JSONObject()
-                json_update_user.put("id", StorageManager.instance.get<String>(StorageTypes.USER_ID.toString()))
-
-                NetworkManager.instance.put<Int>("VolunteerUsers/"+ StorageManager.instance.get<String>(
-                    StorageTypes.USER_ID.toString()), json_update_user){ response, statusCode, error ->
-                    if (statusCode != 204){
-                        Log.i("LOG - error in update user", error.toString())
-                        loginError?.post {
-                            loginError.visibility = View.VISIBLE
-                        }
-                    }else{
-                        Log.i("LOG - volunteer user created ", "")
-                        loginError?.post{
-                            loginError.text = "Your details updated"
-                            loginError.visibility = View.VISIBLE
-                        }
-                    }
-                }
-
-*/
-
-                //val intent = Intent(context, VolunteerUserListAdapter::class.java)
-
- /*               val intent =Intent(Intent.ACTION_SENDTO);
-                intent.setType("text/plain");
-
-                //emailLauncher.type = "message/rfc822"
-                try {
-                    context.startActivity(intent)
-                    //startActivity(emailLauncher)
-                }
-                catch (e: ActivityNotFoundException) {
-                    print(e)
-                }
-*/
-                // Your code that you want to execute on this button click
-            }
-        })
 
 
 
