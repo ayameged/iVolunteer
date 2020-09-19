@@ -265,11 +265,9 @@ class searchVolunteerDetailActivity : AppCompatActivity() {
                                             runOnUiThread {
                                                 val successAlert = successDialogBuilder.create()
                                                 successAlert.show()
-
                                             }
                                             iVolunteerButton.isEnabled = false;
                                         }
-
                                     }
                                 }
 
@@ -303,27 +301,17 @@ class searchVolunteerDetailActivity : AppCompatActivity() {
                                         dialog, id -> dialog.cancel()
                                 })
                             runOnUiThread {
-
                                 val alert = dialogBuilder.create()
                                 alert.show()
-
                             }
-
-
-
-
-
                         }
                         else {
                             val loginError = findViewById<TextView>(R.id.search_error_text_view)
                             iVolunteerButton.isEnabled=false;
                         }
-                        }
-                    })
+                    }
+                })
             }
-
         }
     }
-
-
 }

@@ -125,6 +125,37 @@ class NetworkManager {
             }
     }
 
+
+
+    inline fun <reified T>delete(path: String, body: JSONObject, crossinline callback: (response: T?, statusCode: Int, error: JSONObject) -> Unit) {
+        val token = StorageManager.instance.get<String>(StorageTypes.TOKEN.toString())
+
+        Fuel.delete(apiAddress + path)
+            .header("Authorization", "Bearer " + token)
+            .jsonBody(body.toString()).response { request, response, result ->
+                var (bytes, error) = result
+                var respErr = JSONObject()
+
+                val collectionType: Type = object : TypeToken<T?>() {}.type
+
+                if (error != null && String(error.response.data) != "") {
+                    respErr = JSONObject(String(error.response.data))
+                }
+
+                if (bytes == null) {
+                    bytes = "{}".toByteArray()
+                }
+
+                val resp = Gson().fromJson<T>(String(bytes), collectionType)
+                try{
+                callback(resp, response.statusCode, respErr)
+                } catch(e: Exception) {
+                    print(e)
+                }
+            }
+    }
+
+
     companion object {
         val instance = NetworkManager()
     }
