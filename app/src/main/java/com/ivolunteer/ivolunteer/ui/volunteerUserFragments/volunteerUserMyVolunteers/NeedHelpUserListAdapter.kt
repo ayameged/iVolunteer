@@ -54,14 +54,6 @@ class NeedHelpUserListAdapter(
         }
 
 
-
-
-
-
-
-
-
-
             return rowView
     }
 

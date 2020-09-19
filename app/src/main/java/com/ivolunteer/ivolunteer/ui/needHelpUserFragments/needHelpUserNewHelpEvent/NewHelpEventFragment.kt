@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.ivolunteer.ivolunteer.R
@@ -117,10 +118,19 @@ class NewHelpEventFragment : Fragment() {
       json.put("details", details.text)
 
       NetworkManager.instance.post<Auth>("volunteers", json) { response, statusCode, error ->
-        if (statusCode != 200) {
+        if (statusCode != 201) {
           Log.i("LOG - error", error.toString())
 
         } else {
+          //TODO: fix
+          val successDialogBuilder = AlertDialog.Builder(requireActivity())
+          successDialogBuilder.setMessage("Volunteer assigned successfully!")
+          successDialogBuilder.setTitle("iVolunteer")
+          //runOnUiThread {
+
+            val successAlert = successDialogBuilder.create()
+            successAlert.show()
+          //}
           Log.i("LOG - login", "SUCCESS")
         }
       }

@@ -1,16 +1,15 @@
 package com.ivolunteer.ivolunteer.ui.volunteerUserFragments.volunteerUserSearchForVolunteers
 
 import android.content.ActivityNotFoundException
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.AlarmClock
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.ListView
-import android.widget.TextView
+import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import com.ivolunteer.ivolunteer.R
 import com.ivolunteer.ivolunteer.resources.NetworkManager
 import com.ivolunteer.ivolunteer.resources.StorageManager
@@ -37,6 +36,8 @@ class searchVolunteerDetailActivity : AppCompatActivity() {
                 val typeId = response?.volunteerType?.volunteerTypeId
                 val details = response?.details.toString()
                 val volunteerSchedulerId = response?.volunteerScheduler?.volunteerSchedulerId
+                val isOccupied= response?.isOccupied
+                val volunteerUsers= response?.volunteerUser
 
                 val volunteerSchedulerMorning = response?.volunteerScheduler?.isMorning
                 val volunteerSchedulerNoon = response?.volunteerScheduler?.isNoon
@@ -169,8 +170,18 @@ class searchVolunteerDetailActivity : AppCompatActivity() {
                         }
                     }
                 }
-
-
+                val iVolunteerButton = findViewById<Button>(R.id.search_detail_ivolunteer)
+                var flagiVolunteer=0;
+                if (volunteerUsers != null) {
+                    for (user in volunteerUsers) {
+                        if (user.id == StorageManager.instance.get<String>(StorageTypes.USER_ID.toString())) {
+                            flagiVolunteer = 1
+                        }
+                    }
+                }
+                if (flagiVolunteer == 1) {
+                    iVolunteerButton.isEnabled=false;
+                }
 
 
                 val updateButtonNeedHelpUser = findViewById<Button>(R.id.search_detail_contact)
@@ -181,6 +192,8 @@ class searchVolunteerDetailActivity : AppCompatActivity() {
 
                         val intent =Intent(Intent.ACTION_SENDTO);
                         intent.setType("text/plain");
+                        //intent.setPackage("com.google.android.gm");
+
 
                         //emailLauncher.type = "message/rfc822"
                         try {
@@ -196,75 +209,121 @@ class searchVolunteerDetailActivity : AppCompatActivity() {
                 })
 
 
-                val iVolunteerButton = findViewById<Button>(R.id.search_detail_ivolunteer)
 
+                var flag=0;
                 iVolunteerButton.setOnClickListener(object : View.OnClickListener {
+
                     override fun onClick(v: View?) {
 
-
-                        val json_update_volunteer = JSONObject()
-
-
-                        json_update_volunteer.put("volunteerId", volunteerId)
-                        json_update_volunteer.put("needHelpUserId", needHelpUserId[0])
-                        json_update_volunteer.put("volunteercityId", cityId)
-                        json_update_volunteer.put("volunteerTypeId", typeId)
-                        json_update_volunteer.put("isOccupied", 1)
-                        json_update_volunteer.put("volunteerSchedulerId", volunteerSchedulerId)
-                        json_update_volunteer.put("details", details)
-
-                        val loginError = findViewById<TextView>(R.id.search_error_text_view)
-
-                        //PUT update isOccupied
-                        NetworkManager.instance.put<Int>("volunteers/"+ volunteerId, json_update_volunteer){ response,
-                                                                                                             statusCode, error ->
-                            if (statusCode != 204){
-                                Log.i("LOG - error in update volunteer- volunteer already associated for you", error.toString())
-                                loginError?.post {
-                                    loginError.visibility = View.VISIBLE
-                                }
-                            }else{
-                                Log.i("LOG - volunteer association updated ", "")
-                                loginError?.post{
-                                    loginError.text = "volunteer association updated"
-                                    loginError.visibility = View.VISIBLE
+                        if (volunteerUsers != null) {
+                            for (user in volunteerUsers) {
+                                if (user.id == StorageManager.instance.get<String>(StorageTypes.USER_ID.toString())) {
+                                    flag = 1
                                 }
                             }
                         }
+                        if (flag == 0) {
+
+                            val json_update_volunteer = JSONObject()
+
+                            json_update_volunteer.put("volunteerId", volunteerId)
+                            json_update_volunteer.put("needHelpUserId", needHelpUserId[0])
+                            json_update_volunteer.put("volunteercityId", cityId)
+                            json_update_volunteer.put("volunteerTypeId", typeId)
+                            json_update_volunteer.put("isOccupied", 1)
+                            json_update_volunteer.put("volunteerSchedulerId", volunteerSchedulerId)
+                            json_update_volunteer.put("details", details)
+
+                            val loginError = findViewById<TextView>(R.id.search_error_text_view)
+
+                            // build alert dialog
+                            val dialogBuilder = AlertDialog.Builder(this@searchVolunteerDetailActivity)
+
+                            val iVolunteerPositiveClick = { dialog: DialogInterface, which: Int ->
+                                //PUT update isOccupied
+                                NetworkManager.instance.put<Int>(
+                                    "volunteers/" + volunteerId,
+                                    json_update_volunteer
+                                ) { response,
+                                    statusCode, error ->
+                                    if (statusCode != 204) {
+                                        Log.i(
+                                            "LOG - error in update volunteer- volunteer already associated for you",
+                                            error.toString()
+                                        )
+                                        loginError?.post {
+                                            loginError.visibility = View.VISIBLE
+                                        }
+                                    } else {
+                                        Log.i("LOG - volunteer association updated", "")
+                                        loginError?.post {
+                                            //loginError.text = "volunteer association updated"
+                                            //loginError.visibility = View.VISIBLE
+                                            val successDialogBuilder = AlertDialog.Builder(this@searchVolunteerDetailActivity)
+                                            successDialogBuilder.setMessage("Volunteer assigned successfully!")
+                                            successDialogBuilder.setTitle("iVolunteer")
+                                            runOnUiThread {
+                                                val successAlert = successDialogBuilder.create()
+                                                successAlert.show()
+
+                                            }
+                                            iVolunteerButton.isEnabled = false;
+                                        }
+
+                                    }
+                                }
 
 
-                        //POST Associate
+                                //POST Associate
+                                val Associatejson = JSONObject()
+                                Associatejson.put("volunteerId", volunteerId)
+                                Associatejson.put(
+                                    "Id",
+                                    StorageManager.instance.get<String>(StorageTypes.USER_ID.toString())
+                                )
+                                NetworkManager.instance.post<Auth>(
+                                    "VolunteerUser_Volunteer",
+                                    Associatejson
+                                ) { response, statusCode, error ->
+                                    if (statusCode != 200) {
+                                        Log.i("LOG - error", error.toString())
 
-                        val Associatejson = JSONObject()
-
-
-                        Associatejson.put("volunteerId", volunteerId)
-                        Associatejson.put(
-                            "Id",
-                            StorageManager.instance.get<String>(StorageTypes.USER_ID.toString())
-                        )
-                        NetworkManager.instance.post<Auth>(
-                            "VolunteerUser_Volunteer",
-                            Associatejson
-                        ) { response, statusCode, error ->
-                            if (statusCode != 200) {
-                                Log.i("LOG - error", error.toString())
-
-                            } else {
-                                Log.i("LOG - login", "SUCCESS")
+                                    } else {
+                                        Log.i("LOG - associate volunteer", "SUCCESS")
+                                    }
+                                }
                             }
+                            // set message of alert dialog
+                            dialogBuilder.setMessage("Do you want to volunteer in this activity?")
+                                .setCancelable(false)
+                                .setPositiveButton("Proceed", DialogInterface.OnClickListener(function=iVolunteerPositiveClick)) //{
+                                        //dialog, id -> finish()
+                                //})
+                                .setNegativeButton("Cancel", DialogInterface.OnClickListener {
+                                        dialog, id -> dialog.cancel()
+                                })
+                            runOnUiThread {
+
+                                val alert = dialogBuilder.create()
+                                alert.show()
+
+                            }
+
+
+
+
+
                         }
-
-
-
-
-                    }
+                        else {
+                            val loginError = findViewById<TextView>(R.id.search_error_text_view)
+                            iVolunteerButton.isEnabled=false;
+                        }
+                        }
                     })
-
-
-
             }
 
         }
     }
+
+
 }
