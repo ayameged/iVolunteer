@@ -235,14 +235,15 @@ class EditPersonalDetailsFragment : Fragment() {
         //  loginError.text = "Your details updated"
         //  loginError.visibility = View.VISIBLE
         //}
-        val successDialogBuilder = AlertDialog.Builder(requireActivity())
-        successDialogBuilder.setMessage("Personal details updated successfully!")
-        successDialogBuilder.setTitle("iVolunteer")
-        //runOnUiThread {
 
-        val successAlert = successDialogBuilder.create()
-        successAlert.show()
       }
+      val successDialogBuilder = AlertDialog.Builder(requireActivity())
+      successDialogBuilder.setMessage("Personal details updated successfully!")
+      successDialogBuilder.setTitle("iVolunteer")
+      //runOnUiThread {
+
+      val successAlert = successDialogBuilder.create()
+      successAlert.show()
     }
   }
 }

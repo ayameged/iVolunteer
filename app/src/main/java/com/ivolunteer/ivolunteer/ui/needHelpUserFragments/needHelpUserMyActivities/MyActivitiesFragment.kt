@@ -1,13 +1,17 @@
 package com.ivolunteer.ivolunteer.ui.needHelpUserFragments.needHelpUserMyActivities
 
+import android.app.NotificationManager
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.provider.AlarmClock.EXTRA_MESSAGE
+import android.provider.Settings.Global.getString
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
+import androidx.core.app.NotificationCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.ivolunteer.ivolunteer.R
@@ -55,6 +59,13 @@ class MyActivitiesFragment : Fragment() {
 
           }
 
+
+          var builder = NotificationCompat.Builder(requireActivity(), "1")
+            .setContentTitle("iVolunteer")
+            .setContentText("someone interested helping  you")
+
+
+
             listView.setOnItemClickListener { parent, view, position, id ->
                 val selectedActivities = myListAdapter.getItem(position)
 //NeedHelpUserActivitiesItem selectedCity=myListAdapter.getItem(position)
@@ -80,3 +91,4 @@ class MyActivitiesFragment : Fragment() {
     return root
   }
 }
+
