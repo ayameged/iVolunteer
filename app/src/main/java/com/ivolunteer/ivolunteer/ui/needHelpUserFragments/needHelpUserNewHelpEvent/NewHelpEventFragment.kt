@@ -123,17 +123,20 @@ class NewHelpEventFragment : Fragment() {
 
         } else {
           //TODO: fix
-          val successDialogBuilder = AlertDialog.Builder(requireActivity())
-          successDialogBuilder.setMessage("Volunteer assigned successfully!")
-          successDialogBuilder.setTitle("iVolunteer")
-          //runOnUiThread {
 
-            val successAlert = successDialogBuilder.create()
-            successAlert.show()
+
           //}
           Log.i("LOG - login", "SUCCESS")
         }
       }
+
+      val successDialogBuilder = AlertDialog.Builder(requireActivity())
+      successDialogBuilder.setMessage("New help event created successfully!")
+      successDialogBuilder.setTitle("iVolunteer")
+      //runOnUiThread {
+
+      val successAlert = successDialogBuilder.create()
+      successAlert.show()
     }
   }
 }

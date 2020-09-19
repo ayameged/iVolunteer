@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
@@ -203,12 +204,20 @@ class EditPersonalDetailsFragment : Fragment() {
         }
       }else{
         Log.i("LOG - need help user updated ", "")
-        loginError?.post{
-          loginError.text = "Your details updated"
-          loginError.visibility = View.VISIBLE
-        }
+        //loginError?.post{
+         // loginError.text = "Your details updated"
+         // loginError.visibility = View.VISIBLE
+
+        //}
       }
     }
+    val successDialogBuilder = AlertDialog.Builder(requireActivity())
+    successDialogBuilder.setMessage("Personal details updated successfully!")
+    successDialogBuilder.setTitle("iVolunteer")
+    //runOnUiThread {
+
+    val successAlert = successDialogBuilder.create()
+    successAlert.show()
   }
 
   @SuppressLint("SetTextI18n")
@@ -222,10 +231,17 @@ class EditPersonalDetailsFragment : Fragment() {
         }
       }else{
         Log.i("LOG - volunteer user created ", "")
-        loginError?.post{
-          loginError.text = "Your details updated"
-          loginError.visibility = View.VISIBLE
-        }
+       // loginError?.post{
+        //  loginError.text = "Your details updated"
+        //  loginError.visibility = View.VISIBLE
+        //}
+        val successDialogBuilder = AlertDialog.Builder(requireActivity())
+        successDialogBuilder.setMessage("Personal details updated successfully!")
+        successDialogBuilder.setTitle("iVolunteer")
+        //runOnUiThread {
+
+        val successAlert = successDialogBuilder.create()
+        successAlert.show()
       }
     }
   }
