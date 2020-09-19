@@ -8,8 +8,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="397dp"
-        android:layout_height="0dp"
+        android:layout_width="396dp"
+        android:layout_height="252dp"
         android:layout_marginStart="35dp"
         android:layout_marginTop="60dp"
         android:layout_marginEnd="35dp"
@@ -21,10 +21,9 @@
         app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="58dp"
             android:orientation="horizontal">
 
             <TextView
@@ -38,14 +37,13 @@
                 android:textColor="#070707"
                 android:textSize="18sp"
                 tools:ignore="RtlCompat" />
-
-            <TextView
-                android:id="@+id/search_detail_type"
-                android:layout_width="wrap_content"
-                android:layout_height="44dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/gabriela"
-                android:textSize="14sp" />
+        <TextView
+            android:id="@+id/search_detail_type"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/gabriela"
+            android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -165,7 +163,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="141dp"
+            android:layout_height="66dp"
             android:orientation="vertical">
 
             <EditText
@@ -186,15 +184,26 @@
 
     <LinearLayout
         android:id="@+id/linearLayout3"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="1dp"
+        android:layout_width="501dp"
+        android:layout_height="377dp"
+        android:layout_marginStart="100dp"
         android:layout_marginEnd="1dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+        <TextView
+            android:id="@+id/search_NeedHelpUserDetails_label"
+            android:layout_width="match_parent"
+            android:layout_height="47dp"
+            android:fontFamily="@font/gabriela"
+            android:text="Activity Owner Personal Details"
+            android:textAlignment="viewStart"
+            android:textColor="#000000"
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/search_NeedHelpUserName_text"
@@ -217,9 +226,10 @@
             android:layout_height="47dp"
             android:fontFamily="@font/gabriela"
             android:textSize="18sp" />
+
         <Button
             android:id="@+id/search_detail_ivolunteer"
-            android:layout_width="176dp"
+            android:layout_width="357dp"
             android:layout_height="33dp"
             android:layout_marginStart="15dp"
             android:layout_marginLeft="15dp"
@@ -235,10 +245,14 @@
             app:layout_constraintStart_toStartOf="parent" />
 
 
+        <TextView
+            android:id="@+id/search_error_text_view"
+            android:layout_width="373dp"
+            android:layout_height="30dp"/>
 
         <Button
             android:id="@+id/search_detail_contact"
-            android:layout_width="174dp"
+            android:layout_width="354dp"
             android:layout_height="33dp"
             android:layout_marginStart="15dp"
             android:layout_marginLeft="15dp"
@@ -252,5 +266,31 @@
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/search_volunteerDetails_label2"
+            android:layout_width="match_parent"
+            android:layout_height="47dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/gabriela"
+            android:text="Volunteer Details"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textColorLink="#000000"
+            android:textSize="24sp"
+            android:textStyle="bold" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

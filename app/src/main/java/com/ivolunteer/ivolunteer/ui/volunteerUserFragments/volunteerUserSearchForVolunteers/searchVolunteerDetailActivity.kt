@@ -32,8 +32,12 @@ class searchVolunteerDetailActivity : AppCompatActivity() {
             if (statusCode == 200) {
 
                 val city = response?.volunteerCity?.city
+                val cityId = response?.volunteerCity?.volunteerCityId
                 val type = response?.volunteerType?.type
+                val typeId = response?.volunteerType?.volunteerTypeId
                 val details = response?.details.toString()
+                val volunteerSchedulerId = response?.volunteerScheduler?.volunteerSchedulerId
+
                 val volunteerSchedulerMorning = response?.volunteerScheduler?.isMorning
                 val volunteerSchedulerNoon = response?.volunteerScheduler?.isNoon
                 val volunteerSchedulerEvening = response?.volunteerScheduler?.isEvening
@@ -197,6 +201,38 @@ class searchVolunteerDetailActivity : AppCompatActivity() {
                 iVolunteerButton.setOnClickListener(object : View.OnClickListener {
                     override fun onClick(v: View?) {
 
+
+                        val json_update_volunteer = JSONObject()
+
+
+                        json_update_volunteer.put("volunteerId", volunteerId)
+                        json_update_volunteer.put("needHelpUserId", needHelpUserId[0])
+                        json_update_volunteer.put("volunteercityId", cityId)
+                        json_update_volunteer.put("volunteerTypeId", typeId)
+                        json_update_volunteer.put("isOccupied", 1)
+                        json_update_volunteer.put("volunteerSchedulerId", volunteerSchedulerId)
+                        json_update_volunteer.put("details", details)
+
+                        val loginError = findViewById<TextView>(R.id.search_error_text_view)
+
+                        //PUT update isOccupied
+                        NetworkManager.instance.put<Int>("volunteers/"+ volunteerId, json_update_volunteer){ response,
+                                                                                                             statusCode, error ->
+                            if (statusCode != 204){
+                                Log.i("LOG - error in update volunteer- volunteer already associated for you", error.toString())
+                                loginError?.post {
+                                    loginError.visibility = View.VISIBLE
+                                }
+                            }else{
+                                Log.i("LOG - volunteer association updated ", "")
+                                loginError?.post{
+                                    loginError.text = "volunteer association updated"
+                                    loginError.visibility = View.VISIBLE
+                                }
+                            }
+                        }
+
+
                         //POST Associate
 
                         val Associatejson = JSONObject()
@@ -218,6 +254,9 @@ class searchVolunteerDetailActivity : AppCompatActivity() {
                                 Log.i("LOG - login", "SUCCESS")
                             }
                         }
+
+
+
 
                     }
                     })
