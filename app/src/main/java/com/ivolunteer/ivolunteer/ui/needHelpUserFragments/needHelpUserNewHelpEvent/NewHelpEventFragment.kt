@@ -74,23 +74,48 @@ class NewHelpEventFragment : Fragment() {
 
     val updateButtonNeedHelpUser = view.findViewById<Button>(R.id.create_event_btn)
 
-    updateButtonNeedHelpUser.setOnClickListener {
+    val morningCheckBox = view.findViewById<CheckBox>(R.id.morning_check_box)
+    val noonCheckBox = view.findViewById<CheckBox>(R.id.noon_check_box)
+    val eveningCheckBox = view.findViewById<CheckBox>(R.id.evening_check_box)
+    val volunteersCitiesSpinner = view.findViewById<Spinner>(R.id.city_spinner_new_event)
+    val volunteersTypesSpinner = view.findViewById<Spinner>(R.id.events_spinner)
+    val details = view.findViewById<TextView>(R.id.additinal_details_text)
+    val days= arrayOf<CheckBox>(view.findViewById<CheckBox>(R.id.sunday_check_box), view.findViewById<CheckBox>(R.id.monday_check_box),
+      view.findViewById<CheckBox>(R.id.tuesday_check_box), view.findViewById<CheckBox>(R.id.wednesday_check_box),
+      view.findViewById<CheckBox>(R.id.thursday_check_box), view.findViewById<CheckBox>(R.id.friday_check_box),
+      view.findViewById<CheckBox>(R.id.saturday_check_box))
+    /*
+    var flagDay=0
+    var flagTime=0
+    updateButtonNeedHelpUser.post {
+      updateButtonNeedHelpUser.isEnabled=false
+    }
+    for (day in days) {
+      if (day.isChecked==true)
+      {
+        flagDay=1;
+      }
+    }
+    if ((morningCheckBox.isChecked==true) || (noonCheckBox.isChecked==true) || (eveningCheckBox.isChecked==true))
+    {
+      flagTime=1
+    }
+    if ((flagTime==1) &&(flagDay==1)){
+      updateButtonNeedHelpUser.post {
+        updateButtonNeedHelpUser.isEnabled=true
+      }
+    }
+*/
 
 
-      val morningCheckBox = view.findViewById<CheckBox>(R.id.morning_check_box)
-      val noonCheckBox = view.findViewById<CheckBox>(R.id.noon_check_box)
-      val eveningCheckBox = view.findViewById<CheckBox>(R.id.evening_check_box)
-      val volunteersCitiesSpinner = view.findViewById<Spinner>(R.id.city_spinner_new_event)
-      val volunteersTypesSpinner = view.findViewById<Spinner>(R.id.events_spinner)
+      updateButtonNeedHelpUser.setOnClickListener {
+
       val cityId = Helper.getCityId(volunteersCitiesSpinner.selectedItem.toString())
       val typeId = Helper.getTypeId(volunteersTypesSpinner.selectedItem.toString())
-      val details = view.findViewById<TextView>(R.id.additinal_details_text)
 
 
-      val days= arrayOf<CheckBox>(view.findViewById<CheckBox>(R.id.sunday_check_box), view.findViewById<CheckBox>(R.id.monday_check_box),
-        view.findViewById<CheckBox>(R.id.tuesday_check_box), view.findViewById<CheckBox>(R.id.wednesday_check_box),
-        view.findViewById<CheckBox>(R.id.thursday_check_box), view.findViewById<CheckBox>(R.id.friday_check_box),
-        view.findViewById<CheckBox>(R.id.saturday_check_box))
+
+
       val size = 8;
       var internalData: ArrayList<Int> = ArrayList()
       var i=1;
