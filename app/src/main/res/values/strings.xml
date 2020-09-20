@@ -29,4 +29,6 @@
     <string name="menu__my_volunteers">My volunteers</string>
     <string name="menu_search_for_volunteers">Search for volunteers</string>
     <string name="menu_my_score">My score</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
