@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ivolunteer.ivolunteer">
 
-
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -13,9 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.volunteerUserFragments.volunteerUserMyVolunteers.VolunteerUserDetailsActivity"></activity>
-        <activity android:name=".ui.volunteerUserFragments.volunteerUserSearchForVolunteers.searchVolunteerDetailActivity"></activity>
-
+        <activity
+            android:name=".ui.needHelpUserFragments.needHelpUserMyActivities.RateVolunteer"
+            android:label="@string/title_activity_rate_volunteer"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".ui.volunteerUserFragments.volunteerUserMyVolunteers.VolunteerUserDetailsActivity" />
+        <activity android:name=".ui.volunteerUserFragments.volunteerUserSearchForVolunteers.searchVolunteerDetailActivity" />
         <activity android:name=".ui.needHelpUserFragments.needHelpUserMyActivities.NeedHelpDetailsActivity" />
         <activity
             android:name=".NeedHelpActivity"
@@ -50,6 +52,7 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
         <service
             android:name=".util.MyFirebaseMessagingService"
             android:exported="false">

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
@@ -20,7 +21,8 @@ class VolunteerUserListAdapter(
     private val volUserName: Array<String?>,
     private val volUserEmail: Array<String?>,
     private val volUserPhoneNumber: Array<String?>,
-    private val volUserId: Array<String?>,
+    private val VolRateId: Array<Int?>,
+    private val volUserId: Array<String?>
 
 
     )
@@ -34,12 +36,9 @@ class VolunteerUserListAdapter(
         val email = rowView.findViewById(R.id.volunteerUser_Email) as TextView
         val phoneNumber = rowView.findViewById(R.id.volunteerUser_PhoneNumber) as TextView
 
-
-
         name.post {
             name.text = volUserName[position]
         }
-
 
         email.post {
             email.text = volUserEmail[position]
@@ -48,16 +47,10 @@ class VolunteerUserListAdapter(
             phoneNumber.text = volUserPhoneNumber[position]
         }
 
-
-
-
-
-
-
-        val updateButtonNeedHelpUser = rowView.findViewById<Button>(R.id.volunteer_detail_contact_button)
+        val volunteerDetailsContactButton = rowView.findViewById<Button>(R.id.volunteer_detail_contact_button)
         val volunteerDetailsRateButton = rowView.findViewById<Button>(R.id.volunteer_detail_rate_button)
 
-        updateButtonNeedHelpUser.setOnClickListener(object : View.OnClickListener {
+        volunteerDetailsContactButton.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
                 //val intent = Intent(context, VolunteerUserListAdapter::class.java)
 
@@ -79,30 +72,22 @@ class VolunteerUserListAdapter(
             }
         })
 
-        //Aya
         volunteerDetailsRateButton.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
-                //Aya
-                StorageManager.instance.set(StorageTypes.USER_ID_RATE_VOLUNTEER.toString(), volUserId)
-                volUserName[position]?.let {
-                    StorageManager.instance.set(StorageTypes.USER_NAME_RATE_VOLUNTEER.toString(),
-                        it
-                    )
+                try {
+                    val rateIntent = Intent(context,RateVolunteer::class.java)
+                    rateIntent.putExtra("user_id", volUserId[position])
+                    rateIntent.putExtra("volunteer_user_name", volUserName[position])
+                    rateIntent.putExtra("volunteer_email", volUserEmail[position])
+                    rateIntent.putExtra("volunteer_phone", volUserPhoneNumber[position])
+                    rateIntent.putExtra("volunteer_rate_id", VolRateId[position])
+                    context.startActivity(rateIntent)
+
+
+                } catch (E: Exception) {
+                    Log.i("error", E.toString())
                 }
-                volUserEmail[position]?.let {
-                    StorageManager.instance.set(StorageTypes.EMAIL_RATE_VOLUNTEER.toString(),
-                        it
-                    )
-                }
-                volUserPhoneNumber[position]?.let {
-                    StorageManager.instance.set(StorageTypes.PHONE_RATE_VOLUNTEER.toString(),
-                        it
-                    )
-                }
-//                var mainFragment: RateVolunteerFragment = RateVolunteerFragment()
-//                supportFragmentManager.beginTransaction().add(R.id.container, mainFragment)
-//                    .commit()
-                //TODO: start fragment fragment_rate_volunteer
+
             }})
 
 
