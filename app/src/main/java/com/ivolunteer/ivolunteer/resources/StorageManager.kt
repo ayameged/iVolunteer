@@ -12,7 +12,12 @@ enum class StorageTypes{
   //meital
   TYPES_LIST,
     RATE_ID,
-    USER_TYPE
+    USER_TYPE,
+    USER_NAME_RATE_VOLUNTEER,
+    EMAIL_RATE_VOLUNTEER,
+    PHONE_RATE_VOLUNTEER,
+    USER_ID_RATE_VOLUNTEER
+
 }
 
 class StorageManager {

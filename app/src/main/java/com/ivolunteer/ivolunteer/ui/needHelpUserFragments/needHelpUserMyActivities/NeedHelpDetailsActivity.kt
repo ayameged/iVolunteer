@@ -14,6 +14,7 @@ import android.widget.ListView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.ivolunteer.ivolunteer.NeedHelpActivity
 import com.ivolunteer.ivolunteer.R
 import com.ivolunteer.ivolunteer.resources.NetworkManager
 import com.ivolunteer.ivolunteer.resources.StorageManager
@@ -178,13 +179,9 @@ class NeedHelpDetailsActivity : AppCompatActivity() {
                                         val successAlert = successDialogBuilder.create()
                                         successAlert.show()
                                     }
-//
-//                                    //TODO: Refresh list after delete and go back to the former page
-////                                    listView.post {
-////                                        listView.removeViewInLayout(listView.volunteerId)
-////                                        listView.invalidateViews()
-////                                    }
-////                                    finishActivity(0)
+                                    val activityIntent: Intent
+                                    activityIntent = Intent(this@NeedHelpDetailsActivity, NeedHelpActivity::class.java)
+                                    startActivity(activityIntent)
                                 }
                             }
                         }

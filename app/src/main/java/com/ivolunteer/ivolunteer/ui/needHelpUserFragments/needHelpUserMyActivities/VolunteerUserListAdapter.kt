@@ -11,6 +11,8 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
 import com.ivolunteer.ivolunteer.R
+import com.ivolunteer.ivolunteer.resources.StorageManager
+import com.ivolunteer.ivolunteer.resources.StorageTypes
 
 
 class VolunteerUserListAdapter(
@@ -81,6 +83,26 @@ class VolunteerUserListAdapter(
         volunteerDetailsRateButton.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
                 //Aya
+                StorageManager.instance.set(StorageTypes.USER_ID_RATE_VOLUNTEER.toString(), volUserId)
+                volUserName[position]?.let {
+                    StorageManager.instance.set(StorageTypes.USER_NAME_RATE_VOLUNTEER.toString(),
+                        it
+                    )
+                }
+                volUserEmail[position]?.let {
+                    StorageManager.instance.set(StorageTypes.EMAIL_RATE_VOLUNTEER.toString(),
+                        it
+                    )
+                }
+                volUserPhoneNumber[position]?.let {
+                    StorageManager.instance.set(StorageTypes.PHONE_RATE_VOLUNTEER.toString(),
+                        it
+                    )
+                }
+//                var mainFragment: RateVolunteerFragment = RateVolunteerFragment()
+//                supportFragmentManager.beginTransaction().add(R.id.container, mainFragment)
+//                    .commit()
+//                //TODO: start fragment fragment_rate_volunteer
             }})
 
 
