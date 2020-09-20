@@ -158,18 +158,12 @@ class NeedHelpDetailsActivity : AppCompatActivity() {
 
                 buttonDelete.setOnClickListener(object : View.OnClickListener {
                     override fun onClick(v: View?) {
-                        val json_delete_volunteer = JSONObject()
-                         json_delete_volunteer.put("volunteerId", volunteerId)
 
                         // build alert dialog
                         val dialogBuilder = AlertDialog.Builder(this@NeedHelpDetailsActivity)
                         val deletePositiveClick = { dialog: DialogInterface, which: Int ->
 
-                            NetworkManager.instance.delete<Int>(
-                                "volunteers/" + volunteerId,
-                                json_delete_volunteer
-                            ) { response,
-                                statusCode, error ->
+                            NetworkManager.instance.delete<volunteerwithvolUser>("volunteers/" + volunteerId) { response, statusCode, error ->
                                 if (statusCode != 200) {
                                     Log.i(
                                         "LOG - error in delete volunteer",
@@ -184,13 +178,13 @@ class NeedHelpDetailsActivity : AppCompatActivity() {
                                         val successAlert = successDialogBuilder.create()
                                         successAlert.show()
                                     }
-
-                                    //TODO: Refresh list after delete and go back to the former page
-                                    listView.post {
-                                        listView.removeViewInLayout(listView.volunteerId)
-                                        listView.invalidateViews()
-                                    }
-                                    finishActivity(0)
+//
+//                                    //TODO: Refresh list after delete and go back to the former page
+////                                    listView.post {
+////                                        listView.removeViewInLayout(listView.volunteerId)
+////                                        listView.invalidateViews()
+////                                    }
+////                                    finishActivity(0)
                                 }
                             }
                         }

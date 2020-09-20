@@ -1,6 +1,7 @@
 package com.ivolunteer.ivolunteer.resources
 
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.util.Log
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.core.Request
 import com.github.kittinunf.fuel.core.Response
@@ -13,7 +14,7 @@ import java.lang.reflect.Type
 
 
 class NetworkManager {
-    val apiAddress = "http://40.118.3.66:4434/api/"
+    val apiAddress = "http://192.168.1.10:2315/api/"
 
     inline fun <reified T> fromJson(json: String): T {
         return Gson().fromJson(json, object: TypeToken<T>(){}.type)
@@ -33,7 +34,11 @@ class NetworkManager {
                     resp = JSONObject(String(bytes))
                 }
 
-                callback(resp, respErr)
+                 try {
+                     callback(resp, respErr)
+                 }catch (e: Exception){
+                     Log.i("LOG - ", e.toString())
+                 }
             }
     }
 
@@ -57,11 +62,11 @@ class NetworkManager {
                 }
 
                 val resp = Gson().fromJson<T>(String(bytes), collectionType)
-//                try{
+                try{
                     callback(resp, response.statusCode, respErr)
-//                } catch(e: Exception) {
-//                    print(e)
-//                }
+                } catch(e: Exception) {
+                    Log.i("LOG - ", e.toString())
+                }
             }
     }
 
@@ -88,7 +93,7 @@ class NetworkManager {
                 try{
                     callback(resp, response.statusCode, respErr)
                 } catch(e: Exception) {
-                    print(e)
+                    Log.i("LOG - ", e.toString())
                 }
             }
     }
@@ -120,19 +125,19 @@ class NetworkManager {
                 try{
                     callback(resp, response.statusCode, respErr)
                 } catch(e: Exception) {
-                    print(e)
+                    Log.i("LOG - ", e.toString())
                 }
             }
     }
 
 
 
-    inline fun <reified T>delete(path: String, body: JSONObject, crossinline callback: (response: T?, statusCode: Int, error: JSONObject) -> Unit) {
+    inline fun <reified T>delete(path: String, crossinline callback: (response: T?, statusCode: Int, error: JSONObject) -> Unit) {
         val token = StorageManager.instance.get<String>(StorageTypes.TOKEN.toString())
 
         Fuel.delete(apiAddress + path)
             .header("Authorization", "Bearer " + token)
-            .jsonBody(body.toString()).response { request, response, result ->
+            .response { request, response, result ->
                 var (bytes, error) = result
                 var respErr = JSONObject()
 
@@ -150,7 +155,7 @@ class NetworkManager {
                 try{
                 callback(resp, response.statusCode, respErr)
                 } catch(e: Exception) {
-                    print(e)
+                    Log.i("LOG - ", e.toString())
                 }
             }
     }
