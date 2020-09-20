@@ -14,56 +14,55 @@
     <include layout="@layout/content_rate_volunteer" />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="389dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
+        android:id="@+id/linearLayout3"
+        android:layout_width="398dp"
+        android:layout_height="240dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
         <TextView
             android:id="@+id/volunteerUser_name_rate_page"
-            android:layout_width="230dp"
-            android:layout_height="wrap_content"
+            android:layout_width="379dp"
+            android:layout_height="60dp"
             android:layout_marginStart="15dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginTop="30dp"
+            android:background="#78FFFFFF"
             android:fontFamily="@font/avss"
-            android:text="title"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textAlignment="center"
+            android:textSize="18sp"
             android:textStyle="bold" />
-
 
         <TextView
             android:id="@+id/volunteerUser_PhoneNumber_rate_page"
-            android:layout_width="227dp"
-            android:layout_height="wrap_content"
+            android:layout_width="379dp"
+            android:layout_height="60dp"
             android:layout_marginStart="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="5dp"
+            android:background="#78FFFFFF"
             android:fontFamily="@font/avss"
-            android:text="description"
-            android:textSize="16sp" />
+            android:textAlignment="center"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/volunteerUser_Email_rate_page"
-            android:layout_width="233dp"
-            android:layout_height="wrap_content"
+            android:layout_width="379dp"
+            android:layout_height="60dp"
             android:layout_marginStart="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="5dp"
+            android:background="#78FFFFFF"
             android:fontFamily="@font/avss"
-            android:text="description"
-            android:textSize="16sp" />
+            android:textAlignment="center"
+            android:textSize="18sp" />
+    </LinearLayout>
 
-        <TextView
-            android:id="@+id/volunteerUser_Id_rate_page"
-            android:layout_width="233dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/avss"
-            android:text=""
-            android:textSize="16sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="183dp"
+        android:layout_marginTop="250dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -100,4 +99,14 @@
         </LinearLayout>
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/volunteerUser_Id_rate_page"
+        android:layout_width="233dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/avss"
+        android:text=""
+        android:textSize="16sp" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -41,7 +41,7 @@ class MyScoreFragment : Fragment() {
         if (rate != null) ratingBar.rating = rate.toFloat();
         ratesNumberText.post {
           ratesNumberText.text =
-            Editable.Factory.getInstance().newEditable("Rates number: $ratesNumber")
+            Editable.Factory.getInstance().newEditable("Number of rates: $ratesNumber")
         }
 
       }else{
