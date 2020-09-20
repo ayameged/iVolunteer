@@ -2,24 +2,17 @@ package com.ivolunteer.ivolunteer.ui.volunteerUserFragments.volunteerUserMyVolun
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.net.Uri
 import android.os.Bundle
 import android.provider.AlarmClock
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
-import android.widget.ListView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.ivolunteer.ivolunteer.R
 import com.ivolunteer.ivolunteer.resources.NetworkManager
-import com.ivolunteer.ivolunteer.resources.StorageManager
-import com.ivolunteer.ivolunteer.resources.StorageTypes
-import com.ivolunteer.ivolunteer.types.Auth
-import com.ivolunteer.ivolunteer.types.VolunteerWithSched.searchedVolunteerItem
 import com.ivolunteer.ivolunteer.types.VolunteerWithSched.volunteerwithvolUser
-import com.ivolunteer.ivolunteer.ui.needHelpUserFragments.needHelpUserMyActivities.VolunteerUserListAdapter
-import org.json.JSONObject
 
 class VolunteerUserDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,10 +54,21 @@ class VolunteerUserDetailsActivity : AppCompatActivity() {
                 name[0] = firstName[0] + " " + lastName[0]
 
 
-                val days= arrayOf<CheckBox>(findViewById<CheckBox>(R.id.my_volunteers_detail_sunday_check_box), findViewById<CheckBox>(R.id.my_volunteers_detail_monday_check_box),
-                    findViewById<CheckBox>(R.id.my_volunteers_detail_tuesday_check_box), findViewById<CheckBox>(R.id.my_volunteers_detail_wednesday_check_box),
-                    findViewById<CheckBox>(R.id.my_volunteers_detail_thursday_check_box), findViewById<CheckBox>(R.id.my_volunteers_detail_friday_check_box),
-                    findViewById<CheckBox>(R.id.my_volunteers_detail_saturday_check_box))
+                val days= arrayOf<CheckBox>(
+                    findViewById<CheckBox>(R.id.my_volunteers_detail_sunday_check_box),
+                    findViewById<CheckBox>(
+                        R.id.my_volunteers_detail_monday_check_box
+                    ),
+                    findViewById<CheckBox>(R.id.my_volunteers_detail_tuesday_check_box),
+                    findViewById<CheckBox>(
+                        R.id.my_volunteers_detail_wednesday_check_box
+                    ),
+                    findViewById<CheckBox>(R.id.my_volunteers_detail_thursday_check_box),
+                    findViewById<CheckBox>(
+                        R.id.my_volunteers_detail_friday_check_box
+                    ),
+                    findViewById<CheckBox>(R.id.my_volunteers_detail_saturday_check_box)
+                )
 
 /*
 
@@ -175,18 +179,32 @@ class VolunteerUserDetailsActivity : AppCompatActivity() {
                     override fun onClick(v: View?) {
                         //val intent = Intent(context, VolunteerUserListAdapter::class.java)
 
-                        val intent =Intent(Intent.ACTION_SENDTO);
+                        val intent = Intent(Intent.ACTION_SEND)
+                            intent.setType("plain/text")
+                        intent.setPackage("com.google.android.gm")
+                        //intent.putExtra(Intent.EXTRA_EMAIL, arrayOf("myEmail@email.com"))
+
+                        intent.putExtra(Intent.EXTRA_BCC, arrayOf(email[0]))
+                        intent.putExtra(Intent.EXTRA_SUBJECT, "How can I Help you?")
+                        intent.putExtra(Intent.EXTRA_TEXT, "I would be happy to help you.")
+                        try {
+                            startActivity(intent)
+                        }
+                         catch (e: Exception) {
+                            print(e)
+                        }
+                    /*
+                        val intent = Intent(Intent.ACTION_SENDTO);
                         intent.setType("text/plain");
 
                         //emailLauncher.type = "message/rfc822"
                         try {
                             startActivity(intent)
                             //startActivity(emailLauncher)
-                        }
-                        catch (e: ActivityNotFoundException) {
+                        } catch (e: ActivityNotFoundException) {
                             print(e)
                         }
-
+*/
                         // Your code that you want to execute on this button click
                     }
                 })

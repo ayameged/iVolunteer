@@ -52,8 +52,22 @@ class VolunteerUserListAdapter(
 
         volunteerDetailsContactButton.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
-                //val intent = Intent(context, VolunteerUserListAdapter::class.java)
 
+                val intent = Intent(Intent.ACTION_SEND)
+                intent.setType("plain/text")
+                intent.setPackage("com.google.android.gm")
+                //intent.putExtra(Intent.EXTRA_EMAIL, arrayOf("myEmail@email.com"))
+
+                intent.putExtra(Intent.EXTRA_BCC, arrayOf(volUserEmail[position]))
+                intent.putExtra(Intent.EXTRA_SUBJECT, "How can you Help me?")
+                try {
+                    context.startActivity(intent)
+                }
+                catch (e: Exception) {
+                    print(e)
+                }
+                //val intent = Intent(context, VolunteerUserListAdapter::class.java)
+/*
                  val intent =Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto",volUserEmail[position], null));
                 intent.setType("text/plain");
                 intent.putExtra(Intent.EXTRA_EMAIL,volUserEmail[position])
@@ -67,7 +81,7 @@ class VolunteerUserListAdapter(
                 catch (e: ActivityNotFoundException) {
                     print(e)
                 }
-
+*/
                 // Your code that you want to execute on this button click
             }
         })

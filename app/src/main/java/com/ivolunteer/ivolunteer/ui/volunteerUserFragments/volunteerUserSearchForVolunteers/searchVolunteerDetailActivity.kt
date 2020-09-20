@@ -190,6 +190,22 @@ class searchVolunteerDetailActivity : AppCompatActivity() {
                     override fun onClick(v: View?) {
                         //val intent = Intent(context, VolunteerUserListAdapter::class.java)
 
+                        val intent = Intent(Intent.ACTION_SEND)
+                        intent.setType("plain/text")
+                        intent.setPackage("com.google.android.gm")
+                        //intent.putExtra(Intent.EXTRA_EMAIL, arrayOf("myEmail@email.com"))
+
+                        intent.putExtra(Intent.EXTRA_BCC, arrayOf(email[0]))
+                        intent.putExtra(Intent.EXTRA_SUBJECT, "How can I Help you?")
+                        intent.putExtra(Intent.EXTRA_TEXT, "I would be happy to help you.")
+                        try {
+                            startActivity(intent)
+                        }
+                        catch (e: Exception) {
+                            print(e)
+                        }
+
+                        /*
                         val intent =Intent(Intent.ACTION_SENDTO);
                         intent.setType("text/plain");
                         //intent.setPackage("com.google.android.gm");
@@ -203,7 +219,7 @@ class searchVolunteerDetailActivity : AppCompatActivity() {
                         catch (e: ActivityNotFoundException) {
                             print(e)
                         }
-
+*/
                         // Your code that you want to execute on this button click
                     }
                 })
