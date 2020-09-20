@@ -164,6 +164,8 @@
             android:id="@+id/search_volunteers_btn"
             android:layout_width="349dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="-10dp"
+            android:layout_marginTop="50dp"
             android:background="@drawable/btn_rounded"
             android:fontFamily="@font/avss"
             android:gravity="center"

@@ -14,7 +14,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="35dp"
         android:layout_marginBottom="1dp"
-        android:background="#78FFFFFF"
+        android:background="@drawable/layout_rounded"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
@@ -226,7 +226,7 @@
             android:layout_height="288dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="18dp"
-            android:background="#78FFFFFF"
+            android:background="@drawable/layout_rounded"
             tools:layout_editor_absoluteX="1dp"
             tools:layout_editor_absoluteY="487dp" />
     </LinearLayout>

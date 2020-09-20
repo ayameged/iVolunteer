@@ -163,6 +163,18 @@ class SearchForVolunteerFragment : Fragment() {
 
                 }
 
+
+                if (response.size==0)
+                {
+                    runOnUiThread() {
+                        Toast.makeText(
+                            requireActivity(),
+                            "No matching volunteers found",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
+
                 try {
 
 
@@ -213,6 +225,16 @@ class SearchForVolunteerFragment : Fragment() {
                     occupied[i] = (response[i].isOccupied)
                     volunteerId[i] = (response[i].volunteerId)
                 }
+                if (response.size==0)
+                {
+                    runOnUiThread() {
+                        Toast.makeText(
+                            requireActivity(),
+                            "No matching volunteers found",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
 
                 try {
                      myListAdapter = MyListAdapter(requireActivity(), type, cities, occupied, volunteerId)
@@ -245,6 +267,16 @@ class SearchForVolunteerFragment : Fragment() {
                     occupied[i] = (response[i].isOccupied)
                     volunteerId[i] = (response[i].volunteerId)
                 }
+                if (response.size==0)
+                {
+                    runOnUiThread() {
+                        Toast.makeText(
+                            requireActivity(),
+                            "No matching volunteers found",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
 
                 try {
                      myListAdapter = MyListAdapter(requireActivity(), type, cities, occupied, volunteerId)
@@ -274,6 +306,16 @@ class SearchForVolunteerFragment : Fragment() {
                     type[i] = (response[i].volunteerType.type)
                     occupied[i] = (response[i].isOccupied)
                     volunteerId[i] = (response[i].volunteerId)
+                }
+                if (response.size==0)
+                {
+                    runOnUiThread() {
+                        Toast.makeText(
+                            requireActivity(),
+                            "No matching volunteers found",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
                 }
 
                 try {
@@ -320,4 +362,10 @@ class SearchForVolunteerFragment : Fragment() {
    // }
     }
   }
+
+    fun Fragment?.runOnUiThread(action: () -> Unit) {
+        this ?: return
+        if (!isAdded) return // Fragment not attached to an Activity
+        activity?.runOnUiThread(action)
+    }
 }

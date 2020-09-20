@@ -15,8 +15,11 @@
 
     <LinearLayout
         android:id="@+id/linearLayout3"
-        android:layout_width="398dp"
-        android:layout_height="240dp"
+        android:layout_width="388dp"
+        android:layout_height="225dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/layout_rounded"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,9 +30,8 @@
             android:id="@+id/volunteerUser_name_rate_page"
             android:layout_width="379dp"
             android:layout_height="60dp"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="30dp"
-            android:background="#78FFFFFF"
             android:fontFamily="@font/avss"
             android:textAlignment="center"
             android:textSize="18sp"
@@ -39,8 +41,7 @@
             android:id="@+id/volunteerUser_PhoneNumber_rate_page"
             android:layout_width="379dp"
             android:layout_height="60dp"
-            android:layout_marginStart="15dp"
-            android:background="#78FFFFFF"
+            android:layout_marginStart="5dp"
             android:fontFamily="@font/avss"
             android:textAlignment="center"
             android:textSize="18sp" />
@@ -49,8 +50,7 @@
             android:id="@+id/volunteerUser_Email_rate_page"
             android:layout_width="379dp"
             android:layout_height="60dp"
-            android:layout_marginStart="15dp"
-            android:background="#78FFFFFF"
+            android:layout_marginStart="5dp"
             android:fontFamily="@font/avss"
             android:textAlignment="center"
             android:textSize="18sp" />
@@ -74,7 +74,8 @@
             <RatingBar
                 android:id="@+id/rate_volunteer_ratingBar"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:progressTint="#FFD607" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -99,14 +100,4 @@
         </LinearLayout>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/volunteerUser_Id_rate_page"
-        android:layout_width="233dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="5dp"
-        android:fontFamily="@font/avss"
-        android:text=""
-        android:textSize="16sp" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
