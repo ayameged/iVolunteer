@@ -27,7 +27,7 @@ class VolunteerUserDetailsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_volunteer_user_details)
 
         val volunteerId = intent.getStringExtra(AlarmClock.EXTRA_MESSAGE)
-
+        getSupportActionBar()?.setTitle("Volunteer Details");
         NetworkManager.instance.get<volunteerwithvolUser>("volunteers/byid?id=" + volunteerId) { response, statusCode, error ->
             if (statusCode == 200) {
 

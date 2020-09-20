@@ -31,6 +31,7 @@ class NeedHelpDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_need_help__details)
         val volunteerId = intent.getStringExtra(EXTRA_MESSAGE)
+        getSupportActionBar()?.setTitle("Volunteer Details");
 
         NetworkManager.instance.get<volunteerwithvolUser>("volunteers/byid?id=" + volunteerId) { response, statusCode, error ->
             if (statusCode == 200) {

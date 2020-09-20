@@ -8,8 +8,8 @@
         <item name="android:windowBackground">@drawable/background__2___10_</item>
     </style>
 
-    <style name="GabrielaTextViewStyle" parent="android:Widget.TextView">
-        <item name="android:fontFamily">@font/gabriela</item>
+    <style name="avssTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/avss</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

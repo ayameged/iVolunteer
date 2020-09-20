@@ -71,7 +71,7 @@
                 android:layout_width="188dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/btn_rounded"
-                android:fontFamily="@font/gabriela"
+                android:fontFamily="@font/avss"
                 android:text="Sign up"
                 android:textAllCaps="false"
                 android:textSize="18sp" />

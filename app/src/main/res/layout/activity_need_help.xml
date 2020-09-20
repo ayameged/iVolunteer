@@ -21,8 +21,8 @@
         android:layout_gravity="start"
         android:background="@drawable/background__2_"
         android:fitsSystemWindows="true"
-        android:fontFamily="@font/gabriela"
+        android:fontFamily="@font/avss"
         app:headerLayout="@layout/nav_header_main"
-        app:itemTextAppearance="@style/GabrielaTextViewStyle"
+        app:itemTextAppearance="@style/avssTextViewStyle"
         app:menu="@menu/activity_main_drawer" />
 </androidx.drawerlayout.widget.DrawerLayout>

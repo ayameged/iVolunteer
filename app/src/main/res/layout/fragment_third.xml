@@ -28,7 +28,7 @@
                 android:id="@+id/first_name_lbl"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
-                android:fontFamily="@font/gabriela"
+                android:fontFamily="@font/avss"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="Name"
                 android:textAlignment="viewStart"
@@ -43,7 +43,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:textSize="18sp"
-                android:fontFamily="@font/gabriela"/>
+                android:fontFamily="@font/avss"/>
 
         </LinearLayout>
 
@@ -56,7 +56,7 @@
                 android:id="@+id/last_name_lbl"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
-                android:fontFamily="@font/gabriela"
+                android:fontFamily="@font/avss"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="Last name"
                 android:textAlignment="viewStart"
@@ -71,7 +71,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:textSize="18sp"
-                android:fontFamily="@font/gabriela"/>
+                android:fontFamily="@font/avss"/>
 
         </LinearLayout>
 
@@ -84,7 +84,7 @@
                 android:id="@+id/phone_lbl"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
-                android:fontFamily="@font/gabriela"
+                android:fontFamily="@font/avss"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="Phone"
                 android:textAlignment="viewStart"
@@ -100,7 +100,7 @@
                 android:ems="10"
                 android:inputType="phone"
                 android:textSize="18sp"
-                android:fontFamily="@font/gabriela"/>
+                android:fontFamily="@font/avss"/>
 
         </LinearLayout>
 
@@ -113,7 +113,7 @@
                 android:id="@+id/age_lbl"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
-                android:fontFamily="@font/gabriela"
+                android:fontFamily="@font/avss"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="age"
                 android:textAlignment="viewStart"
@@ -129,7 +129,7 @@
                 android:ems="10"
                 android:inputType="number"
                 android:textSize="18sp"
-                android:fontFamily="@font/gabriela"/>
+                android:fontFamily="@font/avss"/>
 
         </LinearLayout>
 
@@ -147,7 +147,7 @@
                     android:id="@+id/gender_lbl"
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/gabriela"
+                    android:fontFamily="@font/avss"
                     android:gravity="center_horizontal|center_vertical"
                     android:text="Gender"
                     android:textAlignment="viewStart"
@@ -161,7 +161,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textSize="18sp"
-                    android:fontFamily="@font/gabriela"/>
+                    android:fontFamily="@font/avss"/>
 
             </LinearLayout>
 
@@ -177,7 +177,7 @@
                 android:layout_width="203dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/gabriela"
+                android:fontFamily="@font/avss"
                 android:text="City"
                 android:textColor="#040303"
                 android:textSize="18sp" />
@@ -188,7 +188,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textSize="18sp"
-                android:fontFamily="@font/gabriela"/>
+                android:fontFamily="@font/avss"/>
         </LinearLayout>
 
         <Button
@@ -196,7 +196,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_rounded"
-            android:fontFamily="@font/gabriela"
+            android:fontFamily="@font/avss"
             android:text="Update"
             android:textAllCaps="false"
             android:textSize="18sp" />
@@ -211,6 +211,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:textSize="18sp"
-        android:fontFamily="@font/gabriela"/>
+        android:fontFamily="@font/avss"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

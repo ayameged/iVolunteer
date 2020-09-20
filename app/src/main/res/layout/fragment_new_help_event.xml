@@ -29,7 +29,7 @@
                 android:id="@+id/type_lbl"
                 android:layout_width="152dp"
                 android:layout_height="match_parent"
-                android:fontFamily="@font/gabriela"
+                android:fontFamily="@font/avss"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="Event category"
                 android:textAlignment="viewStart"
@@ -54,7 +54,7 @@
                 android:id="@+id/city_lbl"
                 android:layout_width="155dp"
                 android:layout_height="35dp"
-                android:fontFamily="@font/gabriela"
+                android:fontFamily="@font/avss"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="City"
                 android:textAlignment="viewStart"
@@ -67,7 +67,7 @@
                 android:layout_width="232dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:fontFamily="@font/gabriela"
+                android:fontFamily="@font/avss"
                 android:textSize="18sp" />
 
         </LinearLayout>
@@ -82,7 +82,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:fontFamily="@font/gabriela"
+                android:fontFamily="@font/avss"
                 android:text="Morning" />
 
             <CheckBox
@@ -90,7 +90,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:fontFamily="@font/gabriela"
+                android:fontFamily="@font/avss"
                 android:text="Noon" />
 
             <CheckBox
@@ -98,7 +98,7 @@
                 android:layout_width="0dp"
                 android:layout_height="60dp"
                 android:layout_weight="1"
-                android:fontFamily="@font/gabriela"
+                android:fontFamily="@font/avss"
                 android:text="Evening" />
 
         </LinearLayout>
@@ -181,7 +181,7 @@
             android:layout_width="349dp"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_rounded"
-            android:fontFamily="@font/gabriela"
+            android:fontFamily="@font/avss"
             android:gravity="center"
             android:text="Create"
             android:textAllCaps="false"

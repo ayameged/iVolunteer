@@ -6,19 +6,19 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_my_volunteers"
-            android:fontFamily="@font/gabriela"
+            android:fontFamily="@font/avss"
             android:title="My volunteers" />
         <item
             android:id="@+id/nav_search_for_volunteers"
-            android:fontFamily="@font/gabriela"
+            android:fontFamily="@font/avss"
             android:title="Search for volunteers" />
         <item
             android:id="@+id/nav_my_score"
-            android:fontFamily="@font/gabriela"
+            android:fontFamily="@font/avss"
             android:title="My score" />
         <item
             android:id="@+id/nav_edit_personal_details"
-            android:fontFamily="@font/gabriela"
+            android:fontFamily="@font/avss"
             android:title="Edit personal details" />
 
     </group>

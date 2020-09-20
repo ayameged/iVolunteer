@@ -7,12 +7,17 @@
     tools:context=".ui.needHelpUserFragments.needHelpUserMyActivities.NeedHelpDetailsActivity">
 
     <LinearLayout
-        android:layout_width="417dp"
-        android:layout_height="815dp"
+        android:id="@+id/linearLayout2"
+        android:layout_width="387dp"
+        android:layout_height="311dp"
         android:layout_marginStart="35dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="35dp"
+        android:layout_marginBottom="1dp"
+        android:background="#78FFFFFF"
         android:gravity="center"
         android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,14 +25,18 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="58dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="400dp"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/type_lbl"
-                android:layout_width="171dp"
+                android:layout_width="152dp"
                 android:layout_height="match_parent"
-                android:fontFamily="@font/gabriela"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="-40dp"
+                android:fontFamily="@font/avss"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="Event category"
                 android:textAlignment="viewStart"
@@ -39,22 +48,24 @@
                 android:id="@+id/detail_type"
                 android:layout_width="201dp"
                 android:layout_height="44dp"
+                android:layout_marginTop="-40dp"
                 android:layout_weight="1"
-                android:fontFamily="@font/gabriela"
+                android:fontFamily="@font/avss"
                 android:textSize="14sp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="385dp"
-            android:layout_height="wrap_content"
+            android:layout_height="67dp"
+            android:layout_marginLeft="10dp"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/city_lbl"
                 android:layout_width="155dp"
                 android:layout_height="35dp"
-                android:fontFamily="@font/gabriela"
+                android:fontFamily="@font/avss"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="City"
                 android:textAlignment="viewStart"
@@ -67,7 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="44dp"
                 android:layout_weight="1"
-                android:fontFamily="@font/gabriela"
+                android:fontFamily="@font/avss"
                 android:textSize="14sp" />
 
         </LinearLayout>
@@ -82,7 +93,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:fontFamily="@font/gabriela"
+                android:fontFamily="@font/avss"
                 android:text="Morning" />
 
             <CheckBox
@@ -90,7 +101,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:fontFamily="@font/gabriela"
+                android:fontFamily="@font/avss"
                 android:text="Noon" />
 
             <CheckBox
@@ -98,7 +109,7 @@
                 android:layout_width="0dp"
                 android:layout_height="60dp"
                 android:layout_weight="1"
-                android:fontFamily="@font/gabriela"
+                android:fontFamily="@font/avss"
                 android:text="Evening" />
 
         </LinearLayout>
@@ -174,60 +185,50 @@
                 android:textColorHighlight="#090909"
                 android:textColorLink="#0B0A0A" />
 
-            <TextView
-                android:id="@+id/needHelp_NeedHelpUserDetails_label"
-                android:layout_width="match_parent"
-                android:layout_height="47dp"
-                android:fontFamily="@font/gabriela"
-                android:text="Interested Volunteer User Personal Details"
-                android:textAlignment="center"
-                android:textColor="#000000"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <ListView
-                android:id="@+id/volunteer_volunteerUsers_list"
-                android:layout_width="409dp"
-                android:layout_height="136dp"
-                tools:layout_editor_absoluteX="1dp"
-                tools:layout_editor_absoluteY="487dp" />
-
-            <Button
-                android:id="@+id/detail_delete_volunteer_button"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:text="Delete"
-                android:textAllCaps="false" />
-
 
         </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout4"
-        android:layout_width="0dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="4dp"
-        android:orientation="horizontal"
+        android:id="@+id/linearLayout6"
+        android:layout_width="409dp"
+        android:layout_height="333dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
-        <TextView
-            android:id="@+id/search_volunteerDetails_label2"
-            android:layout_width="match_parent"
-            android:layout_height="47dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/gabriela"
-            android:text="Volunteer Details"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textColorLink="#000000"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+        <Button
+            android:id="@+id/detail_delete_volunteer_button"
+            android:layout_width="363dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="100dp"
+            android:background="@drawable/btn_rounded"
+            android:fontFamily="@font/avss"
+            android:foregroundGravity="left"
+            android:text="Delete volunteer"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ListView
+            android:id="@+id/volunteer_volunteerUsers_list"
+            android:layout_width="386dp"
+            android:layout_height="288dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="18dp"
+            android:background="#78FFFFFF"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="487dp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

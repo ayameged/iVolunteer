@@ -7,15 +7,15 @@
         <item
             android:id="@+id/nav_my_activities"
             android:title="@string/menu__my_activities"
-            android:fontFamily="@font/gabriela"/>
+            android:fontFamily="@font/avss"/>
         <item
             android:id="@+id/nav_new_help_event"
             android:title="@string/menu_new_help_events"
-            android:fontFamily="@font/gabriela"/>
+            android:fontFamily="@font/avss"/>
         <item
             android:id="@+id/nav_edit_personal_details"
             android:title="@string/menu_edit_personal_details"
-            android:fontFamily="@font/gabriela"/>
+            android:fontFamily="@font/avss"/>
 
     </group>
 </menu>

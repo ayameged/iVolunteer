@@ -8,12 +8,13 @@
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="397dp"
-        android:layout_height="0dp"
+        android:layout_width="390dp"
+        android:layout_height="319dp"
         android:layout_marginStart="35dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="35dp"
         android:layout_marginBottom="1dp"
+        android:background="#78FFFFFF"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
@@ -31,7 +32,7 @@
                 android:id="@+id/my_volunteers_type_lbl"
                 android:layout_width="152dp"
                 android:layout_height="match_parent"
-                android:fontFamily="@font/gabriela"
+                android:fontFamily="@font/avss"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="Event category"
                 android:textAlignment="viewStart"
@@ -44,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="44dp"
                 android:layout_weight="1"
-                android:fontFamily="@font/gabriela"
+                android:fontFamily="@font/avss"
                 android:textSize="14sp" />
 
         </LinearLayout>
@@ -58,7 +59,7 @@
                 android:id="@+id/my_volunteers_city_lbl"
                 android:layout_width="155dp"
                 android:layout_height="35dp"
-                android:fontFamily="@font/gabriela"
+                android:fontFamily="@font/avss"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="City"
                 android:textAlignment="viewStart"
@@ -71,7 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="44dp"
                 android:layout_weight="1"
-                android:fontFamily="@font/gabriela"
+                android:fontFamily="@font/avss"
                 android:textSize="14sp" />
 
         </LinearLayout>
@@ -86,7 +87,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:fontFamily="@font/gabriela"
+                android:fontFamily="@font/avss"
                 android:text="Morning" />
 
             <CheckBox
@@ -94,7 +95,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:fontFamily="@font/gabriela"
+                android:fontFamily="@font/avss"
                 android:text="Noon" />
 
             <CheckBox
@@ -102,7 +103,7 @@
                 android:layout_width="0dp"
                 android:layout_height="60dp"
                 android:layout_weight="1"
-                android:fontFamily="@font/gabriela"
+                android:fontFamily="@font/avss"
                 android:text="Evening" />
 
         </LinearLayout>
@@ -173,6 +174,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="65dp"
                 android:ems="10"
+                android:fontFamily="@font/avss"
                 android:gravity="start|top"
                 android:inputType="textMultiLine"
                 android:textColorHighlight="#090909"
@@ -195,79 +197,55 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
-        <TextView
-            android:id="@+id/search_NeedHelpUserDetails_label"
-            android:layout_width="match_parent"
-            android:layout_height="47dp"
-            android:fontFamily="@font/gabriela"
-            android:text="Activity Owner Personal Details"
-            android:textAlignment="viewStart"
-            android:textColor="#000000"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/NeedHelpUserName_text"
-            android:layout_width="392dp"
-            android:layout_height="47dp"
-            android:fontFamily="@font/gabriela"
+            android:layout_width="374dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="30dp"
+            android:background="#78FFFFFF"
+            android:fontFamily="@font/avss"
+            android:textAlignment="center"
             android:textSize="18sp"
             android:textStyle="bold" />
 
+
         <TextView
             android:id="@+id/NeedHelpUserPhone_text"
-            android:layout_width="392dp"
-            android:layout_height="37dp"
-            android:fontFamily="@font/gabriela"
+            android:layout_width="374dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="15dp"
+            android:background="#78FFFFFF"
+            android:fontFamily="@font/avss"
+            android:textAlignment="center"
             android:textSize="18sp" />
 
         <TextView
             android:id="@+id/NeedHelpUser_Mail_text"
-            android:layout_width="392dp"
-            android:layout_height="39dp"
-            android:fontFamily="@font/gabriela"
+            android:layout_width="374dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="15dp"
+            android:background="#78FFFFFF"
+            android:fontFamily="@font/avss"
+            android:textAlignment="center"
             android:textSize="18sp" />
-
 
         <Button
             android:id="@+id/myVolunteers_detail_contact"
-            android:layout_width="174dp"
+            android:layout_width="363dp"
             android:layout_height="33dp"
             android:layout_marginStart="15dp"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="100dp"
             android:background="@drawable/btn_rounded"
-            android:fontFamily="@font/gabriela"
+            android:fontFamily="@font/avss"
             android:foregroundGravity="left"
             android:text="contact"
             android:textAllCaps="false"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/linearLayout4"
-        android:layout_width="0dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="4dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/search_volunteerDetails_label2"
-            android:layout_width="match_parent"
-            android:layout_height="47dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/gabriela"
-            android:text="Volunteer Details"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textColorLink="#000000"
-            android:textSize="24sp"
-            android:textStyle="bold" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

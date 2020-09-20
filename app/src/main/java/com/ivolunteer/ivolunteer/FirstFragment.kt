@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.ivolunteer.ivolunteer.resources.NetworkManager
@@ -51,17 +52,26 @@ class FirstFragment : Fragment() {
             NetworkManager.instance.post<Auth>("authenticate/register", json) { response, statusCode, error ->
                 if (statusCode != 200) {
                     Log.i("LOG - failed to register", error.toString())
-                    registerErrorMessage.post {
-                        registerErrorMessage.visibility = View.VISIBLE
-                    }
+                    runOnUiThread() {
+                        Toast.makeText(
+                            requireActivity(),
+                            "Password does not meet the complexity requirements",
+                            Toast.LENGTH_LONG
+                        ).show()
+                        }
                 }
                 else{
                     Log.i("LOG - registration", "SUCCESS")
                     NetworkManager.instance.post<Auth>("authenticate/login", json) { response, statusCode, error ->
                         if (statusCode != 200) {
                             Log.i("LOG - failed to login", error.toString())
-                            registerErrorMessage.post {
-                                registerErrorMessage.visibility = View.VISIBLE
+
+                            runOnUiThread() {
+                                Toast.makeText(
+                                    requireActivity(),
+                                    "Username or password incorrect",
+                                    Toast.LENGTH_LONG
+                                ).show()
                             }
                         }
                         else{
@@ -86,5 +96,11 @@ class FirstFragment : Fragment() {
 
 
         }
+    }
+
+    fun Fragment?.runOnUiThread(action: () -> Unit) {
+        this ?: return
+        if (!isAdded) return // Fragment not attached to an Activity
+        activity?.runOnUiThread(action)
     }
 }
