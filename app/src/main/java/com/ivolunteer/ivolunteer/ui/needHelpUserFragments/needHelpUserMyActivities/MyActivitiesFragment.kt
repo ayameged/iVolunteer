@@ -1,11 +1,8 @@
 package com.ivolunteer.ivolunteer.ui.needHelpUserFragments.needHelpUserMyActivities
 
-import android.app.NotificationManager
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.provider.AlarmClock.EXTRA_MESSAGE
-import android.provider.Settings.Global.getString
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +16,7 @@ import com.ivolunteer.ivolunteer.resources.NetworkManager
 import com.ivolunteer.ivolunteer.resources.StorageManager
 import com.ivolunteer.ivolunteer.resources.StorageTypes
 import com.ivolunteer.ivolunteer.types.needhelpuseractivities.NeedHelpUserActivities
+import com.ivolunteer.ivolunteer.util.NotifyDemoActivity
 
 class MyActivitiesFragment : Fragment() {
 
@@ -35,7 +33,7 @@ class MyActivitiesFragment : Fragment() {
 
     var listView = root.findViewById<ListView>(R.id.recipe_list_view)
 
-    NetworkManager.instance.get<NeedHelpUserActivities>("volunteers/byuserid?id=" + StorageManager.instance.get<String>(StorageTypes.USER_ID.toString())) { response, statusCode, error ->
+      NetworkManager.instance.get<NeedHelpUserActivities>("volunteers/byuserid?id=" + StorageManager.instance.get<String>(StorageTypes.USER_ID.toString())) { response, statusCode, error ->
       if (statusCode == 200){
 
         val cities= arrayOfNulls<String>(response!!.size)

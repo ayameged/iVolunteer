@@ -9,10 +9,14 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.iid.FirebaseInstanceId
 import com.ivolunteer.ivolunteer.resources.NetworkManager
 import com.ivolunteer.ivolunteer.resources.StorageManager
 import com.ivolunteer.ivolunteer.resources.StorageTypes
 import com.ivolunteer.ivolunteer.types.Auth
+import com.ivolunteer.ivolunteer.util.MyFirebaseMessagingService
+import com.ivolunteer.ivolunteer.util.NotifyDemoActivity
 import org.json.JSONObject
 
 enum class UserTypes{
@@ -25,6 +29,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
 
 
         val loginButton = findViewById<Button>(R.id.login_button)
@@ -49,6 +54,8 @@ class LoginActivity : AppCompatActivity() {
             })
         }
         loginButton.setOnClickListener {
+
+           val token= FirebaseInstanceId.getInstance().getToken()
 
             val json = JSONObject()
             json.put("username", userNameInput.text)
