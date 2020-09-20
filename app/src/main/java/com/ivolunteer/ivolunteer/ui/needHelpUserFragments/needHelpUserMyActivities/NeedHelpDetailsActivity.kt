@@ -185,7 +185,7 @@ class NeedHelpDetailsActivity : AppCompatActivity() {
                                 }
                             }
                         }
-                        // set message of alert dialog
+
                         dialogBuilder.setMessage("Are you sure you want to delete this volunteer activity?")
                             .setCancelable(false)
                             .setPositiveButton("Delete", DialogInterface.OnClickListener(function=deletePositiveClick))
