@@ -1,6 +1,7 @@
 package com.ivolunteer.ivolunteer
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -8,6 +9,7 @@ import android.view.View.OnFocusChangeListener
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
@@ -65,8 +67,12 @@ class LoginActivity : AppCompatActivity() {
                 if (statusCode != 200) {
                     Log.i("LOG - error", error.toString())
 
-                    loginError.post {
-                        loginError.visibility = View.VISIBLE
+                    runOnUiThread() {
+                        Toast.makeText(
+                            applicationContext,
+                            "Username or password incorrect",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
                 }
                 else {
