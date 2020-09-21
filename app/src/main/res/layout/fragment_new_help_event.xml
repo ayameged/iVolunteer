@@ -184,6 +184,7 @@
             android:layout_width="349dp"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_rounded"
+            android:enabled="false"
             android:fontFamily="@font/avss"
             android:gravity="center"
             android:text="Create"
