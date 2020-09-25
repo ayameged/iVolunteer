@@ -12,10 +12,7 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.Navigation
-import com.ivolunteer.ivolunteer.NeedHelpActivity
 import com.ivolunteer.ivolunteer.R
-import com.ivolunteer.ivolunteer.RegActivity
 import com.ivolunteer.ivolunteer.UserTypes
 import com.ivolunteer.ivolunteer.resources.NetworkManager
 import com.ivolunteer.ivolunteer.resources.StorageManager
@@ -43,7 +40,11 @@ class EditPersonalDetailsFragment : Fragment() {
     var isVolunteer = StorageManager.instance.get<Boolean>(StorageTypes.IS_VOLUNTEER.toString())
     if (!isVolunteer!!) {
       //Get need help user details
-      NetworkManager.instance.get<NeedHelpUser>("NeedHelpUsers/byid?id=" + StorageManager.instance.get<String>(StorageTypes.USER_ID.toString())) { response, statusCode, error ->
+      NetworkManager.instance.get<NeedHelpUser>(
+        "NeedHelpUsers/byid?id=" + StorageManager.instance.get<String>(
+          StorageTypes.USER_ID.toString()
+        )
+      ) { response, statusCode, error ->
         if (statusCode == 200) {
           val firstName = response?.applicationUser?.firstName
           val lastName = response?.applicationUser?.lastName
@@ -62,7 +63,11 @@ class EditPersonalDetailsFragment : Fragment() {
 
 
           genderSpinner?.post {
-            genderSpinner.adapter = activity?.applicationContext?.let {ArrayAdapter(it, R.layout.support_simple_spinner_dropdown_item,genderSelection)}
+            genderSpinner.adapter = activity?.applicationContext?.let {ArrayAdapter(
+              it,
+              R.layout.support_simple_spinner_dropdown_item,
+              genderSelection
+            )}
             genderSpinner.setSelection(genderSelection.indexOf(gender.toString()))
           }
           NetworkManager.instance.get<List<City>>("NeedHelpCities") { response, statusCode, error ->
@@ -73,7 +78,11 @@ class EditPersonalDetailsFragment : Fragment() {
               StorageManager.instance.set(StorageTypes.CITIES_LIST.toString(), response)
 
               citySpinner?.post {
-                citySpinner.adapter = activity?.applicationContext?.let {ArrayAdapter(it, R.layout.support_simple_spinner_dropdown_item, cities_names)}
+                citySpinner.adapter = activity?.applicationContext?.let {ArrayAdapter(
+                  it,
+                  R.layout.support_simple_spinner_dropdown_item,
+                  cities_names
+                )}
                 citySpinner.setSelection(cities_names.indexOf(city.toString()))
               }
             }
@@ -82,7 +91,11 @@ class EditPersonalDetailsFragment : Fragment() {
       }
     }
     else if (isVolunteer!!) {
-      NetworkManager.instance.get<VolunteerUser>("VolunteerUsers/byid?id=" + StorageManager.instance.get<String>(StorageTypes.USER_ID.toString())) { response, statusCode, error ->
+      NetworkManager.instance.get<VolunteerUser>(
+        "VolunteerUsers/byid?id=" + StorageManager.instance.get<String>(
+          StorageTypes.USER_ID.toString()
+        )
+      ) { response, statusCode, error ->
         if (statusCode == 200){
           var firstName = response?.applicationUser?.firstName
           var lastName = response?.applicationUser?.lastName
@@ -101,7 +114,7 @@ class EditPersonalDetailsFragment : Fragment() {
 
           genderSpinner?.post {
             genderSpinner?.adapter = activity?.applicationContext?.let {
-              ArrayAdapter(it, R.layout.support_simple_spinner_dropdown_item,genderSelection)
+              ArrayAdapter(it, R.layout.support_simple_spinner_dropdown_item, genderSelection)
             }
             genderSpinner?.setSelection(genderSelection.indexOf(gender.toString()))
           }
@@ -113,7 +126,11 @@ class EditPersonalDetailsFragment : Fragment() {
               }
               StorageManager.instance.set(StorageTypes.CITIES_LIST.toString(), response)
               citySpinner?.post {
-                citySpinner.adapter = activity?.applicationContext?.let {ArrayAdapter(it, R.layout.support_simple_spinner_dropdown_item, cities_names)}
+                citySpinner.adapter = activity?.applicationContext?.let {ArrayAdapter(
+                  it,
+                  R.layout.support_simple_spinner_dropdown_item,
+                  cities_names
+                )}
                 citySpinner.setSelection(cities_names.indexOf(city.toString()))
               }
             }
@@ -141,41 +158,52 @@ class EditPersonalDetailsFragment : Fragment() {
 
     first_name_update_text.addTextChangedListener(object : TextWatcher {
       override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-        updateButton.isEnabled = firstName.text.isNotEmpty() && lastName.text.isNotEmpty() && phone.text.isNotEmpty() && age.text.isNotEmpty()
+        updateButton.isEnabled =
+          firstName.text.isNotEmpty() && lastName.text.isNotEmpty() && phone.text.isNotEmpty() && age.text.isNotEmpty()
       }
-      override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) { }
-      override fun afterTextChanged(s: Editable) { }
+
+      override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+      override fun afterTextChanged(s: Editable) {}
     })
 
     last_name_text_update.addTextChangedListener(object : TextWatcher {
       override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-        updateButton.isEnabled = firstName.text.isNotEmpty() && lastName.text.isNotEmpty() && phone.text.isNotEmpty() && age.text.isNotEmpty()
+        updateButton.isEnabled =
+          firstName.text.isNotEmpty() && lastName.text.isNotEmpty() && phone.text.isNotEmpty() && age.text.isNotEmpty()
       }
-      override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) { }
-      override fun afterTextChanged(s: Editable) { }
+
+      override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+      override fun afterTextChanged(s: Editable) {}
     })
 
     age_text_update.addTextChangedListener(object : TextWatcher {
       override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-        updateButton.isEnabled = firstName.text.isNotEmpty() && lastName.text.isNotEmpty() && phone.text.isNotEmpty() && age.text.isNotEmpty()
+        updateButton.isEnabled =
+          firstName.text.isNotEmpty() && lastName.text.isNotEmpty() && phone.text.isNotEmpty() && age.text.isNotEmpty()
       }
-      override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) { }
-      override fun afterTextChanged(s: Editable) { }
+
+      override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+      override fun afterTextChanged(s: Editable) {}
     })
 
     phone_text_update.addTextChangedListener(object : TextWatcher {
       override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-        updateButton.isEnabled = firstName.text.isNotEmpty() && lastName.text.isNotEmpty() && phone.text.isNotEmpty() && age.text.isNotEmpty()
+        updateButton.isEnabled =
+          firstName.text.isNotEmpty() && lastName.text.isNotEmpty() && phone.text.isNotEmpty() && age.text.isNotEmpty()
       }
-      override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) { }
-      override fun afterTextChanged(s: Editable) { }
+
+      override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+      override fun afterTextChanged(s: Editable) {}
     })
 
     update_btn_need_help_user.setOnClickListener {
 
       var cityId = Helper.getCityId(citySpinner.selectedItem.toString())
       val json_update_user = JSONObject()
-      json_update_user.put("id", StorageManager.instance.get<String>(StorageTypes.USER_ID.toString()))
+      json_update_user.put(
+        "id",
+        StorageManager.instance.get<String>(StorageTypes.USER_ID.toString())
+      )
 
       val json_application_user = JSONObject()
       json_application_user.put("firstname", firstName.text)
@@ -189,8 +217,13 @@ class EditPersonalDetailsFragment : Fragment() {
         json_update_user.put("needhelpcityid", cityId)
         updateNeedHelpUser(json_update_user)
       }
-      else if (StorageManager.instance.get<String>(StorageTypes.USER_TYPE.toString()).equals(UserTypes.VolunteerUser.name)){
-        json_update_user.put("rateId", StorageManager.instance.get<Int>(StorageTypes.RATE_ID.toString()))
+      else if (StorageManager.instance.get<String>(StorageTypes.USER_TYPE.toString()).equals(
+          UserTypes.VolunteerUser.name
+        )){
+        json_update_user.put(
+          "rateId",
+          StorageManager.instance.get<Int>(StorageTypes.RATE_ID.toString())
+        )
         json_update_user.put("volunteerusercityid", cityId)
         updateVolunteerUser(json_update_user)
       }
@@ -219,8 +252,11 @@ class EditPersonalDetailsFragment : Fragment() {
   @SuppressLint("SetTextI18n")
   private fun updateNeedHelpUser(json_update_user: JSONObject){
     val loginError = view?.findViewById<TextView>(R.id.error_text_view)
-    NetworkManager.instance.put<Int>("NeedHelpUsers/"+ StorageManager.instance.get<String>(
-      StorageTypes.USER_ID.toString()), json_update_user){ response, statusCode, error ->
+    NetworkManager.instance.put<Int>(
+      "NeedHelpUsers/" + StorageManager.instance.get<String>(
+        StorageTypes.USER_ID.toString()
+      ), json_update_user
+    ){ response, statusCode, error ->
       if (statusCode != 204){
         Log.i("LOG - error in update user", error.toString())
         loginError?.post {
@@ -228,22 +264,26 @@ class EditPersonalDetailsFragment : Fragment() {
         }
       }else{
         Log.i("LOG - need help user updated ", "")
+        val successDialogBuilder = AlertDialog.Builder(requireActivity())
+        successDialogBuilder.setMessage("Personal details updated successfully!")
+        successDialogBuilder.setTitle("iVolunteer")
+
+        requireActivity().runOnUiThread(){
+          val successAlert = successDialogBuilder.create()
+          successAlert.show()
+        }
       }
-
     }
-    val successDialogBuilder = AlertDialog.Builder(requireActivity())
-    successDialogBuilder.setMessage("Personal details updated successfully!")
-    successDialogBuilder.setTitle("iVolunteer")
-
-    val successAlert = successDialogBuilder.create()
-    successAlert.show()
-
   }
 
   @SuppressLint("SetTextI18n")
   private fun updateVolunteerUser(json_update_user: JSONObject){
     val loginError = view?.findViewById<TextView>(R.id.error_text_view)
-    NetworkManager.instance.put<Int>("VolunteerUsers/"+StorageManager.instance.get<String>(StorageTypes.USER_ID.toString()), json_update_user){ response, statusCode, error ->
+    NetworkManager.instance.put<Int>(
+      "VolunteerUsers/" + StorageManager.instance.get<String>(
+        StorageTypes.USER_ID.toString()
+      ), json_update_user
+    ){ response, statusCode, error ->
       if (statusCode != 204){
         Log.i("LOG - error in update user", error.toString())
         loginError?.post {
@@ -251,14 +291,15 @@ class EditPersonalDetailsFragment : Fragment() {
         }
       }else{
         Log.i("LOG - volunteer user created ", "")
+        val successDialogBuilder = AlertDialog.Builder(requireActivity())
+        successDialogBuilder.setMessage("Personal details updated successfully!")
+        successDialogBuilder.setTitle("iVolunteer")
+
+        requireActivity().runOnUiThread(){
+          val successAlert = successDialogBuilder.create()
+          successAlert.show()
+        }
       }
-
     }
-    val successDialogBuilder = AlertDialog.Builder(requireActivity())
-    successDialogBuilder.setMessage("Personal details updated successfully!")
-    successDialogBuilder.setTitle("iVolunteer")
-
-    val successAlert = successDialogBuilder.create()
-    successAlert.show()
   }
 }
