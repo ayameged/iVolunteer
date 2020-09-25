@@ -13,7 +13,8 @@ enum class StorageTypes{
   TYPES_LIST,
     RATE_ID,
     USER_TYPE,
-    SHARED_PREFERENCE
+    SHARED_PREFERENCE,
+    IS_FIRST_TIME
 }
 
 class StorageManager {

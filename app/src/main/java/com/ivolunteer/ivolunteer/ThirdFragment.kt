@@ -119,6 +119,7 @@ class ThirdFragment : Fragment() {
 //                        TODO: Add text about failure
                     }else{
                         Log.i("LOG - volunteer user created ", "")
+                        StorageManager.instance.set(StorageTypes.IS_FIRST_TIME.toString(), true)
                         val activityIntentVolunteer = Intent(this.context, VolunteerActivity::class.java)
                         startActivity(activityIntentVolunteer)
                     }
@@ -148,6 +149,7 @@ class ThirdFragment : Fragment() {
                         Log.i("LOG - error in update user", error.toString())
                     }else{
                         Log.i("LOG - need help user created ", "")
+                        StorageManager.instance.set(StorageTypes.IS_FIRST_TIME.toString(), true)
                         val activityIntentNeedHelpUser = Intent(this.context, NeedHelpActivity::class.java)
                         startActivity(activityIntentNeedHelpUser)
                     }

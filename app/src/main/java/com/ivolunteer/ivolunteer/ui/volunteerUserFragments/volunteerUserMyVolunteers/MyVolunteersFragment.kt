@@ -41,10 +41,14 @@ class MyVolunteersFragment : Fragment() {
       if (statusCode == 200){
 
         if (response != null) {
-          if(response.size == 0){
-            val navController =  this.view?.let { Navigation.findNavController(it)}
-            this.view?.post {
-              navController?.navigate(R.id.action_nav_my_volunteers_to_nav_search_for_volunteers)
+          if(response.size == 0) {
+            var isFirst = StorageManager.instance.get<Boolean>(StorageTypes.IS_FIRST_TIME.toString())
+            if (isFirst!!) {
+              StorageManager.instance.set(StorageTypes.IS_FIRST_TIME.toString(), false)
+              val navController = this.view?.let { Navigation.findNavController(it) }
+              this.view?.post {
+                navController?.navigate(R.id.action_nav_my_volunteers_to_nav_search_for_volunteers)
+              }
             }
           }
         }

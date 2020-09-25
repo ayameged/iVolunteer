@@ -41,10 +41,14 @@ class MyActivitiesFragment : Fragment() {
       NetworkManager.instance.get<NeedHelpUserActivities>("volunteers/byuserid?id=" + StorageManager.instance.get<String>(StorageTypes.USER_ID.toString())) { response, statusCode, error ->
       if (statusCode == 200){
 
-        if (response!!.size ==0){
-          val navController =  this.view?.let {Navigation.findNavController(it)}
-          this.view?.post {
-            navController?.navigate(R.id.action_nav_my_activities_to_nav_new_help_event)
+        if (response!!.size ==0) {
+          var isFirst = StorageManager.instance.get<Boolean>(StorageTypes.IS_FIRST_TIME.toString())
+          if (isFirst!!) {
+            StorageManager.instance.set(StorageTypes.IS_FIRST_TIME.toString(), false)
+            val navController = this.view?.let { Navigation.findNavController(it) }
+            this.view?.post {
+              navController?.navigate(R.id.action_nav_my_activities_to_nav_new_help_event)
+            }
           }
         }
 

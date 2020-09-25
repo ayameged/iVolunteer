@@ -56,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
 
-
+        StorageManager.instance.set(StorageTypes.IS_FIRST_TIME.toString(), true)
 
 
         userNameInput?.post {
