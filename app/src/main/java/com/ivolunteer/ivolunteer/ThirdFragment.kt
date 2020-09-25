@@ -2,11 +2,14 @@ package com.ivolunteer.ivolunteer
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
@@ -25,14 +28,21 @@ import org.json.JSONObject
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
 class ThirdFragment : Fragment() {
-
     val genderSelection = arrayOf("Male", "Female")
     var cities_names: ArrayList<String> = ArrayList()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val t=inflater.inflate(R.layout.fragment_third, container, false)
         val genderSpinner = t.findViewById<Spinner>(R.id.gender_spinner)
-        genderSpinner?.adapter = activity?.applicationContext?.let { ArrayAdapter(it, R.layout.support_simple_spinner_dropdown_item, genderSelection) }
+        genderSpinner?.adapter = activity?.applicationContext?.let { ArrayAdapter(
+            it,
+            R.layout.support_simple_spinner_dropdown_item,
+            genderSelection
+        ) }
         val citySpinner = t.findViewById<Spinner>(R.id.city_spinner)
 
 //        Get all cities from API
@@ -46,7 +56,11 @@ class ThirdFragment : Fragment() {
                 StorageManager.instance.set(StorageTypes.CITIES_LIST.toString(), response)
 
                 citySpinner.post {
-                    citySpinner?.adapter = activity?.applicationContext?.let { ArrayAdapter(it, R.layout.support_simple_spinner_dropdown_item, cities_names) }
+                    citySpinner?.adapter = activity?.applicationContext?.let { ArrayAdapter(
+                        it,
+                        R.layout.support_simple_spinner_dropdown_item,
+                        cities_names
+                    ) }
                 }
             }
         }
@@ -62,16 +76,63 @@ class ThirdFragment : Fragment() {
         val lastName = view.findViewById<EditText>(R.id.last_name_text)
         val phone = view.findViewById<EditText>(R.id.phone_text)
         val age = view.findViewById<EditText>(R.id.age_text)
+        val updateButton = view.findViewById<Button>(R.id.update_btn)
         var cityId = 1
+
+        first_name_text.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                updateButton.isEnabled = firstName.text.isNotEmpty() && lastName.text.isNotEmpty() && phone.text.isNotEmpty() && age.text.isNotEmpty()
+            }
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) { }
+            override fun afterTextChanged(s: Editable) { }
+        })
+
+        last_name_text.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                updateButton.isEnabled = firstName.text.isNotEmpty() && lastName.text.isNotEmpty() && phone.text.isNotEmpty() && age.text.isNotEmpty()
+            }
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) { }
+            override fun afterTextChanged(s: Editable) { }
+        })
+
+        phone_text.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                updateButton.isEnabled = firstName.text.isNotEmpty() && lastName.text.isNotEmpty() && phone.text.isNotEmpty() && age.text.isNotEmpty()
+            }
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) { }
+            override fun afterTextChanged(s: Editable) { }
+        })
+
+        age_text.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                updateButton.isEnabled = firstName.text.isNotEmpty() && lastName.text.isNotEmpty() && phone.text.isNotEmpty() && age.text.isNotEmpty()
+            }
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) { }
+            override fun afterTextChanged(s: Editable) { }
+        })
 
         update_btn.setOnClickListener{
 
             val json_create_user = JSONObject()
             val json_update_user = JSONObject()
             cityId = Helper.getCityId(citySpinner.selectedItem.toString())
-            json_create_user.put("id", StorageManager.instance.get<String>(StorageTypes.USER_ID.toString()))
-            json_update_user.put("id", StorageManager.instance.get<String>(StorageTypes.USER_ID.toString()))
-            json_update_user.put("ApplicationUser", createApplicationUserJson(firstName, lastName, phone, age, genderSpinner))
+            json_create_user.put(
+                "id",
+                StorageManager.instance.get<String>(StorageTypes.USER_ID.toString())
+            )
+            json_update_user.put(
+                "id",
+                StorageManager.instance.get<String>(StorageTypes.USER_ID.toString())
+            )
+            json_update_user.put(
+                "ApplicationUser", createApplicationUserJson(
+                    firstName,
+                    lastName,
+                    phone,
+                    age,
+                    genderSpinner
+                )
+            )
             var isVolunteer = StorageManager.instance.get<Boolean>(StorageTypes.IS_VOLUNTEER.toString())
             if (isVolunteer != null && isVolunteer){
                 json_create_user.put("volunteerusercityid", cityId)
@@ -91,19 +152,6 @@ class ThirdFragment : Fragment() {
         }
     }
 
-//    private fun getCityId(cityName: String): Int{
-//        var cityId = 1
-//        var cities: List<City>? =
-//            StorageManager.instance.get<List<City>>(StorageTypes.CITIES_LIST.toString())
-//        if (cities != null) {
-//            for (city: City in cities.iterator()) {
-//                if (cityName == city.city) {
-//                    cityId = city.needHelpCityId!!
-//                }
-//            }
-//        }
-//        return cityId
-//    }
 
     private fun createVolunteerUser(json_create_user: JSONObject, json_update_user: JSONObject){
         NetworkManager.instance.post<VolunteerUser>("VolunteerUsers", json_create_user){ response, statusCode, error ->
@@ -112,15 +160,25 @@ class ThirdFragment : Fragment() {
             }
             else{
                 StorageManager.instance.set(StorageTypes.RATE_ID.toString(), response!!.rate.rateId)
-                json_update_user.put("rateId", StorageManager.instance.get<Int>(StorageTypes.RATE_ID.toString()))
-                NetworkManager.instance.put<Int>("VolunteerUsers/"+StorageManager.instance.get<String>(StorageTypes.USER_ID.toString()), json_update_user){ response, statusCode, error ->
+                json_update_user.put(
+                    "rateId",
+                    StorageManager.instance.get<Int>(StorageTypes.RATE_ID.toString())
+                )
+                NetworkManager.instance.put<Int>(
+                    "VolunteerUsers/" + StorageManager.instance.get<String>(
+                        StorageTypes.USER_ID.toString()
+                    ), json_update_user
+                ){ response, statusCode, error ->
                     if (statusCode != 204){
                         Log.i("LOG - error in update user", error.toString())
 //                        TODO: Add text about failure
                     }else{
                         Log.i("LOG - volunteer user created ", "")
                         StorageManager.instance.set(StorageTypes.IS_FIRST_TIME.toString(), true)
-                        val activityIntentVolunteer = Intent(this.context, VolunteerActivity::class.java)
+                        val activityIntentVolunteer = Intent(
+                            this.context,
+                            VolunteerActivity::class.java
+                        )
                         startActivity(activityIntentVolunteer)
                     }
                 }
@@ -128,7 +186,13 @@ class ThirdFragment : Fragment() {
         }
     }
 
-    private fun createApplicationUserJson(firstName: EditText, lastName: EditText, phone: EditText, age: EditText, genderSpinner: Spinner): JSONObject{
+    private fun createApplicationUserJson(
+        firstName: EditText,
+        lastName: EditText,
+        phone: EditText,
+        age: EditText,
+        genderSpinner: Spinner
+    ): JSONObject{
         val json_application_user = JSONObject()
         json_application_user.put("firstname", firstName.text)
         json_application_user.put("lastName", lastName.text)
@@ -144,13 +208,20 @@ class ThirdFragment : Fragment() {
                 Log.i("LOG - error in creating user ", error.toString())
             }
             else{
-                NetworkManager.instance.put<Int>("NeedHelpUsers/"+StorageManager.instance.get<String>(StorageTypes.USER_ID.toString()), json_update_user){ response, statusCode, error ->
+                NetworkManager.instance.put<Int>(
+                    "NeedHelpUsers/" + StorageManager.instance.get<String>(
+                        StorageTypes.USER_ID.toString()
+                    ), json_update_user
+                ){ response, statusCode, error ->
                     if (statusCode != 204){
                         Log.i("LOG - error in update user", error.toString())
                     }else{
                         Log.i("LOG - need help user created ", "")
                         StorageManager.instance.set(StorageTypes.IS_FIRST_TIME.toString(), true)
-                        val activityIntentNeedHelpUser = Intent(this.context, NeedHelpActivity::class.java)
+                        val activityIntentNeedHelpUser = Intent(
+                            this.context,
+                            NeedHelpActivity::class.java
+                        )
                         startActivity(activityIntentNeedHelpUser)
                     }
                 }

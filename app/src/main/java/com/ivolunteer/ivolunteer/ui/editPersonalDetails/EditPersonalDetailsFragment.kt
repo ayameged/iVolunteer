@@ -3,14 +3,12 @@ package com.ivolunteer.ivolunteer.ui.editPersonalDetails
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.EditText
-import android.widget.Spinner
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -54,11 +52,6 @@ class EditPersonalDetailsFragment : Fragment() {
           val age = response?.applicationUser?.age
           val city = response?.needHelpCity?.city
 
-
-//          editText(R.id.first_name_update_text, firstName.toString())
-//          editText(R.id.last_name_text_update, lastName.toString())
-//          editText(R.id.phone_text_update, phone.toString())
-//          editText(R.id.age_text_update, age.toString())
           editFields(firstName.toString(), lastName.toString(), phone.toString(), age.toString())
 
           val genderSelection = arrayOf("Male", "Female")
@@ -98,10 +91,6 @@ class EditPersonalDetailsFragment : Fragment() {
           var age = response?.applicationUser?.age
           var city = response?.volunteerUserCity?.city
 
-//          editText(R.id.first_name_update_text, firstName.toString())
-//          editText(R.id.last_name_text_update, lastName.toString())
-//          editText(R.id.phone_text_update, phone.toString())
-//          editText(R.id.age_text_update, age.toString())
           editFields(firstName.toString(), lastName.toString(), phone.toString(), age.toString())
 
           val genderSelection = arrayOf("Male", "Female")
@@ -146,7 +135,41 @@ class EditPersonalDetailsFragment : Fragment() {
     val lastName = view.findViewById<EditText>(R.id.last_name_text_update)
     val phone = view.findViewById<EditText>(R.id.phone_text_update)
     val age = view.findViewById<EditText>(R.id.age_text_update)
+    val updateButton = view.findViewById<Button>(R.id.update_btn_need_help_user)
 
+
+
+    first_name_update_text.addTextChangedListener(object : TextWatcher {
+      override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+        updateButton.isEnabled = firstName.text.isNotEmpty() && lastName.text.isNotEmpty() && phone.text.isNotEmpty() && age.text.isNotEmpty()
+      }
+      override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) { }
+      override fun afterTextChanged(s: Editable) { }
+    })
+
+    last_name_text_update.addTextChangedListener(object : TextWatcher {
+      override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+        updateButton.isEnabled = firstName.text.isNotEmpty() && lastName.text.isNotEmpty() && phone.text.isNotEmpty() && age.text.isNotEmpty()
+      }
+      override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) { }
+      override fun afterTextChanged(s: Editable) { }
+    })
+
+    age_text_update.addTextChangedListener(object : TextWatcher {
+      override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+        updateButton.isEnabled = firstName.text.isNotEmpty() && lastName.text.isNotEmpty() && phone.text.isNotEmpty() && age.text.isNotEmpty()
+      }
+      override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) { }
+      override fun afterTextChanged(s: Editable) { }
+    })
+
+    phone_text_update.addTextChangedListener(object : TextWatcher {
+      override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+        updateButton.isEnabled = firstName.text.isNotEmpty() && lastName.text.isNotEmpty() && phone.text.isNotEmpty() && age.text.isNotEmpty()
+      }
+      override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) { }
+      override fun afterTextChanged(s: Editable) { }
+    })
 
     update_btn_need_help_user.setOnClickListener {
 
@@ -205,20 +228,16 @@ class EditPersonalDetailsFragment : Fragment() {
         }
       }else{
         Log.i("LOG - need help user updated ", "")
-        //loginError?.post{
-         // loginError.text = "Your details updated"
-         // loginError.visibility = View.VISIBLE
-
-        //}
       }
+
     }
     val successDialogBuilder = AlertDialog.Builder(requireActivity())
     successDialogBuilder.setMessage("Personal details updated successfully!")
     successDialogBuilder.setTitle("iVolunteer")
-    //runOnUiThread {
 
     val successAlert = successDialogBuilder.create()
     successAlert.show()
+
   }
 
   @SuppressLint("SetTextI18n")
@@ -232,19 +251,14 @@ class EditPersonalDetailsFragment : Fragment() {
         }
       }else{
         Log.i("LOG - volunteer user created ", "")
-       // loginError?.post{
-        //  loginError.text = "Your details updated"
-        //  loginError.visibility = View.VISIBLE
-        //}
-
       }
-      val successDialogBuilder = AlertDialog.Builder(requireActivity())
-      successDialogBuilder.setMessage("Personal details updated successfully!")
-      successDialogBuilder.setTitle("iVolunteer")
-      //runOnUiThread {
 
-      val successAlert = successDialogBuilder.create()
-      successAlert.show()
     }
+    val successDialogBuilder = AlertDialog.Builder(requireActivity())
+    successDialogBuilder.setMessage("Personal details updated successfully!")
+    successDialogBuilder.setTitle("iVolunteer")
+
+    val successAlert = successDialogBuilder.create()
+    successAlert.show()
   }
 }
