@@ -7,10 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import android.widget.AdapterView.OnItemSelectedListener
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import com.ivolunteer.ivolunteer.LoginActivity
 import com.ivolunteer.ivolunteer.NeedHelpActivity
 import com.ivolunteer.ivolunteer.R
 import com.ivolunteer.ivolunteer.resources.NetworkManager
@@ -55,6 +55,7 @@ class NewHelpEventFragment : Fragment() {
     NetworkManager.instance.get<List<Type>>("volunteertypes") { response, statusCode, error ->
       if (statusCode == 200) {
         if (response != null) {
+          volunteers_types.add("")
           for(item in response){
             volunteers_types.add(item.type)
             }
@@ -73,6 +74,7 @@ class NewHelpEventFragment : Fragment() {
     NetworkManager.instance.get<List<City>>("NeedHelpCities") { response, statusCode, error ->
       if (statusCode == 200) {
         if (response != null) {
+          volunteers_cities.add("")
           for(item in response){
             volunteers_cities.add(item.city)
           }
@@ -115,7 +117,65 @@ class NewHelpEventFragment : Fragment() {
     )
     var timesFlags = arrayOf<Int>(0, 0, 0)
     var daysFlags = arrayOf<Int>(0, 0, 0, 0, 0, 0, 0)
+    var typesSpinnerFlag = 0
+    var citiesSpinnerFlag = 0
 
+
+    volunteersTypesSpinner.setOnItemSelectedListener(object : OnItemSelectedListener {
+      override fun onItemSelected(
+        parentView: AdapterView<*>?,
+        selectedItemView: View,
+        position: Int,
+        id: Long
+      ) {
+        if(volunteersTypesSpinner.selectedItem != "") {
+          typesSpinnerFlag = 1
+
+          changeCreateButtonStatus(
+            daysFlags = daysFlags.toIntArray(),
+            timesFlags = timesFlags.toIntArray(),
+            typesSpinnerFlag = typesSpinnerFlag,
+            citiesSpinnerFlag = citiesSpinnerFlag,
+            createButton = createEventButton
+          )
+        } else {
+          createEventButton.isEnabled = false
+        }
+      }
+      override fun onNothingSelected(parentView: AdapterView<*>?) {
+        typesSpinnerFlag = 0
+      }
+    })
+
+
+    volunteersCitiesSpinner.setOnItemSelectedListener(object : OnItemSelectedListener {
+      override fun onItemSelected(
+        parentView: AdapterView<*>?,
+        selectedItemView: View,
+        position: Int,
+        id: Long
+      ) {
+        if(volunteersCitiesSpinner.selectedItem != "") {
+          citiesSpinnerFlag = 1
+
+          changeCreateButtonStatus(
+            daysFlags = daysFlags.toIntArray(),
+            timesFlags = timesFlags.toIntArray(),
+            typesSpinnerFlag = typesSpinnerFlag,
+            citiesSpinnerFlag = citiesSpinnerFlag,
+            createButton = createEventButton
+          )
+        } else {
+          createEventButton.isEnabled = false
+        }
+      }
+      override fun onNothingSelected(parentView: AdapterView<*>?) {
+        citiesSpinnerFlag = 0
+      }
+    })
+
+
+   // volunteersCitiesSpinner.setOnItemSelectedListener
 
     morningCheckBox.setOnCheckedChangeListener { buttonView, isChecked ->
       if (isChecked) {
@@ -126,6 +186,8 @@ class NewHelpEventFragment : Fragment() {
       changeCreateButtonStatus(
         daysFlags = daysFlags.toIntArray(),
         timesFlags = timesFlags.toIntArray(),
+        typesSpinnerFlag = typesSpinnerFlag,
+        citiesSpinnerFlag = citiesSpinnerFlag,
         createButton = createEventButton
       )
     }
@@ -139,6 +201,8 @@ class NewHelpEventFragment : Fragment() {
       changeCreateButtonStatus(
         daysFlags = daysFlags.toIntArray(),
         timesFlags = timesFlags.toIntArray(),
+        typesSpinnerFlag = typesSpinnerFlag,
+        citiesSpinnerFlag = citiesSpinnerFlag,
         createButton = createEventButton
       )
     }
@@ -152,6 +216,8 @@ class NewHelpEventFragment : Fragment() {
       changeCreateButtonStatus(
         daysFlags = daysFlags.toIntArray(),
         timesFlags = timesFlags.toIntArray(),
+        typesSpinnerFlag = typesSpinnerFlag,
+        citiesSpinnerFlag = citiesSpinnerFlag,
         createButton = createEventButton
       )
     }
@@ -165,6 +231,8 @@ class NewHelpEventFragment : Fragment() {
       changeCreateButtonStatus(
         daysFlags = daysFlags.toIntArray(),
         timesFlags = timesFlags.toIntArray(),
+        typesSpinnerFlag = typesSpinnerFlag,
+        citiesSpinnerFlag = citiesSpinnerFlag,
         createButton = createEventButton
       )
     }
@@ -178,6 +246,8 @@ class NewHelpEventFragment : Fragment() {
       changeCreateButtonStatus(
         daysFlags = daysFlags.toIntArray(),
         timesFlags = timesFlags.toIntArray(),
+        typesSpinnerFlag = typesSpinnerFlag,
+        citiesSpinnerFlag = citiesSpinnerFlag,
         createButton = createEventButton
       )
     }
@@ -191,6 +261,8 @@ class NewHelpEventFragment : Fragment() {
       changeCreateButtonStatus(
         daysFlags = daysFlags.toIntArray(),
         timesFlags = timesFlags.toIntArray(),
+        typesSpinnerFlag = typesSpinnerFlag,
+        citiesSpinnerFlag = citiesSpinnerFlag,
         createButton = createEventButton
       )
     }
@@ -204,6 +276,8 @@ class NewHelpEventFragment : Fragment() {
       changeCreateButtonStatus(
         daysFlags = daysFlags.toIntArray(),
         timesFlags = timesFlags.toIntArray(),
+        typesSpinnerFlag = typesSpinnerFlag,
+        citiesSpinnerFlag = citiesSpinnerFlag,
         createButton = createEventButton
       )
     }
@@ -217,6 +291,8 @@ class NewHelpEventFragment : Fragment() {
       changeCreateButtonStatus(
         daysFlags = daysFlags.toIntArray(),
         timesFlags = timesFlags.toIntArray(),
+        typesSpinnerFlag = typesSpinnerFlag,
+        citiesSpinnerFlag = citiesSpinnerFlag,
         createButton = createEventButton
       )
     }
@@ -230,6 +306,8 @@ class NewHelpEventFragment : Fragment() {
       changeCreateButtonStatus(
         daysFlags = daysFlags.toIntArray(),
         timesFlags = timesFlags.toIntArray(),
+        typesSpinnerFlag = typesSpinnerFlag,
+        citiesSpinnerFlag = citiesSpinnerFlag,
         createButton = createEventButton
       )
     }
@@ -243,6 +321,8 @@ class NewHelpEventFragment : Fragment() {
       changeCreateButtonStatus(
         daysFlags = daysFlags.toIntArray(),
         timesFlags = timesFlags.toIntArray(),
+        typesSpinnerFlag = typesSpinnerFlag,
+        citiesSpinnerFlag = citiesSpinnerFlag,
         createButton = createEventButton
       )
     }
@@ -304,7 +384,8 @@ class NewHelpEventFragment : Fragment() {
     }
   }
 
-  private fun changeCreateButtonStatus(daysFlags: IntArray, timesFlags: IntArray, createButton: Button){
-    createButton.isEnabled = daysFlags.contains(1) && timesFlags.contains(1)
+  private fun changeCreateButtonStatus(daysFlags: IntArray, timesFlags: IntArray, typesSpinnerFlag: Int,
+                                       citiesSpinnerFlag: Int, createButton: Button){
+    createButton.isEnabled = daysFlags.contains(1) && timesFlags.contains(1) && (typesSpinnerFlag == 1) && (citiesSpinnerFlag ==1)
   }
 }
