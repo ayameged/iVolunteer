@@ -11,7 +11,7 @@
         <item
             android:id="@+id/nav_search_for_volunteers"
             android:fontFamily="@font/avss"
-            android:title="Search for volunteers" />
+            android:title="I want to volunteer" />
         <item
             android:id="@+id/nav_my_score"
             android:fontFamily="@font/avss"

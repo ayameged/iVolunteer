@@ -1,5 +1,6 @@
 package com.ivolunteer.ivolunteer
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -15,6 +16,8 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
+import com.ivolunteer.ivolunteer.resources.StorageManager
+import com.ivolunteer.ivolunteer.resources.StorageTypes
 
 class NeedHelpActivity : AppCompatActivity() {
 
@@ -58,6 +61,14 @@ class NeedHelpActivity : AppCompatActivity() {
             R.id.action_logout -> {
                 val activityIntent: Intent
                 activityIntent = Intent(this, LoginActivity::class.java)
+             var test =   StorageManager.instance.get<SharedPreferences>(StorageTypes.SHARED_PREFERENCE.toString())
+                val editor = test?.edit()
+                editor?.clear()
+                editor?.apply()
+              //  outputName.setText("").toString()
+             //  outputPassword.setText("".toString())
+
+
                 startActivity(activityIntent)
                 true
             }

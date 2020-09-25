@@ -12,7 +12,8 @@ enum class StorageTypes{
     CITIES_LIST,
   TYPES_LIST,
     RATE_ID,
-    USER_TYPE
+    USER_TYPE,
+    SHARED_PREFERENCE
 }
 
 class StorageManager {
