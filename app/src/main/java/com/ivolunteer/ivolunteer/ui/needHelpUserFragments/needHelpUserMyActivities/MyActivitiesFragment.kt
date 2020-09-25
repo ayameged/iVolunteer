@@ -1,5 +1,6 @@
 package com.ivolunteer.ivolunteer.ui.needHelpUserFragments.needHelpUserMyActivities
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.provider.AlarmClock.EXTRA_MESSAGE
@@ -11,17 +12,21 @@ import android.widget.ListView
 import androidx.core.app.NotificationCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
+import com.ivolunteer.ivolunteer.NeedHelpActivity
 import com.ivolunteer.ivolunteer.R
 import com.ivolunteer.ivolunteer.resources.NetworkManager
 import com.ivolunteer.ivolunteer.resources.StorageManager
 import com.ivolunteer.ivolunteer.resources.StorageTypes
 import com.ivolunteer.ivolunteer.types.needhelpuseractivities.NeedHelpUserActivities
+import com.ivolunteer.ivolunteer.ui.needHelpUserFragments.needHelpUserNewHelpEvent.NewHelpEventFragment
 import com.ivolunteer.ivolunteer.util.NotifyDemoActivity
 
 class MyActivitiesFragment : Fragment() {
 
   private lateinit var galleryViewModel: SearchForVolunteersViewModel
 
+  @SuppressLint("ResourceType")
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
@@ -36,6 +41,17 @@ class MyActivitiesFragment : Fragment() {
       NetworkManager.instance.get<NeedHelpUserActivities>("volunteers/byuserid?id=" + StorageManager.instance.get<String>(StorageTypes.USER_ID.toString())) { response, statusCode, error ->
       if (statusCode == 200){
 
+     // TODO
+        //Aya
+        /*
+        if (response!!.size ==0)
+        {
+          val navController = this.view?.let { Navigation.findNavController(it) }
+          if (navController != null) {
+            navController.navigate(R.id.action_FirstFragment_to_SecondFragment)
+          }
+        }
+*/
         val cities= arrayOfNulls<String>(response!!.size)
         val type= arrayOfNulls<String>(response!!.size)
         val occupied = arrayOfNulls<Boolean>(response!!.size)
