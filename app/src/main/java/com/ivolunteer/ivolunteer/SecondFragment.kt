@@ -32,11 +32,13 @@ class SecondFragment : Fragment() {
         i_need_help_btn.setOnClickListener {
             moveToFillDetailsPage()
             StorageManager.instance.set(StorageTypes.IS_VOLUNTEER.toString(), false)
+            StorageManager.instance.set(StorageTypes.USER_TYPE.toString(), "NeedHelpUser")
         }
 
         i_volunteer_btn.setOnClickListener {
             moveToFillDetailsPage()
             StorageManager.instance.set(StorageTypes.IS_VOLUNTEER.toString(), true)
+            StorageManager.instance.set(StorageTypes.USER_TYPE.toString(), "VolunteerUser")
         }
     }
 

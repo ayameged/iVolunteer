@@ -15,7 +15,11 @@
         android:id="@+id/nav_my_volunteers"
         android:name="com.ivolunteer.ivolunteer.ui.volunteerUserFragments.volunteerUserMyVolunteers.MyVolunteersFragment"
         android:label="@string/menu__my_volunteers"
-        tools:layout="@layout/fragment_my_volunteers" />
+        tools:layout="@layout/fragment_my_volunteers" >
+        <action
+            android:id="@+id/action_nav_my_volunteers_to_nav_search_for_volunteers"
+            app:destination="@id/nav_search_for_volunteers" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_search_for_volunteers"

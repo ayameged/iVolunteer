@@ -118,20 +118,19 @@ class LoginActivity : AppCompatActivity() {
                         if(statusCode == 200){
                             StorageManager.instance.set(StorageTypes.USER_ID.toString(), response!!)
                             NetworkManager.instance.get<String>(
-                                "applicationusers/byuserid?id=" + StorageManager.instance.get(
+                                "applicationusers/byuserid?id=" + StorageManager.instance.get<String>(
                                     StorageTypes.USER_ID.toString()
                                 )
                             ){ response, statusCode, error ->
                                 if(statusCode == 200){
-                                    StorageManager.instance.set(
-                                        StorageTypes.USER_TYPE.toString(),
-                                        response!!
+                                    StorageManager.instance.set(StorageTypes.USER_TYPE.toString(),response!!
                                     )
                                     Log.i(
                                         "LOG - user type: ",
                                         StorageManager.instance.get<String>(StorageTypes.USER_TYPE.toString())!!
                                     )
                                     if (response == UserTypes.NeedHelpUser.name){
+                                        StorageManager.instance.set(StorageTypes.IS_VOLUNTEER.toString(),false)
 
                                         try {
                                             val activityIntentNeedHelpUser = Intent(
@@ -143,6 +142,7 @@ class LoginActivity : AppCompatActivity() {
                                             Log.i("error", E.toString())
                                         }
                                     }else if(response == UserTypes.VolunteerUser.name){
+                                        StorageManager.instance.set(StorageTypes.IS_VOLUNTEER.toString(),true)
                                         try{
                                             val activityIntentVolunteerUser = Intent(
                                                 this,

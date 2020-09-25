@@ -15,7 +15,11 @@
         android:id="@+id/nav_my_activities"
         android:name="com.ivolunteer.ivolunteer.ui.needHelpUserFragments.needHelpUserMyActivities.MyActivitiesFragment"
         android:label="@string/menu__my_activities"
-        tools:layout="@layout/fragment_my_activities" />
+        tools:layout="@layout/fragment_my_activities" >
+        <action
+            android:id="@+id/action_nav_my_activities_to_nav_new_help_event"
+            app:destination="@id/nav_new_help_event" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_new_help_event"

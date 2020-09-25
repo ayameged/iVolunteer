@@ -42,7 +42,8 @@ class EditPersonalDetailsFragment : Fragment() {
       ViewModelProviders.of(this).get(EditPersonalDetailsModel::class.java)
     val root = inflater.inflate(R.layout.fragment_edit_personal_details, container, false)
 
-    if (StorageManager.instance.get<String>(StorageTypes.USER_TYPE.toString()) == UserTypes.NeedHelpUser.name) {
+    var isVolunteer = StorageManager.instance.get<Boolean>(StorageTypes.IS_VOLUNTEER.toString())
+    if (!isVolunteer!!) {
       //Get need help user details
       NetworkManager.instance.get<NeedHelpUser>("NeedHelpUsers/byid?id=" + StorageManager.instance.get<String>(StorageTypes.USER_ID.toString())) { response, statusCode, error ->
         if (statusCode == 200) {
@@ -87,7 +88,7 @@ class EditPersonalDetailsFragment : Fragment() {
         }
       }
     }
-    else if (StorageManager.instance.get<String>(StorageTypes.USER_TYPE.toString()) == UserTypes.VolunteerUser.name) {
+    else if (isVolunteer!!) {
       NetworkManager.instance.get<VolunteerUser>("VolunteerUsers/byid?id=" + StorageManager.instance.get<String>(StorageTypes.USER_ID.toString())) { response, statusCode, error ->
         if (statusCode == 200){
           var firstName = response?.applicationUser?.firstName
@@ -161,11 +162,11 @@ class EditPersonalDetailsFragment : Fragment() {
       json_application_user.put("phoneNumber", phone.text)
       json_update_user.put("ApplicationUser", json_application_user)
 
-      if (StorageManager.instance.get<String>(StorageTypes.USER_TYPE.toString()) == UserTypes.NeedHelpUser.name) {
+      if (StorageManager.instance.get<String>(StorageTypes.USER_TYPE.toString()).equals(UserTypes.NeedHelpUser.name)) {
         json_update_user.put("needhelpcityid", cityId)
         updateNeedHelpUser(json_update_user)
       }
-      else if (StorageManager.instance.get<String>(StorageTypes.USER_TYPE.toString()) == UserTypes.VolunteerUser.name){
+      else if (StorageManager.instance.get<String>(StorageTypes.USER_TYPE.toString()).equals(UserTypes.VolunteerUser.name)){
         json_update_user.put("rateId", StorageManager.instance.get<Int>(StorageTypes.RATE_ID.toString()))
         json_update_user.put("volunteerusercityid", cityId)
         updateVolunteerUser(json_update_user)

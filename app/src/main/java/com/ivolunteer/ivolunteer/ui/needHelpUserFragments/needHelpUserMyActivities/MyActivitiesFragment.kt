@@ -41,21 +41,17 @@ class MyActivitiesFragment : Fragment() {
       NetworkManager.instance.get<NeedHelpUserActivities>("volunteers/byuserid?id=" + StorageManager.instance.get<String>(StorageTypes.USER_ID.toString())) { response, statusCode, error ->
       if (statusCode == 200){
 
-     // TODO
-        //Aya
-        /*
-        if (response!!.size ==0)
-        {
-          val navController = this.view?.let { Navigation.findNavController(it) }
-          if (navController != null) {
-            navController.navigate(R.id.action_FirstFragment_to_SecondFragment)
+        if (response!!.size ==0){
+          val navController =  this.view?.let {Navigation.findNavController(it)}
+          this.view?.post {
+            navController?.navigate(R.id.action_nav_my_activities_to_nav_new_help_event)
           }
         }
-*/
-        val cities= arrayOfNulls<String>(response!!.size)
-        val type= arrayOfNulls<String>(response!!.size)
-        val occupied = arrayOfNulls<Boolean>(response!!.size)
-        val volunteerId = arrayOfNulls<Int>(response!!.size)
+
+        val cities= arrayOfNulls<String>(response.size)
+        val type= arrayOfNulls<String>(response.size)
+        val occupied = arrayOfNulls<Boolean>(response.size)
+        val volunteerId = arrayOfNulls<Int>(response.size)
 
         for(i in 0 until response!!.size) {
           cities[i] = (response[i].volunteerCity.city)

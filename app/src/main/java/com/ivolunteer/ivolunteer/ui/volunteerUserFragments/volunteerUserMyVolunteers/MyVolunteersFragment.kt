@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.ListView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import com.ivolunteer.ivolunteer.R
 import com.ivolunteer.ivolunteer.resources.NetworkManager
 import com.ivolunteer.ivolunteer.resources.StorageManager
@@ -38,6 +39,15 @@ class MyVolunteersFragment : Fragment() {
 
     NetworkManager.instance.get<VolunteerUserActivities>("VolunteerUsers/volunteers/" + StorageManager.instance.get<String>(StorageTypes.USER_ID.toString())) { response, statusCode, error ->
       if (statusCode == 200){
+
+        if (response != null) {
+          if(response.size == 0){
+            val navController =  this.view?.let { Navigation.findNavController(it)}
+            this.view?.post {
+              navController?.navigate(R.id.action_nav_my_volunteers_to_nav_search_for_volunteers)
+            }
+          }
+        }
 
         val cities= arrayOfNulls<String>(response!!.size)
         val type= arrayOfNulls<String>(response!!.size)
