@@ -1,5 +1,6 @@
 package com.ivolunteer.ivolunteer.resources
 
+import java.io.FileOutputStream
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 
@@ -9,15 +10,9 @@ enum class StorageTypes{
     USER_ID,
     TOKEN,
     CITIES_LIST,
-  //meital
   TYPES_LIST,
     RATE_ID,
-    USER_TYPE,
-    USER_NAME_RATE_VOLUNTEER,
-    EMAIL_RATE_VOLUNTEER,
-    PHONE_RATE_VOLUNTEER,
-    USER_ID_RATE_VOLUNTEER
-
+    USER_TYPE
 }
 
 class StorageManager {
