@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.RatingBar
 import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
 import com.ivolunteer.ivolunteer.R
@@ -22,6 +23,7 @@ class VolunteerUserListAdapter(
     private val volUserEmail: Array<String?>,
     private val volUserPhoneNumber: Array<String?>,
     private val VolRateId: Array<Int?>,
+    private val VolRateAvg: Array<Double?>,
     private val volUserId: Array<String?>
 
 
@@ -35,6 +37,7 @@ class VolunteerUserListAdapter(
         val name = rowView.findViewById(R.id.volunteerUser_name) as TextView
         val email = rowView.findViewById(R.id.volunteerUser_Email) as TextView
         val phoneNumber = rowView.findViewById(R.id.volunteerUser_PhoneNumber) as TextView
+        val rateAvg = rowView.findViewById(R.id.volunteerUser_ratingBar) as RatingBar
 
         name.post {
             name.text = volUserName[position]
@@ -45,6 +48,10 @@ class VolunteerUserListAdapter(
         }
         phoneNumber.post {
             phoneNumber.text = volUserPhoneNumber[position]
+        }
+
+        rateAvg.post {
+            rateAvg.rating = (VolRateAvg[position])!!.toFloat()
         }
 
         val volunteerDetailsContactButton = rowView.findViewById<Button>(R.id.volunteer_detail_contact_button)

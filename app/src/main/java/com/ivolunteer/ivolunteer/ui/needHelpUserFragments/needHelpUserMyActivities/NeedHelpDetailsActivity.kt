@@ -51,6 +51,7 @@ class NeedHelpDetailsActivity : AppCompatActivity() {
                 val name = arrayOfNulls<String>(response!!.volunteerUser.size)
                 val volunteerUserId = arrayOfNulls<String>(response!!.volunteerUser.size)
                 val rateId = arrayOfNulls<Int>(response!!.volunteerUser.size)
+                val rateAvg = arrayOfNulls<Double>(response!!.volunteerUser.size)
 
                 for (i in 0 until response.volunteerUser.size) {
                     firstName[i] = (response.volunteerUser[i].applicationUser.firstName)
@@ -60,6 +61,7 @@ class NeedHelpDetailsActivity : AppCompatActivity() {
                     volunteerUserId[i] = (response.volunteerUser[i].applicationUser.id)
                     name[i] = firstName[i] + " " + lastName[i]
                     rateId[i] = (response.volunteerUser[i].rateId)
+                    rateAvg[i] = (response.volunteerUser[i].rate.avgRate)
                 }
 
                 val checkBoxMorning = findViewById<CheckBox>(R.id.detail_morning_check_box)
@@ -79,7 +81,7 @@ class NeedHelpDetailsActivity : AppCompatActivity() {
                 )
                 var listView = findViewById<ListView>(R.id.volunteer_volunteerUsers_list)
                 try {
-                    val myListAdapter = VolunteerUserListAdapter(this, name, email, phoneNumber, rateId, volunteerUserId)
+                    val myListAdapter = VolunteerUserListAdapter(this, name, email, phoneNumber, rateId,rateAvg, volunteerUserId)
 
                     runOnUiThread {
                         listView?.post {
